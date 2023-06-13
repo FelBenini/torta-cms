@@ -3,12 +3,11 @@ import { useState, useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
 
-export default function TextEditor({ initialValue }: { initialValue: string }) {
-  const [text, setText] = useState(initialValue);
+export default function TextEditor({ value, setValue }: { value: string, setValue: React.Dispatch<React.SetStateAction<string>> }) {
   const editorRef = useRef<any>();
 
   const handleEditorCange = (content: string) => {
-    setText(content);
+    setValue(content);
   };
 
   const handleUpload = async (
@@ -47,7 +46,7 @@ export default function TextEditor({ initialValue }: { initialValue: string }) {
     <>
       <Editor
         onInit={(evt, editor) => (editorRef.current = editor)}
-        value={text}
+        value={value}
         onEditorChange={handleEditorCange}
         init={{
           height: '96.5svh',
@@ -56,20 +55,21 @@ export default function TextEditor({ initialValue }: { initialValue: string }) {
           menubar: true,
           skin_url: "/skin/light",
           //skin_url: '/skin/dark',
-          //content_css: "dark",
+          content_css: "light",
           plugins: [
             "image",
             "advlist autolink lists link image charmap print preview anchor",
-            "searchreplace emoticons editimage visualblocks code fullscreen",
+            "searchreplace visualblocks code fullscreen",
             "insertdatetime media table paste code help wordcount",
           ],
           toolbar:
             "undo redo | formatselect blocks insertfile | " +
             "bold italic backcolor | alignleft aligncenter " +
-            "alignright alignjustify | image imageoptions | bullist numlist outdent indent | " +
+            "alignright alignjustify | image | bullist numlist outdent indent | " +
             "removeformat emoticons | help",
           images_upload_url: "/api/upload", // @ts-ignore
           images_upload_handler: handleUpload,
+          content_style: "body { font-family: 'Inter', sans-serif; }"
         }}
       />
     </>
