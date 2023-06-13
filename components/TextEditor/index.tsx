@@ -50,21 +50,24 @@ export default function TextEditor({ initialValue }: { initialValue: string }) {
         value={text}
         onEditorChange={handleEditorCange}
         init={{
-          height: 600,
+          height: '96.5svh',
+          width: '95%',
+          resize: false,
           menubar: true,
+          skin_url: "/skin/light",
+          //skin_url: '/skin/dark',
+          //content_css: "dark",
           plugins: [
             "image",
             "advlist autolink lists link image charmap print preview anchor",
-            "searchreplace visualblocks code fullscreen",
+            "searchreplace emoticons editimage visualblocks code fullscreen",
             "insertdatetime media table paste code help wordcount",
           ],
           toolbar:
-            "undo redo | formatselect insertfile | " +
+            "undo redo | formatselect blocks insertfile | " +
             "bold italic backcolor | alignleft aligncenter " +
-            "alignright alignjustify | image | bullist numlist outdent indent | " +
-            "removeformat | help",
-          content_style:
-            "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+            "alignright alignjustify | image imageoptions | bullist numlist outdent indent | " +
+            "removeformat emoticons | help",
           images_upload_url: "/api/upload", // @ts-ignore
           images_upload_handler: handleUpload,
         }}
