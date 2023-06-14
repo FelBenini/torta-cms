@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { RiListSettingsLine, RiArticleLine, RiPagesLine } from 'react-icons/ri'
 import { AiOutlineCluster } from 'react-icons/ai'
 import { FaRegUser } from 'react-icons/fa'
+import { GrHomeRounded } from 'react-icons/gr'
 
 const SideMenu = () => {
   return (
@@ -16,32 +17,38 @@ const SideMenu = () => {
         <h4>tortaCMS</h4>
       </nav>
       <nav>
-        <Link href="#">
-          <RiArticleLine size={40} />
+        <Link href="/dashboard">
+          <GrHomeRounded size={25} />
+          <h5>Home</h5>
+        </Link>
+      </nav>
+      <nav>
+        <Link href="/dashboard/posts">
+          <RiArticleLine size={30} />
           <h5>Posts</h5>
         </Link>
       </nav>
       <nav>
         <Link href="#">
-          <RiPagesLine size={40} />
+          <RiPagesLine size={30} />
           <h5>Pages</h5>
         </Link>
       </nav>
       <nav>
         <Link href="#">
-          <AiOutlineCluster size={40} />
+          <AiOutlineCluster size={30} />
           <h5>API ref</h5>
         </Link>
       </nav>
       <nav>
         <Link href="#">
-          <FaRegUser size={35} />
+          <FaRegUser size={25} />
           <h5>User</h5>
         </Link>
       </nav>
       <nav>
         <Link href="#">
-          <RiListSettingsLine size={35} />
+          <RiListSettingsLine size={25} />
           <h5>Settings</h5>
         </Link>
       </nav>

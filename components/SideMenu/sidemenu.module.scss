@@ -1,7 +1,9 @@
 .SideMenu {
-  background-color: #f5f5f5;
+  background-color: #fffcfe;
   width: fit-content;
-  padding: 0px 12px;
+  position: fixed;
+  margin-left: 8px;
+  padding: 0px 6px;
   height: 96svh;
   padding-bottom: 1svh;
   margin-top: 1.5svh;
@@ -10,6 +12,8 @@
   flex-direction: column;
   justify-content: space-between;
   overflow-y: auto;
+  scrollbar-gutter: stable both-edges;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   & h5, & h4 {
     opacity: 0;
     transition: all ease 0.2s;
@@ -50,4 +54,8 @@
       }
     }
   }
+}
+
+.logoSideMenu {
+  filter: drop-shadow(0px 0px 8px #f5d0fe);
 }

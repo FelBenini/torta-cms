@@ -1,5 +1,6 @@
 import SideMenu from '@/components/SideMenu'
 import React from 'react'
+import './dashboardstyles.scss'
 
 const RootLayout = ({
   children,
@@ -7,9 +8,11 @@ const RootLayout = ({
   children: React.ReactNode
 }) => {
   return (
-    <body>
+    <body style={{display: 'flex', margin: 0}}>
       <SideMenu />
-      {children}
+      <main>
+        {children}
+      </main>
     </body>
   )
 }
