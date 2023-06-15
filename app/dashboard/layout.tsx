@@ -7,6 +7,10 @@ import { ThemeProvider } from '@emotion/react'
 import NProgress from "nprogress";
 import NextNProgress from 'nextjs-progressbar';
 import { useSearchParams, usePathname } from 'next/navigation'
+import "@fontsource/inter"
+import { Inter } from 'next/font/google'
+
+const inter = Inter({ subsets: ['latin'] })
 
 type PushStateInput = [
   data: any,
@@ -15,6 +19,13 @@ type PushStateInput = [
 ];
 
 const theme = createTheme({
+  typography: {
+    fontFamily: 'Inter',
+    button: {
+      fontWeight: 600,
+      fontSize: 16
+    }
+  },
   palette: {
     primary: {
       main: '#c026d3'
@@ -60,8 +71,8 @@ const RootLayout = ({
     });
   });
   return (
-    <body style={{ display: 'flex', margin: 0 }}>
-      <NextNProgress options={{showSpinner: false}} color={'#db2777'}/>
+    <body style={{ display: 'flex', margin: 0 }} className={inter.className}>
+      <NextNProgress options={{showSpinner: false}} color={'#d946ef'}/>
       <SideMenu />
       <main>
         <ThemeProvider theme={theme}>
