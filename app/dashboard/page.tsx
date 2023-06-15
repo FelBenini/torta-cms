@@ -1,8 +1,11 @@
+import Topbar from '@/components/TopBar'
 import React from 'react'
 
 const Dashboard = () => {
   return (
-    <div></div>
+    <>
+      <Topbar/>
+    </>
   )
 }
 
