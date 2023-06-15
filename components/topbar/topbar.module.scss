@@ -1,0 +1,13 @@
+.topbar {
+  display: flex;
+  align-content: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  & h3 {
+    padding: 0 2%;
+  }
+  & a {
+    height: fit-content;
+    align-self: center;
+  }
+}

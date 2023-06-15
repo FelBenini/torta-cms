@@ -1,6 +1,17 @@
+'use client'
 import SideMenu from '@/components/SideMenu'
 import React from 'react'
 import './dashboardstyles.scss'
+import { createTheme } from '@mui/material/styles'
+import { ThemeProvider } from '@emotion/react'
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#c026d3'
+    }
+  }
+})
 
 const RootLayout = ({
   children,
@@ -11,7 +22,9 @@ const RootLayout = ({
     <body style={{display: 'flex', margin: 0}}>
       <SideMenu />
       <main>
-        {children}
+        <ThemeProvider theme={theme}>
+          {children}
+        </ThemeProvider>
       </main>
     </body>
   )
