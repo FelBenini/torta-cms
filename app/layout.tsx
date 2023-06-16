@@ -4,7 +4,9 @@ import { Inter } from 'next/font/google'
 import { NextAuthProvider } from './authprovider'
 import NextNProgress from 'nextjs-progressbar';
 import NProgress from "nprogress";
-import { useEffect, startTransition } from 'react'
+import { useEffect } from 'react'
+import { ThemeProvider } from '@emotion/react'
+import { createTheme } from '@mui/material';
 
 type PushStateInput = [
   data: any,
@@ -13,6 +15,21 @@ type PushStateInput = [
 ];
 
 const inter = Inter({ subsets: ['latin'] })
+
+const theme = createTheme({
+  typography: {
+    fontFamily: 'Inter',
+    button: {
+      fontWeight: 600,
+      fontSize: 16
+    }
+  },
+  palette: {
+    primary: {
+      main: '#c026d3'
+    }
+  }
+})
 
 export const metadata = {
   title: 'tortaCMS',
@@ -57,8 +74,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NextNProgress options={{showSpinner: false}} color={'#d946ef'}/>
-        <NextAuthProvider>{children}</NextAuthProvider>
+        <NextNProgress options={{ showSpinner: false }} color={'#d946ef'} />
+        <NextAuthProvider>
+          <ThemeProvider theme={theme}>
+            {children}
+          </ThemeProvider>
+        </NextAuthProvider>
       </body>
     </html>
   )
