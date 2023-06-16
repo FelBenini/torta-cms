@@ -4,16 +4,13 @@ import styles from './topbar.module.scss'
 import { Button } from '@mui/material'
 import Link from 'next/link'
 import { BsPencilFill } from 'react-icons/bs'
-import { IoLogOutOutline } from 'react-icons/io5'
-import { signOut } from 'next-auth/react'
+import { LogoutButton } from '../Auth'
 
 const Topbar = () => {
   return (
     <nav className={styles.topbar}>
       <h3>
-        <Link href='#' onClick={() => signOut()}>
-          <IoLogOutOutline size={30}/> Logout
-        </Link>
+        <LogoutButton />
       </h3>
       <Link href='/dashboard/newpost'>
         <Button sx={{height: 50, alignSelf: 'center', padding: '0 36px'}} variant='contained' startIcon={<BsPencilFill size={15} />}>New Post</Button>
