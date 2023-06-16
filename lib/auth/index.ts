@@ -1,6 +1,7 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { UserFunctions } from "../db/userFunctions";
+import bcrypt from 'bcryptjs'
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -22,7 +23,8 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         const authUser = await UserFunctions.getUserByName(credentials?.username)
-        if (!authUser || authUser.password !== credentials?.password) {
+        const salt = bcrypt.genSaltSync(10)
+        if (!authUser || !(await bcrypt.compare(credentials?.password as string, authUser.password))) {
           return null
         }
         const user = { id: authUser._id, name: credentials?.username, email: authUser.role };
