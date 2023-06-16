@@ -1,10 +1,12 @@
-"use client"
-import { useState } from "react"
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { getServerSession } from "next-auth";
 import { LoginForm } from "@/components/Auth";
+import { redirect } from 'next/navigation'
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession();
+  if (session) {
+    redirect('/dashboard')
+  }
   return (
     <>
       <LoginForm />
