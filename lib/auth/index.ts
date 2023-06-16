@@ -5,6 +5,9 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
+  jwt: {
+    maxAge: 30 * 60,
+  },
   providers: [
     CredentialsProvider({
       name: "Sign in",
@@ -17,9 +20,12 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const user = { id: "1", name: credentials?.username, email: credentials?.password };
+        const user = { id: "1", name: credentials?.username, role: 'admin' };
         return user;
       },
     }),
   ],
+  pages: {
+    signIn: '/'
+  }
 };

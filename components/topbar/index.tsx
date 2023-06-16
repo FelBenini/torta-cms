@@ -5,12 +5,13 @@ import { Button } from '@mui/material'
 import Link from 'next/link'
 import { BsPencilFill } from 'react-icons/bs'
 import { IoLogOutOutline } from 'react-icons/io5'
+import { signOut } from 'next-auth/react'
 
 const Topbar = () => {
   return (
     <nav className={styles.topbar}>
       <h3>
-        <Link href='/dashboard'>
+        <Link href='#' onClick={() => signOut()}>
           <IoLogOutOutline size={30}/> Logout
         </Link>
       </h3>
