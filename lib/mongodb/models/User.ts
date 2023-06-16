@@ -10,6 +10,6 @@ const UserSchema = new mongoose.Schema({
   profilePic: {type: String}
 })
 
-const User = mongoose.models.User ||  model('users', UserSchema);
+const User = mongoose.models.User ||  model('User', UserSchema);
 
 export default User

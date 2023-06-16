@@ -1,5 +1,6 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { UserFunctions } from "../db/userFunctions";
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -20,6 +21,10 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
+        const authUser = await UserFunctions.getUserByName(credentials?.username)
+        if (!authUser || authUser.password !== credentials?.password) {
+          return null
+        }
         const user = { id: "1", name: credentials?.username, email: 'admin' };
         return user;
       },
