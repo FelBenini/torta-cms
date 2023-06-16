@@ -20,7 +20,7 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const user = { id: "1", name: credentials?.username, role: 'admin' };
+        const user = { id: "1", name: credentials?.username, email: 'admin' };
         return user;
       },
     }),

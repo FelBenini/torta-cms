@@ -17,7 +17,6 @@ export default function Home() {
       password: formValues.password,
       callbackUrl: '/dashboard'
     })
-    router.push('/dashboard')
   }
   return (
     <div>
