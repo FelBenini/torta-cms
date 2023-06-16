@@ -4,7 +4,21 @@
   justify-content: flex-end;
   flex-wrap: wrap;
   & h3 {
-    padding: 0 2%;
+    padding: 0 5%;
+    font-weight: 500;
+    & a:hover {
+      color: #c026d3;
+      text-decoration: underline;
+      text-decoration-color: #c026d3;
+    }
+    & a {
+      color: #3f3f46;
+      text-decoration-color: #00000000;
+      transition: all ease 0.2s;
+      & svg {
+        margin-bottom: -8px;
+      }
+    }
   }
   & a {
     height: fit-content;
