@@ -11,7 +11,7 @@ const Dashboard = async () => {
   return (
     <>
       <Topbar/>
-      {JSON.stringify(session)}
+      <p>{JSON.stringify(session)}</p>
     </>
   )
 }

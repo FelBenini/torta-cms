@@ -3,8 +3,9 @@
   align-content: center;
   justify-content: flex-end;
   flex-wrap: wrap;
+  height: 50px;
   & h3 {
-    padding-right: 5%;
+    padding-right: 4%;
     font-weight: 500;
     & a:hover {
       color: #c026d3;
