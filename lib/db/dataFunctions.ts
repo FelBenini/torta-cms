@@ -24,11 +24,13 @@ export default async function getSizeOfData() {
   const path = join(process.cwd(), '/public', '/uploads');
   const sizeOfImg = getDirSize(path);
   const data = await mongoController.getSizeOfDatabase();
-  const total = sizeOfImg + data.categoryCollection + data.postCollection + data.userCollection
-
+  const sizeOfTortaCMS = getDirSize(process.cwd()) - sizeOfImg;
+  const total = sizeOfImg + data.categoryCollection + data.postCollection + data.userCollection + sizeOfTortaCMS;
+  
   return {
     sizeOfImg,
     mongoSize: data,
-    total
+    total,
+    sizeOfTortaCMS
   }
 }

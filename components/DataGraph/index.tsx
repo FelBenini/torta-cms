@@ -10,6 +10,7 @@ Chart.register(ArcElement, Tooltip, Legend);
 
 const DataGraph = () => {
   const [info, setInfo] = useState({
+    sizeOfTortaCMS: 0,
     sizeOfImg: 0,
     sizeOfDb: 0,
     total: 0
@@ -17,24 +18,26 @@ const DataGraph = () => {
   const fetchData = async () => {
     const {data} = await axios.get('/api/size-of-data')
     const totalMongo = data.mongoSize.userCollection + data.mongoSize.postCollection + data.mongoSize.categoryCollection
-    setInfo({sizeOfImg: data.sizeOfImg, sizeOfDb: totalMongo, total: data.total})
+    setInfo({sizeOfTortaCMS: data.sizeOfTortaCMS, sizeOfImg: data.sizeOfImg, sizeOfDb: totalMongo, total: data.total})
   }
   useEffect(() => {
     fetchData()
   }, [])
   const data = {
-    labels: [`Images Folder: ${bytesToSize(info.sizeOfImg)}`, `Database: ${bytesToSize(info.sizeOfDb)}`],
+    labels: [`Images Folder: ${bytesToSize(info.sizeOfImg)}`, `Database: ${bytesToSize(info.sizeOfDb)}`, `tortaCMS system: ${bytesToSize(info.sizeOfTortaCMS)}`],
     datasets: [
       {
         label: 'Bytes used',
-        data: [info.sizeOfImg, info.sizeOfDb],
+        data: [info.sizeOfImg, info.sizeOfDb, info.sizeOfTortaCMS],
         backgroundColor: [
           '#86198f',
-          '#f472b6',
+          '#c026d3',
+          '#f9a8d4',
         ],
         borderColor: [
           '#86198f',
-          '#f472b6',
+          '#c026d3',
+          '#f9a8d4',
         ],
         borderWidth: 1,
       },
