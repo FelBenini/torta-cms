@@ -1,0 +1,23 @@
+.graphSection {
+  width: 300px;
+  height: 420px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 8px 12px;
+  background-color: #fafaf9;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  border-radius: 12px;
+  margin: 8px;
+  & h2 {
+    color: #27272a;
+    font-weight: 500;
+    margin-left: 8px;
+  }
+  & h3 {
+    margin-top: 8px;
+    text-align: center;
+    font-weight: 400;
+    color: #3f3f46;
+  }
+}
