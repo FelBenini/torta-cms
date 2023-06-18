@@ -15,7 +15,7 @@ const PaginationComponent = ({num, pageNum}: {num: number, pageNum: string}) => 
   }
   return (
     <Stack height={50} alignItems="center" justifyContent="center">
-      <Pagination sx={{margin: '0 auto'}} count={num} defaultPage={page} page={page} onChange={handleChange}/>
+      <Pagination sx={{margin: '0 auto'}} count={num} defaultPage={page} page={page} onChange={handleChange} shape='rounded' color='primary' />
     </Stack>
   )
 }
