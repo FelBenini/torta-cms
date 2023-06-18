@@ -4,4 +4,11 @@ main {
   margin-left: 115px;
   min-height: 97svh;
   margin-top: 1.5svh;
+  & section {
+    display: flex;
+    flex-wrap: wrap;
+    & h1 {
+      font-size: calc(36px + 5%);
+    }
+  }
 }

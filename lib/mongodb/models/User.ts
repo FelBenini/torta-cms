@@ -1,5 +1,14 @@
 import mongoose, { model } from 'mongoose'
 
+export type UserType = {
+  username: string,
+  password: string,
+  email: string,
+  role: string,
+  updatedAt?: string,
+  profilePic?: string
+}
+
 const UserSchema = new mongoose.Schema({
   username: {type: String, required: true, unique: true},
   createdAt: {type: Date, required: true, default: Date.now()},

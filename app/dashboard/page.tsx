@@ -11,8 +11,13 @@ const Dashboard = async () => {
   }
   return (
     <>
-      <Topbar/>
-      <DataGraph />
+      <Topbar />
+      <section>
+        <DataGraph />
+        <span>
+          <h1>Welcome, {session.user?.name}</h1>
+        </span>
+      </section>
     </>
   )
 }

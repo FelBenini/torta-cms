@@ -23,8 +23,10 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         const authUser = await UserFunctions.getUserByName(credentials?.username)
-        const salt = bcrypt.genSaltSync(10)
-        if (!authUser || !(await bcrypt.compare(credentials?.password as string, authUser.password))) {
+        if (!authUser) {
+          return null
+        }
+        if (!bcrypt.compareSync(credentials?.password as string, authUser.password)) {
           return null
         }
         const user = { id: authUser._id, name: credentials?.username, email: authUser.role };
