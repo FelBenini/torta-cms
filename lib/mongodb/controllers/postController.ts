@@ -17,11 +17,11 @@ export class postController {
     return post._id
   }
 
-  public static getAllPosts = async (page: number = 1) => {
+  public static getAllPosts = async (page: number) => {
     await dbConnect();
     const posts = await Post.find()
-    .skip((page - 1) * 15)
     .limit(15)
+    .skip((page - 1) * 15)
     .populate('postedBy', '-_id -password -email -__v')
     .sort('-createdAt')
     .exec()
