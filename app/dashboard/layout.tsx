@@ -8,6 +8,11 @@ import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
 
+export const metadata = {
+  title: 'Dashboard - tortaCMS',
+  description: 'torta Content Management System',
+}
+
 const RootLayout = async ({
   children,
 }: {
