@@ -1,8 +1,17 @@
 import React from 'react'
 
-const EditPost = () => {
+type Props = {
+  params?: {
+    id?: string;
+  };
+  searchParams?: {
+    search?: string;
+  };
+};
+
+const EditPost = (props: Props) => {
   return (
-    <div>EditPost</div>
+    <div>{props?.params?.id}</div>
   )
 }
 
