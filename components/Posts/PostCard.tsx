@@ -31,7 +31,7 @@ const PostCard = ({post}: {post: Post}) => {
         <Link href={`/dashboard/post/${post._id}`}>{post.title}</Link>
       </h2>
       <h4>
-        {post.postedBy.username}
+        {post.postedBy.toString()}
         {post.published ? <span className={styles.chipPublished}>Published</span> : <span className={styles.chipNotPublished}>Not published</span>}
         created at: {getFormattedDate(post.createdAt)}
       </h4>

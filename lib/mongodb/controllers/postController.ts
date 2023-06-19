@@ -9,7 +9,7 @@ export class postController {
     const postDraft: PostType = {
       title: 'Your title here',
       content: '<p>Write your content here</p>',
-      postedBy: userPosting._id,
+      postedBy: userPosting.username,
       published: false,
     }
     const post = new Post(postDraft)

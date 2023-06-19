@@ -1,13 +1,23 @@
-import { postController } from '@/lib/mongodb/controllers/postController'
-import { redirect } from 'next/navigation'
-import { getServerSession } from 'next-auth';
+'use client'
+import { useRouter } from 'next/navigation';
+import axios from 'axios'
+import { useEffect } from 'react';
 
 export const dynamic = 'force-dynamic'
 
 const NewPostPage = async () => {
-  const session = await getServerSession();
-  const res = await postController.createPost(session?.user?.name as string)
-  redirect(`/dashboard/post/${res}`)
+  const router = useRouter()
+
+  const createPost = async () => {
+    const {data} = await axios.post(`/api/create-new-post`)
+    router.push(`/dashboard/post/${data.location}`)
+  }
+  useEffect(() => {
+    createPost()
+  })
+  return (
+    <></>
+  )
 }
 
 export default NewPostPage
