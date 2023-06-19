@@ -30,7 +30,7 @@ export class mongooseUserController {
     const encryptedPass = bcrypt.hashSync(newUser.password, bcrypt.genSaltSync(10))
     newUser.role = 'admin'
     newUser.password = encryptedPass
-    newUser.apiKey = generateApiKey(45);
+    newUser.apiKey = generateApiKey(105);
     const checkForUser = await User.find().exec()
     if (checkForUser.length > 0) {
       throw new Error('Admin user already exists')
