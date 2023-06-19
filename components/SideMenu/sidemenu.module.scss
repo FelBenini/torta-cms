@@ -59,3 +59,9 @@
 .logoSideMenu {
   filter: drop-shadow(0px 0px 8px #f5d0fe);
 }
+
+@media (max-width: 650px) {
+  .SideMenu {
+    display: none;
+  }
+}

@@ -19,3 +19,10 @@ main {
     }
   }
 }
+
+@media (max-width: 650px) {
+  main {
+    width: 100%;
+    margin-left: 0;
+  }
+}
