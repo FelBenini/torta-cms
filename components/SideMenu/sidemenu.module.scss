@@ -11,8 +11,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  overflow-y: auto;
-  scrollbar-gutter: stable both-edges;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   & h5, & h4 {
     opacity: 0;
@@ -63,5 +61,12 @@
 @media (max-width: 650px) {
   .SideMenu {
     display: none;
+  }
+}
+
+@media (max-height: 600px) {
+  .SideMenu {
+    scrollbar-gutter: stable both-edges;
+    overflow-y: auto;
   }
 }
