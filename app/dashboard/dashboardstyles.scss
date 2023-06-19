@@ -7,16 +7,7 @@ main {
   & section {
     display: flex;
     flex-wrap: wrap;
-    & h1 {
-      font-size: calc(32px + 7%);
-      color: #3e3e46;
-      font-weight: 500;
-      font-style: italic;
-      margin-left: 12px;
-      & svg {
-        margin-bottom: -6px;
-      }
-    }
+    min-height: 418px;
   }
 }
 
