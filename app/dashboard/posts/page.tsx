@@ -6,13 +6,11 @@ import PostCard from '@/components/Posts/PostCard'
 import {type Post} from '@/components/Posts/PostCard'
 import styles from './styles.module.scss'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 const Posts = async ({
-  params,
   searchParams,
 }: {
-  params: { slug: string };
   searchParams: { page: string | undefined };
 }) => {
   const res = await PostFunctions.getAllPosts(searchParams.page as number | undefined || 1)
