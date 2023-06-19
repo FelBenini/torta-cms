@@ -6,7 +6,8 @@ export type UserType = {
   email: string,
   role: string,
   updatedAt?: string,
-  profilePic?: string
+  profilePic?: string,
+  apiKey?: string
 }
 
 const UserSchema = new mongoose.Schema({
@@ -16,7 +17,8 @@ const UserSchema = new mongoose.Schema({
   email: {type: String, required: true, unique: true},
   role: {type: String, required: true},
   updatedAt: {type: Date},
-  profilePic: {type: String}
+  profilePic: {type: String},
+  apiKey: {type: String}
 })
 
 const User = mongoose.models.User ||  model('User', UserSchema);

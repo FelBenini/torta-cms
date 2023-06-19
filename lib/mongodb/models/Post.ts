@@ -25,7 +25,7 @@ const PostSchema = new mongoose.Schema<PostType>({
   updatedAt: {type: Date},
   tags: {type: Array},
   summary: {type: String},
-  postedBy: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
+  postedBy: {type: String, required: true}
 })
 
 const Post = mongoose.models.Post ||  model<PostType>('Post', PostSchema);

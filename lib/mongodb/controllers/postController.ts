@@ -22,7 +22,7 @@ export class postController {
     const posts = await Post.find()
     .limit(15)
     .skip((page - 1) * 15)
-    .populate('postedBy', '-_id -password -email -__v')
+    .populate('postedBy', '-_id -password -email -__v -apiKey')
     .sort('-createdAt')
     .exec()
 
@@ -38,7 +38,7 @@ export class postController {
     const posts = await Post.find({published: true}, '-__v, -createdAt -content')
     .limit(limit)
     .skip((page - 1) * limit)
-    .populate('postedBy', '-_id -password -email -__v')
+    .populate('postedBy', '-_id -password -email -__v -apiKey')
     .sort('-publishedAt')
     .exec();
 
