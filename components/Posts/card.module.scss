@@ -1,7 +1,7 @@
 .postCard {
-  width: calc(96% - 16px);
+  width: calc(100% - 16px);
   padding: 8px 16px;
-  margin: 8px auto;
+  margin: 2px auto;
   background-color: #fafafa;
   box-shadow: rgba(0, 0, 0, 0.062) 0px 4px 12px;
   border-radius: 8px;
@@ -19,6 +19,9 @@
     display: flex;
     margin-top: -12px;
     align-content: center;
+    word-wrap: break-word;
+    word-break: break-all;
+    height: fit-content;
   }
   & p {
     width: 60%;
@@ -34,7 +37,8 @@
   background-color: #4e46e531;
   color: #2e2972;
   padding: 3px 5px;
-  margin-left: 6px;
+  margin-left: 8px;
+  margin-right: 8px;
   border-radius: 20px;
 }
 
@@ -44,6 +48,7 @@
   background-color: #db277731;
   color: #9d174d;
   padding: 3px 5px;
-  margin-left: 6px;
+  margin-left: 8px;
+  margin-right: 8px;
   border-radius: 20px;
 }

@@ -1,3 +1,20 @@
 .sectionStyles {
   margin-top: 20px;
+  width: 99%;
+  margin: 0 auto;
+  flex-direction: column;
+  & h1 {
+    font-size: 2rem;
+    color: #3e3e46;
+    font-weight: 400;
+    width: calc(100% - 16px);
+    margin: 12px auto;
+  }
+  & h3 {
+    color: #53535c;
+    font-weight: 600;
+    width: calc(100% - 16px);
+    margin: 12px auto;
+    margin-bottom: 24px;
+  }
 }

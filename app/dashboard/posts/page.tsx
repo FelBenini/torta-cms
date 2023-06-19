@@ -20,6 +20,8 @@ const Posts = async ({
     <>
       <Topbar />
       <section className={styles.sectionStyles}>
+        <h1>All posts - page {searchParams.page || 1} of {Math.ceil(res.numOfPosts / 16)}</h1>
+        <h3>Total: {res.numOfPosts} posts</h3>
         {res.posts.map((post, index) => (
           <PostCard post={post as Post} key={index}/>
         ))}
