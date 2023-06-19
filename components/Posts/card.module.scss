@@ -1,0 +1,49 @@
+.postCard {
+  width: calc(96% - 16px);
+  padding: 8px 16px;
+  margin: 8px auto;
+  background-color: #fafafa;
+  box-shadow: rgba(0, 0, 0, 0.062) 0px 4px 12px;
+  border-radius: 8px;
+  & a {
+    color: #8a1691;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  & h4 {
+    font-weight: 400;
+    color: #27272a;
+    font-size: 16px;
+    display: flex;
+    margin-top: -12px;
+    align-content: center;
+  }
+  & p {
+    width: 60%;
+    word-break: break-all;
+    word-wrap: break-word;
+    color: #3f3f46;
+  }
+}
+
+.chipPublished {
+  font-size: 10px;
+  font-weight: 600;
+  background-color: #4e46e531;
+  color: #2e2972;
+  padding: 3px 5px;
+  margin-left: 6px;
+  border-radius: 20px;
+}
+
+.chipNotPublished {
+  font-size: 10px;
+  font-weight: 600;
+  background-color: #db277731;
+  color: #9d174d;
+  padding: 3px 5px;
+  margin-left: 6px;
+  border-radius: 20px;
+}

@@ -4,6 +4,7 @@ import { PostFunctions } from '@/lib/db/postFunctions'
 import PaginationComponent from '@/components/Pagination'
 import PostCard from '@/components/Posts/PostCard'
 import {type Post} from '@/components/Posts/PostCard'
+import styles from './styles.module.scss'
 
 export const dynamic = 'force-dynamic'
 
@@ -18,9 +19,11 @@ const Posts = async ({
   return (
     <>
       <Topbar />
-      {res.posts.map((post, index) => (
-        <PostCard post={post as Post} key={index}/>
-      ))}
+      <section className={styles.sectionStyles}>
+        {res.posts.map((post, index) => (
+          <PostCard post={post as Post} key={index}/>
+        ))}
+      </section>
       <PaginationComponent num={Math.ceil(res.numOfPosts / 16)} pageNum={searchParams.page || '1'}/>
     </>
   )
