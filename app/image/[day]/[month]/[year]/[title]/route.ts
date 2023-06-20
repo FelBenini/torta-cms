@@ -15,5 +15,5 @@ export async function GET(req: Request, url: any) {
     return new NextResponse('', {status: 404})
   }
   return new NextResponse(img.data, {headers: {
-    'Content-Type': 'image/jpeg'}})
+    'Content-Type': `image/${img.contentType}`}})
 }
