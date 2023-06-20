@@ -5,6 +5,7 @@ import PaginationComponent from '@/components/Pagination'
 import PostCard from '@/components/Posts/PostCard'
 import {type Post} from '@/components/Posts/PostCard'
 import styles from './styles.module.scss'
+import RouterRefresh from '@/components/RouterRefresh'
 
 export const revalidate = 0
 
@@ -16,6 +17,7 @@ const Posts = async ({
   const res = await PostFunctions.getAllPosts(searchParams.page as number | undefined || 1)
   return (
     <>
+      <RouterRefresh />
       <Topbar />
       <section className={styles.sectionStyles}>
         <h1>All posts - page {searchParams.page || 1} of {Math.ceil(res.numOfPosts / 15)}</h1>

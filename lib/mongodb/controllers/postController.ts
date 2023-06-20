@@ -50,4 +50,12 @@ export class postController {
       posts: posts
     }
   }
+
+  public static getOnePostById = async (id: string) => {
+    const post = await Post.findById(id).exec();
+    if (post) {
+      return post;
+    }
+    return null
+  }
 }
