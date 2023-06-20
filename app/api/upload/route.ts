@@ -16,43 +16,13 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const buffer = Buffer.from(await file.arrayBuffer());
-  const relativeUploadDir = `/uploads/${dateFn.format(Date.now(), "dd-MM-Y")}`;
-  const uploadDir = join(process.cwd(), "public", relativeUploadDir);
-
-  const mongoImg = await imageController.saveAnImage(file)
+  const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+  const filename = `${file.name.replace(
+    /\.[^/.]+$/,
+    ""
+  )}-${uniqueSuffix}.${mime.getExtension(file.type)}`;
+  const mongoImg = await imageController.saveAnImage(file, filename, mime.getExtension(file.type) as string)
   console.log(mongoImg._id)
 
-  try {
-    await stat(uploadDir);
-  } catch (e: any) {
-    if (e.code === "ENOENT") {
-      await mkdir(uploadDir, { recursive: true });
-    } else {
-      console.error(
-        "Error while trying to create directory when uploading a file\n",
-        e
-      );
-      return NextResponse.json(
-        { error: "Something went wrong." },
-        { status: 500 }
-      );
-    }
-  }
-
-  try {
-    const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-    const filename = `${file.name.replace(
-      /\.[^/.]+$/,
-      ""
-    )}-${uniqueSuffix}.${mime.getExtension(file.type)}`;
-    await writeFile(`${uploadDir}/${filename}`, buffer);
-    return NextResponse.json({ location: `${relativeUploadDir}/${filename}` });
-  } catch (e) {
-    console.error("Error while trying to upload a file\n", e);
-    return NextResponse.json(
-      { error: "Something went wrong." },
-      { status: 500 }
-    );
-  }
+  return NextResponse.json({'location': `/image/${mongoImg.day}/${mongoImg.month}/${mongoImg.year}/${mongoImg.title}`})
 }
