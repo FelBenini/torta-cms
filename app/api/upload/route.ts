@@ -3,6 +3,7 @@ import { join } from "path";
 import { stat, mkdir, writeFile } from "fs/promises";
 import * as dateFn from "date-fns";
 import { NextRequest, NextResponse } from "next/server";
+import imageController from '@/lib/mongodb/controllers/imageController'
 
 export async function POST(request: NextRequest) {
   const formData = await request.formData();
@@ -18,6 +19,9 @@ export async function POST(request: NextRequest) {
   const buffer = Buffer.from(await file.arrayBuffer());
   const relativeUploadDir = `/uploads/${dateFn.format(Date.now(), "dd-MM-Y")}`;
   const uploadDir = join(process.cwd(), "public", relativeUploadDir);
+
+  const mongoImg = await imageController.saveAnImage(file)
+  console.log(mongoImg._id)
 
   try {
     await stat(uploadDir);
