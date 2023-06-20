@@ -3,6 +3,11 @@ import { LoginForm, RegisterForm } from "@/components/Auth";
 import { redirect } from 'next/navigation'
 import { UserFunctions } from "@/lib/db/userFunctions";
 
+export const metadata = {
+  title: 'tortaCMS',
+  description: 'torta Content Management System',
+}
+
 export default async function Home() {
   const session = await getServerSession();
   const isFirstUser: Boolean = await UserFunctions.checkFirstUser();

@@ -34,11 +34,6 @@ const theme = createTheme({
   }
 })
 
-export const metadata = {
-  title: 'tortaCMS',
-  description: 'torta Content Management System',
-}
-
 export default function RootLayout({
   children,
 }: {
