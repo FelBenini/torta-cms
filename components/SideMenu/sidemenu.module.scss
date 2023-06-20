@@ -2,7 +2,7 @@
   background-color: #fafaf9;
   width: fit-content;
   position: fixed;
-  margin-left: 8px;
+  margin-left: 12px;
   padding: 0px 6px;
   height: 96svh;
   padding-bottom: 1svh;
@@ -68,5 +68,12 @@
   .SideMenu {
     scrollbar-gutter: stable both-edges;
     overflow-y: auto;
+    margin-left: 8px;
+  }
+}
+
+@media (min-width: 2000px) {
+  .SideMenu {
+    margin-left: calc(8px + 0.5%);
   }
 }

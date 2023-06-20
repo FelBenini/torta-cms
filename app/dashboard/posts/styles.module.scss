@@ -1,8 +1,9 @@
 .sectionStyles {
   margin-top: 20px;
-  width: 99%;
+  width: calc(100% - 14px);
   margin: 0 auto;
   min-height: 83svh;
+  margin-right: 14px;
   flex-direction: column;
   & h1 {
     font-size: 2rem;

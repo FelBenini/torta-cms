@@ -1,7 +1,7 @@
 main {
-  width: calc(100% - 110px);
+  width: calc(100% - 120px);
   height: 90svh;
-  margin-left: 100px;
+  margin-left: 110px;
   min-height: 97svh;
   margin-top: 1.5svh;
   & section {
@@ -16,5 +16,12 @@ main {
   main {
     width: 100%;
     margin-left: 0;
+  }
+}
+
+@media (min-width: 1520px) {
+  main {
+    width: calc(98.5% - 110px);
+    margin-left: calc(100px + 1.5%);
   }
 }
