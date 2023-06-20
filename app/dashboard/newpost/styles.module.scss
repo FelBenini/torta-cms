@@ -1,0 +1,25 @@
+.loadingEditor {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  & h1 {
+    animation-name: floating;
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
+  }
+  & p {
+    color: #6b7280;
+    padding-top: 24px;
+    font-weight: 600;
+  }
+}
+
+@keyframes floating {
+  0% {color: #6b7280;}
+  50% {color: #3a414d;}
+  100% {color: #6b7280;}
+}
