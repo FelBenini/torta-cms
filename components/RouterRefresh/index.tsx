@@ -7,7 +7,7 @@ const RouterRefresh = () => {
   const router = useRouter()
   useEffect(() => {
     router.refresh()
-  })
+  }, [])
   return (
     <></>
   )
