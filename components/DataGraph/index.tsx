@@ -22,7 +22,7 @@ const DataGraph = () => {
   }
   useEffect(() => {
     fetchData()
-  }, [])
+  })
   const data = {
     labels: [`Images Folder: ${bytesToSize(info.sizeOfImg)}`, `Database: ${bytesToSize(info.sizeOfDb)}`, `tortaCMS system: ${bytesToSize(info.sizeOfTortaCMS)}`],
     datasets: [
