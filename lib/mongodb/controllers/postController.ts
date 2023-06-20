@@ -52,6 +52,7 @@ export class postController {
   }
 
   public static getOnePostById = async (id: string) => {
+    await dbConnect();
     const post = await Post.findById(id).exec();
     if (post) {
       return post;
