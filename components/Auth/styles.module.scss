@@ -6,6 +6,15 @@
   justify-content: center;
   flex-wrap: wrap;
   align-items: center;
+  & .erroMsg {
+    font-size: 0.8rem;
+    color: #be123c;
+    height: fit-content;
+    margin-top: -12px;
+    & svg {
+      margin-bottom: -3px;
+    }
+  }
   & form {
     display: flex;
     flex-direction: column;
