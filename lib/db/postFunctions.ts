@@ -1,4 +1,3 @@
-import { ObjectId } from "mongoose";
 import { postController } from "../mongodb/controllers/postController";
 
 export class PostFunctions {
@@ -12,5 +11,9 @@ export class PostFunctions {
 
   public static getOnePostById = async (id: string) => {
     return await postController.getOnePostById(id);
+  }
+
+  public static updatePost = async (id: string, title: string, content: string) => {
+    return await postController.updatePost(id, title, content)
   }
 }

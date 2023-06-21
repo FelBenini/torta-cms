@@ -3,6 +3,20 @@ import Post, {type PostType} from "../models/Post";
 import User from "../models/User";
 
 export class postController {
+  public static updatePost = async (id: string, title: string, content: string) => {
+    await dbConnect();
+    const post = await Post.findById(id)
+    if (!post) {
+      return null
+    }
+
+    post.title = title;
+    post.content = content; 
+    await post.save()
+    return post
+  }
+
+
   public static createPost = async (username: string) => {
     await dbConnect();
     const userPosting = await User.findOne({username: username}).exec()
