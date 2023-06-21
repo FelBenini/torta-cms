@@ -50,7 +50,7 @@ export default function TextEditor({ value, setValue }: { value: string, setValu
         onEditorChange={handleEditorCange}
         init={{
           height: '96.5svh',
-          width: '95%',
+          width: '100%',
           resize: false,
           menubar: true,
           skin_url: "/skin/light",

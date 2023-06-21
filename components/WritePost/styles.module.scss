@@ -1,0 +1,26 @@
+.writePost {
+  padding-bottom: 12px;
+  & .titleInput {
+    width: calc(99.5% - 16px);
+    border: 2px solid rgba(34,47,62,.1);
+    font-size: 1.8rem;
+    padding: 8px;
+    margin: 0 auto;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    word-wrap: break-word;
+    word-break: break-all;
+    background-color: white;
+    &:focus {
+      outline: none;
+    }
+  }
+  & .topBar {
+    display: flex;
+    width: 100%;
+    justify-content: right;
+    height: 50px;
+    align-items: center;
+  }
+}

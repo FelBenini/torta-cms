@@ -24,7 +24,6 @@ const EditPost = async (props: Props) => {
     
     <div>
       <RouterRefresh />
-      {JSON.stringify(post)}
       <WritePost post={post}/>
     </div>
   )
