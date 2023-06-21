@@ -21,7 +21,7 @@ const DataGraph = () => {
   }
   useEffect(() => {
     fetchData()
-  })
+  }, [])
   const data = {
     labels: [`Images Collection: ${bytesToSize(info.sizeOfImg)}`, `Database: ${bytesToSize(info.sizeOfDb)}`],
     datasets: [
