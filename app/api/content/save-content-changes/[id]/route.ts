@@ -14,9 +14,11 @@ export async function PUT(req: NextRequest, url: any) {
   if (!request.title || !request.content) {
     return NextResponse.json({'message': 'Bad request'}, {status: 400})
   }
-  const updatedPost = await PostFunctions.updatePost(id, request.title, request.content)
+  const title = request.title.replaceAll('<br>', '')
+
+  const updatedPost = await PostFunctions.updatePost(id, title, request.content)
   if (!updatedPost) {
-    return NextResponse.json({'message': 'Not found'}, {status: 404})
+    return NextResponse.json({'message': 'Post not found'}, {status: 404})
   }
   return NextResponse.json(updatedPost, {status: 201})
 }
