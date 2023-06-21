@@ -1,7 +1,6 @@
 import React from 'react'
 import { PostFunctions } from '@/lib/db/postFunctions';
 import RouterRefresh from '@/components/RouterRefresh';
-import TextEditor from '@/components/TextEditor';
 import WritePost from '@/components/WritePost';
 
 type Props = {

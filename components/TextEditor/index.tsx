@@ -3,11 +3,12 @@ import { useState, useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
 
-export default function TextEditor({ value, setValue }: { value: string, setValue: React.Dispatch<React.SetStateAction<string>> }) {
+export default function TextEditor({ value, setValue, onChange }: { value: string, setValue: React.Dispatch<React.SetStateAction<string>>, onChange: () => void }) {
   const editorRef = useRef<any>();
 
-  const handleEditorCange = (content: string) => {
+  const handleEditorChange = (content: string) => {
     setValue(content);
+    onChange()
   };
 
   const handleUpload = async (
@@ -47,7 +48,7 @@ export default function TextEditor({ value, setValue }: { value: string, setValu
       <Editor
         onInit={(evt, editor) => (editorRef.current = editor)}
         value={value}
-        onEditorChange={handleEditorCange}
+        onEditorChange={handleEditorChange}
         init={{
           height: '96.5svh',
           width: '100%',

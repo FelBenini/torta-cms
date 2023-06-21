@@ -19,6 +19,9 @@ const WritePost = ({ post }: { post: Post }) => {
   const [showing, setShowing] = useState(false)
   const [saving, setSaving] = useState(false)
   async function handleSave() {
+    if (saving) {
+      return
+    }
     setSaving(true)
     const { status } = await axios.put(`/api/content/save-content-changes/${post._id}`, {
       title: title,
@@ -39,7 +42,16 @@ const WritePost = ({ post }: { post: Post }) => {
         }
         setShowing(open);
       };
-
+  const handleContentChange = async () => {
+    setSaving(true)
+    setTimeout(() => {
+      handleSave()}, 5000)
+    }
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    setTitle(e.currentTarget.innerHTML)
+    setTimeout(() => {
+      handleSave()}, 5000)
+  }
   return (
     <div className={styles.writePost}>
       <Drawer
@@ -57,8 +69,8 @@ const WritePost = ({ post }: { post: Post }) => {
           <RiMenu3Fill />
         </IconButton>
       </Stack>
-      <div className={styles.titleInput} role='textbox' onBlur={e => setTitle(e.currentTarget.innerHTML)} contentEditable='true' dangerouslySetInnerHTML={{ __html: title }}></div>
-      <TextEditor value={content} setValue={setContent} />
+      <div className={styles.titleInput} role='textbox' onBlur={handleBlur} contentEditable='true' dangerouslySetInnerHTML={{ __html: title }}></div>
+      <TextEditor value={content} setValue={setContent} onChange={handleContentChange}/>
     </div>
   )
 }
