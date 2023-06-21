@@ -2,6 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 import { type ObjectId } from 'mongoose'
 import styles from './card.module.scss'
+import OptionsPost from './Options'
 
 export type Post = {
   title: string,
@@ -24,21 +25,24 @@ function getFormattedDate(date: Date) {
   return `${month}/${day}/${year} - ${hours}:${minutes}`;
 }
 
-const PostCard = ({post}: {post: Post}) => {
+const PostCard = ({ post }: { post: Post }) => {
   return (
     <div className={styles.postCard}>
-      <h2>
-        <Link href={`/dashboard/post/${post._id}`}>{post.title}</Link>
-      </h2>
-      <h4>
-        {post.postedBy.toString()}
-        {post.published ? <span className={styles.chipPublished}>Published</span> : <span className={styles.chipNotPublished}>Not published</span>}
-        created at: {getFormattedDate(post.createdAt)}
-      </h4>
-      {post.content.length > 200 ?
-      <p>{post.content.slice(0, 200).replace( /(<([^>]+)>)/ig, '')}...</p> :
-      <p>{post.content.replace( /(<([^>]+)>)/ig, '')}</p>
-      }
+      <div>
+        <h2>
+          <Link href={`/dashboard/post/${post._id}`}>{post.title}</Link>
+        </h2>
+        <h4>
+          {post.postedBy.toString()}
+          {post.published ? <span className={styles.chipPublished}>Published</span> : <span className={styles.chipNotPublished}>Not published</span>}
+          created at: {getFormattedDate(post.createdAt)}
+        </h4>
+        {post.content.length > 200 ?
+          <p>{post.content.slice(0, 200).replace(/(<([^>]+)>)/ig, '')}...</p> :
+          <p>{post.content.replace(/(<([^>]+)>)/ig, '')}</p>
+        }
+      </div>
+      <OptionsPost />
     </div>
   )
 }
