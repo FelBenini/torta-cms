@@ -50,7 +50,7 @@ export default function TextEditor({ value, setValue, onChange }: { value: strin
         value={value}
         onEditorChange={handleEditorChange}
         init={{
-          height: '96.5svh',
+          height: 'calc(96.5svh - 126px)',
           width: '100%',
           resize: false,
           menubar: true,
