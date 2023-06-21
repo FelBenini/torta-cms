@@ -11,6 +11,7 @@ import Stack from '@mui/material/Stack'
 import { AiOutlineSave } from 'react-icons/ai'
 import axios from 'axios'
 import Drawer from '@mui/material/Drawer';
+import { FaPaperPlane } from 'react-icons/fa'
 
 const WritePost = ({ post }: { post: Post }) => {
   const [content, setContent] = useState(post.content)
@@ -51,7 +52,7 @@ const WritePost = ({ post }: { post: Post }) => {
           <p>Saving changes...</p> :
           <Button startIcon={<AiOutlineSave />} sx={{ textTransform: 'none' }} onClick={handleSave}>Save changes</Button>
         }
-        <Button variant='contained'>Publish</Button>
+        <Button endIcon={<FaPaperPlane />} variant='contained'>Publish</Button>
         <IconButton size='large' onClick={toggleDrawer(true)}>
           <RiMenu3Fill />
         </IconButton>
