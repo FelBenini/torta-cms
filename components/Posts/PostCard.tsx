@@ -30,7 +30,7 @@ const PostCard = ({ post }: { post: Post }) => {
     <div className={styles.postCard}>
       <div>
         <h2>
-          <Link href={`/dashboard/post/${post._id}`}>{post.title}</Link>
+          <Link href={`/dashboard/post/${post._id}`}>{post.title.replace(/(<([^>]+)>)/ig, '')}</Link>
         </h2>
         <h4>
           {post.postedBy.toString()}
