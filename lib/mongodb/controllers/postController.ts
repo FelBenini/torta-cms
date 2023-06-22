@@ -1,5 +1,5 @@
 import dbConnect from "..";
-import Post, {type PostType} from "../models/Post";
+import Post, { type PostType } from "../models/Post";
 import PublishedPosts from "../models/PublishedPosts";
 import User from "../models/User";
 
@@ -20,7 +20,7 @@ export class postController {
 
   public static createPost = async (username: string) => {
     await dbConnect();
-    const userPosting = await User.findOne({username: username}).exec()
+    const userPosting = await User.findOne({ username: username }).exec()
     const postDraft: PostType = {
       title: 'Your title here',
       content: '<p>Write your content here</p>',
@@ -35,11 +35,11 @@ export class postController {
   public static getAllPosts = async (page: number) => {
     await dbConnect();
     const posts = await Post.find()
-    .limit(15)
-    .skip((page - 1) * 15)
-    .populate('postedBy', '-_id -password -email -__v -apiKey')
-    .sort('-createdAt')
-    .exec()
+      .limit(15)
+      .skip((page - 1) * 15)
+      .populate('postedBy', '-_id -password -email -__v -apiKey')
+      .sort('-createdAt')
+      .exec()
 
     const count = await Post.find().count()
     return {
@@ -50,13 +50,13 @@ export class postController {
 
   public static getPublishedPosts = async (page: number, limit: number) => {
     await dbConnect();
-    const posts = await PublishedPosts.find({published: true}, '-__v, -createdAt')
-    .limit(limit)
-    .skip((page - 1) * limit)
-    .sort('-publishedAt')
-    .lean();
+    const posts = await PublishedPosts.find({ published: true }, '-__v, -createdAt')
+      .limit(limit)
+      .skip((page - 1) * limit)
+      .sort('-publishedAt')
+      .lean();
 
-    const count = await PublishedPosts.find({published: true}).count().exec();
+    const count = await PublishedPosts.find({ published: true }).count().exec();
     const numOfPages = Math.ceil(count / 15)
     return {
       number_of_pages: numOfPages,
@@ -85,34 +85,32 @@ export class postController {
         backgroundImage: post?.backgroundImage || null,
         categories: post?.categories || null,
         tags: post?.tags || null,
-        summary: post?.tags || null,
+        summary: post?.summary || null,
         postedBy: post.postedBy,
         draftPost: post._id
       })
       await publishedPost.save()
       post.published = true
       post.publishedAt = Date.now()
+      post.publishedPost = publishedPost._id
       await post.save()
       return publishedPost
     }
-    if (!post.published) {
-      const publishedPost = new PublishedPosts({
-        title: post.title,
-        content: post.content,
-        publishedAt: Date.now(),
-        updatedAt: Date.now(),
-        backgroundImage: post?.backgroundImage || null,
-        categories: post?.categories || null,
-        tags: post?.tags || null,
-        summary: post?.tags || null,
-        postedBy: post.postedBy,
-        draftPost: post._id
-      })
-      await publishedPost.save()
-      post.published = true
-      post.publishedAt = Date.now()
-      await post.save()
-      return publishedPost
-    }
+    const dbPublishedPost = await PublishedPosts.findById(post.publishedPost)
+    dbPublishedPost.title = post.title
+    dbPublishedPost.content = post.content
+    dbPublishedPost.publishedAt = Date.now()
+    dbPublishedPost.updatedAt = Date.now()
+    dbPublishedPost.backgroundImage = post?.backgroundImage || null
+    dbPublishedPost.categories = post?.categories || null
+    dbPublishedPost.tags = post?.tags || null
+    dbPublishedPost.summary = post?.summary || null
+    dbPublishedPost.postedBy = post.postedBy
+    dbPublishedPost.draftPost = post._id
+    await dbPublishedPost.save()
+    post.published = true
+    post.publishedAt = Date.now()
+    await post.save()
+    return dbPublishedPost
   }
 }
