@@ -14,6 +14,8 @@
   & a {
     color: #8a1691;
     text-decoration: none;
+    word-wrap: break-word;
+    word-break: break-all;
     &:hover {
       text-decoration: underline;
     }
@@ -28,6 +30,7 @@
     word-wrap: break-word;
     word-break: break-all;
     height: fit-content;
+    flex-wrap: wrap;
   }
   & p {
     width: 60%;

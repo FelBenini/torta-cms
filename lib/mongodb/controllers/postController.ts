@@ -17,7 +17,6 @@ export class postController {
     return post
   }
 
-
   public static createPost = async (username: string) => {
     await dbConnect();
     const userPosting = await User.findOne({username: username}).exec()
