@@ -8,6 +8,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: all ease 0.2s;
+  &:hover {
+    background-color: #ffffff;
+  }
   & div {
     width: 80%;
   }
