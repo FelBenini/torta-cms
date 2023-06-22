@@ -30,6 +30,11 @@ const WritePost = ({ post }: { post: Post }) => {
     setSaving(false)
   }
 
+  const publishPost = async () => {
+    await handleSave()
+    const { status } = await axios.post(`/api/posts/publish/${post._id}`)
+  }
+
   const toggleDrawer =
     (open: boolean) =>
       (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -64,7 +69,7 @@ const WritePost = ({ post }: { post: Post }) => {
           <p>Saving changes...</p> :
           <Button startIcon={<AiOutlineSave />} sx={{ textTransform: 'none' }} onClick={handleSave}>Save changes</Button>
         }
-        <Button endIcon={<FaPaperPlane />} variant='contained'>Publish</Button>
+        <Button onClick={publishPost} endIcon={<FaPaperPlane />} variant='contained'>{post.published ? 'Publish Changes' : 'Publish'}</Button>
         <IconButton size='large' onClick={toggleDrawer(true)}>
           <RiMenu3Fill />
         </IconButton>
