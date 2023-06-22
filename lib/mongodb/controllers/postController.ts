@@ -11,7 +11,8 @@ export class postController {
     }
 
     post.title = title;
-    post.content = content; 
+    post.content = content;
+    post.updatedAt = Date.now()
     await post.save()
     return post
   }
