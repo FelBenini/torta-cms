@@ -2,7 +2,6 @@ import mongoose, { model } from 'mongoose'
 
 const PublishedPostsSchema = new mongoose.Schema({
   title: {type: String, required: true},
-  createdAt: {type: Date, required: true, default: Date.now()},
   content: {type: String, required: true},
   publishedAt: {type: Date, required: true, default: Date.now()},
   backgroundImage: {type: String},

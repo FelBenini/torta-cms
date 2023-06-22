@@ -73,4 +73,46 @@ export class postController {
     }
     return null
   }
+
+  public static publishAPost = async (id: string) => {
+    await dbConnect();
+    const post = await Post.findById(id).exec()
+    if (!post.published) {
+      const publishedPost = new PublishedPosts({
+        title: post.title,
+        content: post.content,
+        publishedAt: Date.now(),
+        backgroundImage: post?.backgroundImage || null,
+        categories: post?.categories || null,
+        tags: post?.tags || null,
+        summary: post?.tags || null,
+        postedBy: post.postedBy,
+        draftPost: post._id
+      })
+      await publishedPost.save()
+      post.published = true
+      post.publishedAt = Date.now()
+      await post.save()
+      return publishedPost
+    }
+    if (!post.published) {
+      const publishedPost = new PublishedPosts({
+        title: post.title,
+        content: post.content,
+        publishedAt: Date.now(),
+        updatedAt: Date.now(),
+        backgroundImage: post?.backgroundImage || null,
+        categories: post?.categories || null,
+        tags: post?.tags || null,
+        summary: post?.tags || null,
+        postedBy: post.postedBy,
+        draftPost: post._id
+      })
+      await publishedPost.save()
+      post.published = true
+      post.publishedAt = Date.now()
+      await post.save()
+      return publishedPost
+    }
+  }
 }
