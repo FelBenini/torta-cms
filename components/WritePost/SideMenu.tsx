@@ -1,17 +1,29 @@
 'use client'
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './sidemenu.module.scss';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails'
 import { MdOutlineExpandMore } from 'react-icons/md'
+import axios from 'axios';
 
-const SideMenu = () => {
+const SideMenu = ({summaryProp, postId}: {summaryProp: string | undefined, postId: string}) => {
+  const [summary, setSummary] = useState(summaryProp)
+
+  const handleSummaryBlur = async () => {
+    if (summary === '') {
+      return
+    }
+    await axios.put(`/api/update-summary/${postId}`, {
+      summary: summary
+    })
+    return
+  }
   return (
     <div className={styles.sideMenu}>
       <div>
         <h3 className={styles.titleMargin}>Summary</h3>
-        <textarea style={{width: '95%', height: 200}}></textarea>
+        <textarea style={{width: '95%', height: 200}} onChange={(e) => setSummary(e.target.value)} onBlur={handleSummaryBlur}></textarea>
         <Accordion sx={{boxShadow: 'none', borderBottom: '2px solid #52525b', borderRadius: 0}}>
         <AccordionSummary
           expandIcon={<MdOutlineExpandMore size={30}/>}

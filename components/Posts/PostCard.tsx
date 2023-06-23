@@ -6,13 +6,12 @@ import OptionsPost from './Options'
 
 export type Post = {
   title: string,
-  postedBy: {
-    username: string,
-  },
+  postedBy: string,
   _id: ObjectId,
   published: boolean,
   content: string,
-  createdAt: Date
+  createdAt: Date,
+  summary?: string
 }
 
 function getFormattedDate(date: Date) {
