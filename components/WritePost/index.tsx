@@ -12,6 +12,7 @@ import { AiOutlineSave } from 'react-icons/ai'
 import axios from 'axios'
 import Drawer from '@mui/material/Drawer';
 import { FaPaperPlane } from 'react-icons/fa'
+import SideMenu from './SideMenu'
 
 const WritePost = ({ post }: { post: Post }) => {
   const [content, setContent] = useState(post.content)
@@ -61,7 +62,7 @@ const WritePost = ({ post }: { post: Post }) => {
         anchor='right'
         open={showing}
         onClose={toggleDrawer(false)}
-      ><p>dsadsadasad</p></Drawer>
+      ><SideMenu /></Drawer>
       <Stack direction='row' spacing={4} justifyContent='flex-end'>
         {saving ?
           <p>Saving changes...</p> :
