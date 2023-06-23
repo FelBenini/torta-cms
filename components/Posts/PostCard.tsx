@@ -42,7 +42,7 @@ const PostCard = ({ post }: { post: Post }) => {
           <p>{post.content.replace(/(<([^>]+)>)/ig, '')}</p>
         }
       </div>
-      <OptionsPost />
+      <OptionsPost id={post._id.toString()}/>
     </div>
   )
 }
