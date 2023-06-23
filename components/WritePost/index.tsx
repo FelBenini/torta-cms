@@ -54,8 +54,6 @@ const WritePost = ({ post }: { post: Post }) => {
     }
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     setTitle(e.currentTarget.innerHTML)
-    setTimeout(() => {
-      handleSave()}, 5000)
   }
   return (
     <div className={styles.writePost}>
