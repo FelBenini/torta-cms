@@ -1,10 +1,11 @@
 .loginPage {
   width: 100%;
-  min-height: 95svh;
+  height: 95svh;
   display: flex;
   align-content: center;
   justify-content: center;
   flex-wrap: wrap;
+  overflow-y: hidden;
   align-items: center;
   & .erroMsg {
     font-size: 0.8rem;
@@ -45,6 +46,17 @@
           font-style: normal;
         }
       }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .loginPage {
+    & form {
+      width: 100svw;
+      height: 80svh;
+      padding-top: 10svh;
+      padding-bottom: 10svh;
     }
   }
 }
