@@ -11,7 +11,7 @@ const SideMenu = ({summaryProp, postId}: {summaryProp: string | undefined, postI
   const [summary, setSummary] = useState(summaryProp)
 
   const handleSummaryBlur = async () => {
-    if (summary === '') {
+    if (summary === summaryProp) {
       return
     }
     await axios.put(`/api/update-summary/${postId}`, {
