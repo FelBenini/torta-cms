@@ -90,7 +90,7 @@ export class postController {
     await dbConnect();
     const post = await Post.findById(id).exec();
     if (tags.length <= 0) {
-      post.tags = []
+      post.tags = null
     } else {
       post.tags = [...tags]
     }
