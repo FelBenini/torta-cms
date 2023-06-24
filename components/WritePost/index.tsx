@@ -13,11 +13,13 @@ import axios from 'axios'
 import Drawer from '@mui/material/Drawer';
 import { FaPaperPlane } from 'react-icons/fa'
 import SideMenu from './SideMenu'
+import { useRouter } from 'next/navigation'
 
 const WritePost = ({ post }: { post: Post }) => {
   const [content, setContent] = useState(post.content)
   const [title, setTitle] = useState(post.title)
   const [showing, setShowing] = useState(false)
+  const router = useRouter()
   const [saving, setSaving] = useState(false)
   async function handleSave() {
     if (saving) {
@@ -34,6 +36,7 @@ const WritePost = ({ post }: { post: Post }) => {
   const publishPost = async () => {
     await handleSave()
     const { status } = await axios.post(`/api/posts/publish/${post._id}`)
+    router.refresh()
   }
 
   const toggleDrawer =
