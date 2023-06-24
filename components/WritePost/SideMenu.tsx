@@ -23,7 +23,7 @@ const SideMenu = ({summaryProp, postId}: {summaryProp: string | undefined, postI
     <div className={styles.sideMenu}>
       <div>
         <h3 className={styles.titleMargin}>Summary</h3>
-        <textarea style={{width: '95%', height: 200}} onChange={(e) => setSummary(e.target.value)} onBlur={handleSummaryBlur}></textarea>
+        <textarea style={{width: '95%', height: 200}} value={summary} onChange={(e) => setSummary(e.target.value)} onBlur={handleSummaryBlur} />
         <Accordion sx={{boxShadow: 'none', borderBottom: '2px solid #52525b', borderRadius: 0}}>
         <AccordionSummary
           expandIcon={<MdOutlineExpandMore size={30}/>}

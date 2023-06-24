@@ -65,6 +65,14 @@ export class postController {
     }
   }
 
+  public static updateSummary = async (id: string, summary: string) => {
+    await dbConnect();
+    const post = await Post.findById(id);
+    post.summary = summary
+    post.save()
+    return post.summary
+  }
+
   public static getOnePostById = async (id: string) => {
     await dbConnect();
     const post = await Post.findById(id).exec();

@@ -20,4 +20,8 @@ export class PostFunctions {
   public static publishAPost = async (id: string) => {
     return await postController.publishAPost(id);
   }
+
+  public static updateSummary = async (id: string, summary: string) => {
+    return await postController.updateSummary(id, summary);
+  }
 }
