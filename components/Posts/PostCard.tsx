@@ -11,7 +11,8 @@ export type Post = {
   published: boolean,
   content: string,
   createdAt: Date,
-  summary?: string
+  summary?: string,
+  tags?: Array<string>
 }
 
 function getFormattedDate(date: Date) {

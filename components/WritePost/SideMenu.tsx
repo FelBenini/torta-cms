@@ -7,8 +7,9 @@ import AccordionDetails from '@mui/material/AccordionDetails'
 import { MdOutlineExpandMore } from 'react-icons/md'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import InputTags from './TagsInput';
 
-const SideMenu = ({summaryProp, postId}: {summaryProp: string | undefined, postId: string}) => {
+const SideMenu = ({summaryProp, postId, tags}: {summaryProp: string | undefined, postId: string, tags?: Array<string>}) => {
   const router = useRouter()
   const [summary, setSummary] = useState(summaryProp)
 
@@ -39,9 +40,16 @@ const SideMenu = ({summaryProp, postId}: {summaryProp: string | undefined, postI
         <AccordionDetails>
           <p>Category 1</p>
           <p>Category 2</p>
+          <p>Category 2</p>
+          <p>Category 2</p>
+          <p>Category 2</p>
+          <p>Category 2</p>
+          <p>Category 2</p>
         </AccordionDetails>
         </Accordion>
         <div className={styles.line}></div>
+        <h3 className={styles.titleMargin}>Tags</h3>
+        <InputTags tagsData={tags || []}/>
     </div>
   )
 }

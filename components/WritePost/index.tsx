@@ -65,7 +65,7 @@ const WritePost = ({ post }: { post: Post }) => {
         anchor='right'
         open={showing}
         onClose={toggleDrawer(false)}
-      ><SideMenu summaryProp={post.summary} postId={post._id.toString()}/></Drawer>
+      ><SideMenu summaryProp={post.summary} tags={post?.tags} postId={post._id.toString()}/></Drawer>
       <Stack direction='row' spacing={4} justifyContent='flex-end'>
         {saving ?
           <p>Saving changes...</p> :
