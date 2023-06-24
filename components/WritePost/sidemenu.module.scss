@@ -1,9 +1,17 @@
 .sideMenu {
   width: 322px;
   height: 100%;
-  padding-left: 8px;
+  padding-left: 12px;
   padding-bottom: 16px;
   overflow-y: scroll;
+  & h5 {
+    font-weight: 400;
+    color: #4b5563;
+    margin-left: 12px;
+    & svg {
+      margin-bottom: -4px;
+    }
+  }
   & .titleMargin {
     margin-left: 12px;
     margin-top: 24px;
@@ -26,6 +34,12 @@
     border-radius: 4px;
     &:focus {
       outline: 3px solid rgba(0, 0, 0, 0.712);
+    }
+  }
+  & h1 {
+    color: #c026d3;
+    & svg {
+      margin-bottom: -4px;
     }
   }
 }

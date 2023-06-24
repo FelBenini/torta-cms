@@ -8,6 +8,8 @@ import { MdOutlineExpandMore } from 'react-icons/md'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import InputTags from './TagsInput';
+import { AiOutlineInfoCircle } from 'react-icons/ai'
+import { GiSettingsKnobs } from 'react-icons/gi'
 
 const SideMenu = ({summaryProp, postId, tags}: {summaryProp: string | undefined, postId: string, tags?: Array<string>}) => {
   const router = useRouter()
@@ -25,7 +27,7 @@ const SideMenu = ({summaryProp, postId, tags}: {summaryProp: string | undefined,
   }
   return (
     <div className={styles.sideMenu}>
-      <h1>Settings</h1>
+      <h1><GiSettingsKnobs /> Settings</h1>
         <h3 className={styles.titleMargin}>Summary</h3>
         <textarea style={{width: '95%', height: 200}} value={summary} onChange={(e) => setSummary(e.target.value)} onBlur={handleSummaryBlur} />
         <Accordion sx={{boxShadow: 'none', borderRadius: 0}}>
@@ -50,6 +52,7 @@ const SideMenu = ({summaryProp, postId, tags}: {summaryProp: string | undefined,
         <div className={styles.line}></div>
         <h3 className={styles.titleMargin}>Tags</h3>
         <InputTags tagsData={tags || []}/>
+        <h5><AiOutlineInfoCircle size={18}/> Separate tags by pressing enter</h5>
     </div>
   )
 }
