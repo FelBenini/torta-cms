@@ -19,7 +19,7 @@ const SideMenu = ({summaryProp, postId, tags}: {summaryProp: string | undefined,
     if (summary === summaryProp) {
       return
     }
-    await axios.put(`/api/update-summary/${postId}`, {
+    await axios.put(`/api/update/summary/${postId}`, {
       summary: summary
     })
     router.refresh()
