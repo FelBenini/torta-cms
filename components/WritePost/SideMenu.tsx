@@ -1,5 +1,5 @@
 'use client'
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styles from './sidemenu.module.scss';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';

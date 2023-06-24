@@ -17,15 +17,18 @@ const TagsInput = ({tagsData, id}: {tagsData: Array<string>, id: string}) => {
     }
   }
 
-  const handleDelete = (index: number) => {
+  const handleDelete = async (index: number) => {
     setTags([
       ...tags.slice(0, index),
       ...tags.slice(index + 1)
     ]);
-    handleSave()
+    await handleSave([
+      ...tags.slice(0, index),
+      ...tags.slice(index + 1)
+    ])
   }
 
-  const handleSave = async () => {
+  const handleSave = async (tags: Array<string>) => {
     await axios.put(`/api/update/tags/${id}`, {
       tags: tags
     })
@@ -34,7 +37,7 @@ const TagsInput = ({tagsData, id}: {tagsData: Array<string>, id: string}) => {
   }
 
   return (
-    <div className={styles.tagInput} onBlur={handleSave}>
+    <div className={styles.tagInput} onBlur={() => handleSave(tags)}>
       {tags.map((tag, index) => (<p key={index}>{tag} <TiDelete size={24} style={{marginBottom: -7, cursor: 'pointer'}} onClick={() => handleDelete(index)}/></p>))}
       <input type='text' value={inputValue}
         placeholder='Write your tags here'
