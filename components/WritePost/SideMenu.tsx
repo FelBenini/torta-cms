@@ -6,8 +6,10 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails'
 import { MdOutlineExpandMore } from 'react-icons/md'
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 const SideMenu = ({summaryProp, postId}: {summaryProp: string | undefined, postId: string}) => {
+  const router = useRouter()
   const [summary, setSummary] = useState(summaryProp)
 
   const handleSummaryBlur = async () => {
@@ -17,6 +19,7 @@ const SideMenu = ({summaryProp, postId}: {summaryProp: string | undefined, postI
     await axios.put(`/api/update-summary/${postId}`, {
       summary: summary
     })
+    router.refresh()
     return
   }
   return (
