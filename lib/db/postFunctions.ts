@@ -24,4 +24,8 @@ export class PostFunctions {
   public static updateSummary = async (id: string, summary: string) => {
     return await postController.updateSummary(id, summary);
   }
+
+  public static updateTags = async (id: string, tags: Array<string>) => {
+    return await postController.updateTags(id, tags);
+  }
 }

@@ -86,6 +86,18 @@ export class postController {
     return null
   }
 
+  public static updateTags = async (id: string, tags: Array<string>) => {
+    await dbConnect();
+    const post = await Post.findById(id).exec();
+    if (tags.length <= 0) {
+      post.tags = []
+    } else {
+      post.tags = [...tags]
+    }
+    await post.save()
+    return post.tags
+  }
+
   public static publishAPost = async (id: string) => {
     await dbConnect();
     const post = await Post.findById(id).exec()

@@ -51,7 +51,7 @@ const SideMenu = ({summaryProp, postId, tags}: {summaryProp: string | undefined,
         </Accordion>
         <div className={styles.line}></div>
         <h3 className={styles.titleMargin}>Tags</h3>
-        <InputTags tagsData={tags || []}/>
+        <InputTags tagsData={tags || []} id={postId}/>
         <h5><AiOutlineInfoCircle size={18}/> Separate tags by pressing enter</h5>
     </div>
   )
