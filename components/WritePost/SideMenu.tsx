@@ -34,6 +34,12 @@ const SideMenu = ({ summaryProp, postId, tags, categories, postCategories }: { s
     router.refresh()
     return
   }
+  const updateCategories = async (id: string) => {
+    await axios.put(`/api/update/category/${postId}`, {
+      category: id
+    })
+    router.refresh()
+  }
   return (
     <div className={styles.sideMenu}>
       <h1><GiSettingsKnobs /> Settings</h1>
@@ -52,11 +58,11 @@ const SideMenu = ({ summaryProp, postId, tags, categories, postCategories }: { s
           {categories?.map((category, index) => {
             if (postCategories.includes(category._id)) {
               return (
-                <p key={index}><Checkbox defaultChecked />{category.name}</p>
+                <p key={index}><Checkbox defaultChecked onClick={() => updateCategories(category._id.toString())}/>{category.name}</p>
               )
             } else {
               return (
-                <p key={index}><Checkbox />{category.name}</p>
+                <p key={index}><Checkbox onClick={() => updateCategories(category._id.toString())}/>{category.name}</p>
               )
             }
           })}
