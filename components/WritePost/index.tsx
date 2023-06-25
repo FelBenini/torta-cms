@@ -12,10 +12,10 @@ import { AiOutlineSave } from 'react-icons/ai'
 import axios from 'axios'
 import Drawer from '@mui/material/Drawer';
 import { FaPaperPlane } from 'react-icons/fa'
-import SideMenu from './SideMenu'
+import SideMenu, { CategoryType } from './SideMenu'
 import { useRouter } from 'next/navigation'
 
-const WritePost = ({ post }: { post: Post }) => {
+const WritePost = ({ post, categories }: { post: Post, categories: Array<CategoryType> | undefined}) => {
   const [content, setContent] = useState(post.content)
   const [title, setTitle] = useState(post.title)
   const [showing, setShowing] = useState(false)
@@ -65,7 +65,7 @@ const WritePost = ({ post }: { post: Post }) => {
         anchor='right'
         open={showing}
         onClose={toggleDrawer(false)}
-      ><SideMenu summaryProp={post.summary} tags={post?.tags} postId={post._id.toString()}/></Drawer>
+      ><SideMenu summaryProp={post.summary} tags={post?.tags} postId={post._id.toString()} postCategories={post?.categories || []} categories={categories || []}/></Drawer>
       <Stack direction='row' spacing={4} justifyContent='flex-end'>
         {saving ?
           <p>Saving changes...</p> :
