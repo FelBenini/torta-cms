@@ -100,11 +100,11 @@ const AddCategoryForm = () => {
   }
   return (
     <>
+      <p onClick={handleDisplay} className={styles.link}>Add new category</p>
       <form className={styles.formCategory} style={style} onSubmit={handleSubmit}>
         <input type='text' value={name} onChange={(e) => setName(e.target.value)} placeholder='Category name'/>
         <button type='submit'>Add</button>
       </form>
-      <p onClick={handleDisplay} className={styles.link}>Add new category</p>
     </>
   )
 }
