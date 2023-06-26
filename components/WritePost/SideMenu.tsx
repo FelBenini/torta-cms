@@ -97,6 +97,7 @@ const AddCategoryForm = () => {
       type: 'father',
     })
     router.refresh()
+    setName('')
   }
   return (
     <>
