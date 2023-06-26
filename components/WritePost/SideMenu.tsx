@@ -55,7 +55,7 @@ const SideMenu = ({ summaryProp, postId, tags, categories, postCategories }: { s
         >
           <h3>Categories</h3>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails sx={{width: '85%'}}>
           {categories?.map((category, index) => {
             if (postCategories.includes(category._id)) {
               return (
