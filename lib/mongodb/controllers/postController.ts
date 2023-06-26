@@ -27,7 +27,7 @@ export class postController {
       postedBy: userPosting.username,
       published: false,
     }
-    const post = new Post(postDraft)
+    const post = await Post.create(postDraft)
     await post.save()
     return post._id
   }

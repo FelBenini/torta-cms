@@ -6,16 +6,15 @@ import { useEffect } from 'react';
 import styles from './styles.module.scss'
 import Stack from '@mui/material/Stack';
 
-export const dynamic = 'force-dynamic'
-
-const NewPostPage = async () => {
+const NewPostPage = () => {
   const router = useRouter()
 
-  const createPost = async () => {
-    const { data } = await axios.post(`/api/create-new-post`)
-    router.push(`/dashboard/post/${data.location}`)
-  }
   useEffect(() => {
+    const createPost = async () => {
+      const { data } = await axios.post(`/api/create-new-post`)
+      router.push(`/dashboard/post/${data.location}`)
+    }
+    console.log('use effect')
     createPost()
   })
   return (
