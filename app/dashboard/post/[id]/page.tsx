@@ -15,12 +15,16 @@ type Props = {
 
 const fetchPost = async (id: string) => {
   const res = await PostFunctions.getOnePostById(id)
-  return res
+  const string = JSON.stringify(res)
+  const json = JSON.parse(string)
+  return json
 }
 
 const fetchCategories = async () => {
   const res = await categoriesController.getCategories()
-  return res
+  const string = JSON.stringify(res)
+  const json = JSON.parse(string)
+  return json
 }
 
 const EditPost = async (props: Props) => {

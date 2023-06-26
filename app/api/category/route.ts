@@ -17,5 +17,8 @@ export async function POST(req: NextRequest) {
   }
   const data: categoryType = await req.json()
   const category = categoriesController.addCategory(data.name, data.type, data.mainCategory)
+  if (!category) {
+    return NextResponse.json({'message': 'Bad request'}, {status: 400})
+  }
   return NextResponse.json(category)
 }
