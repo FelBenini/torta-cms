@@ -37,9 +37,8 @@ export class postController {
     const posts = await Post.find()
       .limit(15)
       .skip((page - 1) * 15)
-      .populate('postedBy', '-_id -password -email -__v -apiKey')
       .sort('-createdAt')
-      .exec()
+      .lean()
 
     const count = await Post.find().count()
     return {
