@@ -1,0 +1,31 @@
+.apiRefCard {
+  width: 95%;
+  margin: 2px auto;
+  background-color: #fafafa;
+  padding: 0.8% 1.5%;
+  box-shadow: rgba(0, 0, 0, 0.062) 0px 4px 12px;
+  border-radius: 8px;
+  & .apiTitle {
+    display: flex;
+    height: fit-content;
+    align-items: center;
+    & h2 {
+      color: #bf26d3e3;
+      font-size: 1.6rem;
+      height: fit-content;
+      margin-right: 0.8rem;
+    }
+    & h1 {
+      color: #a21caf;
+      font-size: 1.95rem;
+      font-weight: 500;
+      height: fit-content;
+      font-style: italic;
+    }
+  }
+  & p {
+    color: #52525b;
+    height: fit-content;
+    margin-top: -0.3rem;
+  }
+}
