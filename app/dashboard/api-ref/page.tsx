@@ -7,9 +7,11 @@ import ApiRefCard from '@/components/API/RefCard';
 const ApiRefPage = () => {
   const headersList = headers();
   const referer = headersList.get("referer");
+  const headerHost = headersList.get("host")
   const host = referer?.replace('/dashboard/api-ref', '')
   return (
     <section className={styles.apiRefSection}>
+      {headerHost}
       <h1><AiOutlineCluster size='2.8rem' style={{marginBottom: '-0.5rem'}}/> API References</h1>
       <ApiRefCard method='GET' url={`${host}/api/posts`} description='Fetch all the published posts of the blog from newest to oldest'/>
       <ApiRefCard method='GET' url={`${host}/api/posts?order=oldest`} description='Fetch all the published posts of the blog starting from the older posts'/>

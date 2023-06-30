@@ -1,11 +1,11 @@
 import React from 'react'
 import Topbar from '@/components/TopBar'
-import { PostFunctions } from '@/lib/db/postFunctions'
 import PaginationComponent from '@/components/Pagination'
 import PostCard from '@/components/Posts/PostCard'
 import {type Post} from '@/components/Posts/PostCard'
 import styles from './styles.module.scss'
 import RouterRefresh from '@/components/RouterRefresh'
+import { postController } from '@/lib/mongodb/controllers/postController'
 
 export const revalidate = 0
 
@@ -14,7 +14,7 @@ const Posts = async ({
 }: {
   searchParams: { page: string | undefined };
 }) => {
-  const res = await PostFunctions.getAllPosts(searchParams.page as number | undefined || 1)
+  const res = await postController.getAllPosts(searchParams.page as number | undefined || 1)
   return (
     <>
       <RouterRefresh />

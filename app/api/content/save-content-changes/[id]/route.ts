@@ -1,4 +1,4 @@
-import { PostFunctions } from "@/lib/db/postFunctions";
+import { postController } from "@/lib/mongodb/controllers/postController";
 import { getToken } from "next-auth/jwt";
 import { NextResponse, NextRequest } from "next/server";
 
@@ -16,7 +16,7 @@ export async function PUT(req: NextRequest, url: any) {
   }
   const title = request.title.replaceAll('<br>', '')
 
-  const updatedPost = await PostFunctions.updatePost(id, title, request.content)
+  const updatedPost = await postController.updatePost(id, title, request.content)
   if (!updatedPost) {
     return NextResponse.json({'message': 'Post not found'}, {status: 404})
   }

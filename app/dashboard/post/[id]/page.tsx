@@ -1,8 +1,8 @@
 import React from 'react'
-import { PostFunctions } from '@/lib/db/postFunctions';
 import RouterRefresh from '@/components/RouterRefresh';
 import WritePost from '@/components/WritePost';
 import categoriesController from '@/lib/mongodb/controllers/categoriesController';
+import { postController } from '@/lib/mongodb/controllers/postController';
 
 type Props = {
   params?: {
@@ -14,7 +14,7 @@ type Props = {
 };
 
 const fetchPost = async (id: string) => {
-  const res = await PostFunctions.getOnePostById(id)
+  const res = await postController.getOnePostById(id)
   const string = JSON.stringify(res)
   const json = JSON.parse(string)
   return json

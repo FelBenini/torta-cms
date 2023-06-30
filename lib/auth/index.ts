@@ -1,7 +1,7 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { UserFunctions } from "../db/userFunctions";
 import bcrypt from 'bcryptjs'
+import { userController } from "../mongodb/controllers/userController";
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -23,7 +23,7 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const authUser = await UserFunctions.getUserByName(credentials?.username)
+        const authUser = await userController.getUserByName(credentials?.username as string)
         if (!authUser) {
           return null
         }

@@ -15,7 +15,7 @@ function generateApiKey(length: number) {
   return result;
 }
 
-export class mongooseUserController {
+export class userController {
   public static getUserByName = async (username: string) => {
     await dbConnect()
     const user = await User.findOne({username: username}).exec()

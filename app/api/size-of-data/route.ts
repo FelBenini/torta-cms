@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import getSizeOfData from "@/lib/db/dataFunctions";
+import getSizeOfData from "@/lib/mongodb/dataFunctions";
 import { getToken } from "next-auth/jwt";
 
 export async function GET(req: NextRequest) {

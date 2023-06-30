@@ -1,6 +1,5 @@
-import { PostFunctions } from "@/lib/db/postFunctions";
 import dbConnect from "@/lib/mongodb";
-import Post from "@/lib/mongodb/models/Post";
+import { postController } from "@/lib/mongodb/controllers/postController";
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -11,7 +10,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     return NextResponse.json({ 'message': 'Not authorized' }, { status: 401 })
   }
   const body = await req.json()
-  const post = await PostFunctions.getOnePostById(params.id)
+  const post = await postController.getOnePostById(params.id)
   if (post.categories.includes(body.category)) {
     post.categories.pull(body.category)
     await post.save()

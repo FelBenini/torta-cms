@@ -1,4 +1,4 @@
-import { PostFunctions } from "@/lib/db/postFunctions";
+import { postController } from "@/lib/mongodb/controllers/postController";
 import { getToken } from "next-auth/jwt"
 import { NextResponse, NextRequest } from "next/server"
 
@@ -9,6 +9,6 @@ export async function PUT(req: NextRequest, {params}: {params: {id: string}}) {
   }
   const body = await req.json()
   const {id} = params;
-  const tags = await PostFunctions.updateTags(id, body.tags)
+  const tags = await postController.updateTags(id, body.tags)
   return NextResponse.json(tags);
 }

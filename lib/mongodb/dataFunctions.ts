@@ -1,4 +1,4 @@
-import mongoController from "../mongodb/controllers/mongoController";
+import mongoController from "./controllers/mongoController";
 
 export default async function getSizeOfData() {
   const data = await mongoController.getSizeOfDatabase();
