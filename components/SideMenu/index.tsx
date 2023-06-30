@@ -35,7 +35,7 @@ const SideMenu = () => {
         </Link>
       </nav>
       <nav>
-        <Link href="#">
+        <Link href="/dashboard/api-ref">
           <AiOutlineCluster size={30} />
           <h5>API ref</h5>
         </Link>

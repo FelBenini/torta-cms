@@ -2,6 +2,7 @@
   "name": "torta-cms",
   "version": "0.1.0",
   "private": true,
+  "author": "felbenini",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
