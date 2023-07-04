@@ -1,5 +1,4 @@
 'use client'
-import { signOut } from "next-auth/react";
 import { Button, TextField } from "@mui/material";
 import { IoLogOutOutline } from 'react-icons/io5'
 import { FiAlertCircle } from 'react-icons/fi'
@@ -15,9 +14,9 @@ import { signIn } from "next-auth/react";
 import axios from 'axios'
 import { UserType } from "@/lib/mongodb/models/User";
 
-export const LogoutButton = () => {
+export const LogoutButton = ({onClick}: {onClick: () => void}) => {
   return (
-    <Button onClick={() => signOut()} startIcon={<IoLogOutOutline size={30} />} sx={{ color: '#52525b' }}>
+    <Button onClick={() => onClick()} startIcon={<IoLogOutOutline size={30} />} sx={{ color: '#52525b' }}>
       Logout
     </Button>
   )
