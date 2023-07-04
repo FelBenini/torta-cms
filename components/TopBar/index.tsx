@@ -56,6 +56,7 @@ const Topbar = () => {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        sx={{backdropFilter: 'blur(3px)'}}
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" sx={{marginBottom: '12px'}} textAlign='center' variant="h5" component="h2">
@@ -64,7 +65,7 @@ const Topbar = () => {
           <Typography sx={{marginTop: '12px'}} textAlign='center'>
             Are you Sure?
           </Typography>
-          <ButtonGroup sx={{width: '100%', marginTop: '22px'}} aria-label="outlined primary button group">
+          <ButtonGroup sx={{width: '100%', marginTop: '32px'}} aria-label="outlined primary button group">
             <Button onClick={handleClose} sx={{width: '50%'}}>No, go back</Button>
             <Button onClick={() => signOut()} variant="contained" sx={{width: '50%'}}>Yes, log me out</Button>
           </ButtonGroup>
