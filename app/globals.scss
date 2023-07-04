@@ -14,12 +14,13 @@ body {
 
 ::-webkit-scrollbar {
   background-color: rgba(238, 238, 238, 0);
-  width: 5px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: #85858569;
   border-radius: 10px;
+  margin: 1px;
   cursor: pointer;
 }
 
