@@ -26,7 +26,9 @@ const Posts = async ({
           <PostCard post={post as Post} key={index}/>
         ))}
       </section>
-      <PaginationComponent num={Math.ceil(res.numOfPosts / 15)} pageNum={searchParams.page || '1'}/>
+      {Math.ceil(res.numOfPosts / 15) == 1 ? <div style={{height: '1.5svh'}}></div> :
+        <PaginationComponent num={Math.ceil(res.numOfPosts / 15)} pageNum={searchParams.page || '1'}/>
+      }
     </>
   )
 }
