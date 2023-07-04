@@ -12,7 +12,8 @@ export type PostType = {
   summary?: string,
   postedBy: mongoose.Schema.Types.ObjectId,
   updatedAt?: Date,
-  publishedPost?: mongoose.Schema.Types.ObjectId
+  publishedPost?: mongoose.Schema.Types.ObjectId,
+  type?: string
 }
 
 const PostSchema = new mongoose.Schema<PostType>({
@@ -27,7 +28,8 @@ const PostSchema = new mongoose.Schema<PostType>({
   tags: {type: Array},
   summary: {type: String},
   postedBy: {type: String, required: true},
-  publishedPost: {type: mongoose.Schema.Types.ObjectId, ref: 'PublishedPosts'}
+  publishedPost: {type: mongoose.Schema.Types.ObjectId, ref: 'PublishedPosts'},
+  type: {type: String, default: 'post'}
 })
 
 const Post = mongoose.models.Post ||  model<PostType>('Post', PostSchema);

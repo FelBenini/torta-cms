@@ -34,13 +34,13 @@ export class postController {
 
   public static getAllPosts = async (page: number) => {
     await dbConnect();
-    const posts = await Post.find()
+    const posts = await Post.find({type: {$ne: 'page'}})
       .limit(15)
       .skip((page - 1) * 15)
       .sort('-createdAt')
       .lean()
 
-    const count = await Post.find().count()
+    const count = await Post.find({type: {$ne: 'page'}}).count()
     return {
       numOfPosts: count,
       posts: posts
