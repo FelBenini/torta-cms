@@ -12,7 +12,7 @@ import { AiOutlineInfoCircle } from 'react-icons/ai'
 import { GiSettingsKnobs } from 'react-icons/gi'
 import Checkbox from '@mui/material/Checkbox';
 import { ObjectId } from 'mongoose';
-import { TextField } from '@mui/material';
+import ImageUpload from './ImageUpload';
 
 export type CategoryType = {
   name: string,
@@ -46,6 +46,8 @@ const SideMenu = ({ summaryProp, postId, tags, categories, postCategories }: { s
       <h1><GiSettingsKnobs /> Settings</h1>
       <h3 className={styles.titleMargin}>Summary</h3>
       <textarea style={{ width: '95%', height: 200 }} value={summary} onChange={(e) => setSummary(e.target.value)} onBlur={handleSummaryBlur} />
+      <h3 className={styles.titleMargin}>Main Image</h3>
+      <ImageUpload />
       <Accordion sx={{ boxShadow: 'none', borderRadius: 0 }}>
         <AccordionSummary
           expandIcon={<MdOutlineExpandMore size={30} />}
