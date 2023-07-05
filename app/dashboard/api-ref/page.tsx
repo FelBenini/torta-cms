@@ -16,6 +16,8 @@ const ApiRefPage = () => {
       <ApiRefCard method='GET' url={`${host}/api/posts`} description='Fetch all the published posts of the blog from newest to oldest'/>
       <ApiRefCard method='GET' url={`${host}/api/posts?order=oldest`} description='Fetch all the published posts of the blog starting from the older posts'/>
       <ApiRefCard method='GET' url={`${host}/api/posts?search={query}`} description='Search for posts using this endpoint with the search query parameter'/>
+      <ApiRefCard method='GET' url={`${host}/api/posts?category={category}`} description='Search for posts based on a category'/>
+      <ApiRefCard method='GET' url={`${host}/api/post/{day}/{month}/{year}/{slug}`} description='Get a single post content'/>
     </section>
   )
 }

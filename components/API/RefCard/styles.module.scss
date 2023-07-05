@@ -1,8 +1,10 @@
 .apiRefCard {
-  width: 95%;
-  margin: 2px auto;
+  width: calc(97% - 16px);
+  margin-top: 4px;
+  margin-left: auto;
+  margin-right: auto;
   background-color: #fafafa;
-  padding: 0.8% 1.5%;
+  padding: 4px 16px;
   box-shadow: rgba(0, 0, 0, 0.062) 0px 4px 12px;
   border-radius: 8px;
   & .apiTitle {
