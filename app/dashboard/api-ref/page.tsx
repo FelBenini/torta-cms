@@ -8,7 +8,7 @@ const ApiRefPage = () => {
   const headersList = headers();
   const referer = headersList.get("referer");
   const headerHost = headersList.get("host")
-  const host = referer?.replace('/dashboard/api-ref', '')
+  const host = referer?.replace('/dashboard/api-ref', '').replace('/dashboard/posts', '')
   return (
     <section className={styles.apiRefSection}>
       {headerHost}
