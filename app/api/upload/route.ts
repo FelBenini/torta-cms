@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 import imageController from '@/lib/mongodb/controllers/imageController'
 
 export async function POST(request: NextRequest) {
+  const url = new URL(request.url)
+  const hostname = url.toString().replace('/api/upload', '')
   const formData = await request.formData();
 
   const file = formData.get("file") as Blob | null;
@@ -21,5 +23,5 @@ export async function POST(request: NextRequest) {
   const mongoImg = await imageController.saveAnImage(file, filename, mime.getExtension(file.type) as string)
   console.log(mongoImg._id)
 
-  return NextResponse.json({'location': `/image/${mongoImg.day}/${mongoImg.month}/${mongoImg.year}/${mongoImg.title}`})
+  return NextResponse.json({'location': `${hostname}/image/${mongoImg.day}/${mongoImg.month}/${mongoImg.year}/${mongoImg.title}`})
 }
