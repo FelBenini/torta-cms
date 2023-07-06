@@ -24,13 +24,17 @@ const ImageUpload = () => {
 
   return (
     <>
-      <img className={styles.imgPreview} src={imgLink} alt='Main image preview'/>
+      {imgLink !== '' ? 
+        <img className={styles.imgPreview} src={imgLink} alt='Main image preview'/>
+      : <p style={{textAlign: 'center'}}>No image uploaded yet</p>
+      }
+      
       <label className={styles.uploadFile}>
         Click here to Upload
         <BiUpload style={{ display: 'block', marginTop: '6px' }} size='1.5em'/>
         <input onChange={handleUpload} type='file' name='uploadFile'/>  
       </label>
-      <input defaultValue={imgLink} onBlur={(e) => {setImgLink(e.target.value)}}/>
+      <input className={styles.imgUrl} defaultValue={imgLink} onBlur={(e) => {setImgLink(e.target.value)}} placeholder='Paste your image url'/>
     </>
   )
 }

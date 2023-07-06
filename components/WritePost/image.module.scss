@@ -24,3 +24,18 @@
   width: 92%;
   margin-left: 2.3%;
 }
+
+.imgUrl {
+  display: block;
+  width: calc(95% - 12px);
+  border-radius: 4px;
+  padding: 6px;
+  font-size: 15px;
+  &:hover {
+    border: 1px solid #a21caf;
+  }
+  &:focus {
+    outline: 2px solid #a21caf;
+    border: 1px solid #a21caf;
+  }
+}
