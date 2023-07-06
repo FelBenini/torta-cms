@@ -24,7 +24,7 @@ const ImageUpload = () => {
 
   return (
     <>
-      <img className={styles.imgPreview} src={imgLink}/>
+      <img className={styles.imgPreview} src={imgLink} alt='Main image preview'/>
       <label className={styles.uploadFile}>
         Click here to Upload
         <BiUpload style={{ display: 'block', marginTop: '6px' }} size='1.5em'/>
