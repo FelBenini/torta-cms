@@ -15,7 +15,12 @@
   &:hover {
     background-color: #e879f98f;
   }
-  & input {
+  & input[type=file] {
     display: none;
   }
+}
+
+.imgPreview {
+  width: 92%;
+  margin-left: 2.3%;
 }
