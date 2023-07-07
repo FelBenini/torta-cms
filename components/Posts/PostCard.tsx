@@ -13,7 +13,8 @@ export type Post = {
   createdAt: Date,
   summary?: string,
   tags?: Array<string>
-  categories?: Array<any>
+  categories?: Array<any>,
+  backgroundImage?: string
 }
 
 function getFormattedDate(date: Date) {

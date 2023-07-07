@@ -65,7 +65,7 @@ const WritePost = ({ post, categories }: { post: Post, categories: Array<Categor
         anchor='right'
         open={showing}
         onClose={toggleDrawer(false)}
-      ><SideMenu summaryProp={post.summary} tags={post?.tags} postId={post._id.toString()} postCategories={post?.categories || []} categories={categories || []}/></Drawer>
+      ><SideMenu summaryProp={post.summary} tags={post?.tags} postId={post._id.toString()} postCategories={post?.categories || []} categories={categories || []} imageUrl={post.backgroundImage}/></Drawer>
       <Stack direction='row' spacing={4} justifyContent='flex-end'>
         {saving ?
           <p>Saving changes...</p> :

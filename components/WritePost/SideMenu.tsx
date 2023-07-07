@@ -21,7 +21,7 @@ export type CategoryType = {
   childCategories: Array<CategoryType>
 }
 
-const SideMenu = ({ summaryProp, postId, tags, categories, postCategories }: { summaryProp: string | undefined, postId: string, tags?: Array<string>, postCategories: Array<string | ObjectId>, categories: Array<CategoryType> | undefined }) => {
+const SideMenu = ({ summaryProp, postId, tags, categories, postCategories, imageUrl }: { summaryProp: string | undefined, postId: string, tags?: Array<string>, postCategories: Array<string | ObjectId>, categories: Array<CategoryType> | undefined, imageUrl?: string }) => {
   const router = useRouter()
   const [summary, setSummary] = useState(summaryProp)
 
@@ -47,7 +47,7 @@ const SideMenu = ({ summaryProp, postId, tags, categories, postCategories }: { s
       <h3 className={styles.titleMargin}>Summary</h3>
       <textarea style={{ width: '95%', height: 200 }} value={summary} onChange={(e) => setSummary(e.target.value)} onBlur={handleSummaryBlur} />
       <h3 className={styles.titleMargin}>Main Image</h3>
-      <ImageUpload />
+      <ImageUpload postId={postId} initialValue={imageUrl} />
       <Accordion sx={{ boxShadow: 'none', borderRadius: 0 }}>
         <AccordionSummary
           expandIcon={<MdOutlineExpandMore size={30} />}
