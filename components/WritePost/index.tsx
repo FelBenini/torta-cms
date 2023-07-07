@@ -21,6 +21,7 @@ const WritePost = ({ post, categories }: { post: Post, categories: Array<Categor
   const [showing, setShowing] = useState(false)
   const router = useRouter()
   const [saving, setSaving] = useState(false)
+  const [publishedText, setPublishedText] = useState(post.published ? 'Publish Changes' : 'Publish')
   async function handleSave() {
     if (saving) {
       return
@@ -34,8 +35,10 @@ const WritePost = ({ post, categories }: { post: Post, categories: Array<Categor
   }
 
   const publishPost = async () => {
+    setPublishedText('Publishing...')
     await handleSave()
-    const { status } = await axios.post(`/api/posts/publish/${post._id}`)
+    await axios.post(`/api/posts/publish/${post._id}`)
+    setPublishedText('Published!')
     router.refresh()
   }
 
@@ -71,7 +74,7 @@ const WritePost = ({ post, categories }: { post: Post, categories: Array<Categor
           <p>Saving changes...</p> :
           <Button startIcon={<AiOutlineSave />} sx={{ textTransform: 'none' }} onClick={handleSave}>Save changes</Button>
         }
-        <Button onClick={publishPost} endIcon={<FaPaperPlane />} variant='contained'>{post.published ? 'Publish Changes' : 'Publish'}</Button>
+        <Button onClick={publishPost} endIcon={<FaPaperPlane />} variant='contained'>{publishedText}</Button>
         <IconButton size='large' onClick={toggleDrawer(true)}>
           <RiMenu3Fill />
         </IconButton>
