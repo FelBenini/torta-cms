@@ -136,4 +136,25 @@ export class postController {
     await post.save()
     return dbPublishedPost
   }
+
+  public static searchForPublishedPosts = async (query: string, page: number, limit: number) => {
+    await dbConnect();
+    const posts = await PublishedPosts.find({
+      $or: [{title: {$regex: new RegExp(query, "i")}}, {content: {$regex: new RegExp(query, "i")}}]
+    })
+    .skip((page - 1) * limit)
+    .limit(limit)
+    .sort('-publishedAt')
+    .exec();
+    
+    const count = await PublishedPosts.find({
+      $or: [{title: {$regex: new RegExp(query, "i")}}, {content: {$regex: new RegExp(query, "i")}}]
+    }).count().exec();
+    const numOfPages = Math.ceil(count / 15)
+    return {
+      number_of_pages: numOfPages,
+      number_of_posts: count,
+      posts: posts
+    }
+  }
 }
