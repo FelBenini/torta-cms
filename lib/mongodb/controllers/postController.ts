@@ -142,8 +142,8 @@ export class postController {
     const posts = await PublishedPosts.find({
       $or: [{title: {$regex: new RegExp(query, "i")}}, {content: {$regex: new RegExp(query, "i")}}]
     })
-    .skip((page - 1) * limit)
     .limit(limit)
+    .skip((page - 1) * limit)
     .sort('-publishedAt')
     .exec();
     
