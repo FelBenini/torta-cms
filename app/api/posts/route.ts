@@ -12,7 +12,13 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(queriedData)
   }
 
-  const data = await postController.getPublishedPosts(page, limit);
+  let data
+
+  if (searchParams.get('order') !== 'oldest') {
+    data = await postController.getPublishedPosts(page, limit);
+  } else {
+    data = await postController.getPublishedPosts(page, limit, 'publishedAt');
+  }
 
   const modifiedPosts = data.posts.map((post) => {
     const modifiedContent = post.content?.replaceAll('src="../../image', `src="${origin}/image`);

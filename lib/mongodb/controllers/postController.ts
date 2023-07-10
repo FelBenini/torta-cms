@@ -47,12 +47,12 @@ export class postController {
     }
   }
 
-  public static getPublishedPosts = async (page: number, limit: number) => {
+  public static getPublishedPosts = async (page: number, limit: number, sort: string = '-publishedAt') => {
     await dbConnect();
     const posts = await PublishedPosts.find({}, '-__v, -createdAt')
       .limit(limit)
       .skip((page - 1) * limit)
-      .sort('-publishedAt')
+      .sort(sort)
       .lean();
 
     const count = await PublishedPosts.find().count().exec();
