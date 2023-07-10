@@ -1,6 +1,6 @@
 import mongoose, { model } from 'mongoose'
 
-export type UserType = {
+interface IUser {
   username: string,
   password: string,
   email: string,
@@ -10,7 +10,12 @@ export type UserType = {
   apiKey?: string
 }
 
-const UserSchema = new mongoose.Schema({
+export interface IUserDocument extends IUser, Document { }
+export interface IUserModel extends mongoose.Model<IUserDocument> {
+    buildUser(args: IUser): IUserDocument
+}
+
+const UserSchema: mongoose.Schema = new mongoose.Schema({
   username: {type: String, required: true, unique: true},
   createdAt: {type: Date, required: true, default: Date.now()},
   password: {type: String, required: true},
@@ -21,6 +26,7 @@ const UserSchema = new mongoose.Schema({
   apiKey: {type: String}
 })
 
-const User = mongoose.models.User ||  model('User', UserSchema);
+const User = mongoose.models.User<IUser> ||  model<IUserDocument, IUserModel>('User', UserSchema);
 
 export default User
+export type UserType = IUser;

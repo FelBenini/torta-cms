@@ -35,7 +35,7 @@ export class userController {
     if (checkForUser.length > 0) {
       throw new Error('Admin user already exists')
     } else {
-      const adminUser = new User(newUser)
+      const adminUser = await new User(newUser)
       await adminUser.save()
       const firstPost = new Post({
         title: 'Hello world!',
@@ -54,5 +54,11 @@ export class userController {
       return true
     }
     return false
+  }
+
+  public static findOne = async (username: string): Promise<UserType> => {
+    await dbConnect();
+    const user = await User.findOne({username: username}).exec()
+    return user
   }
 }
