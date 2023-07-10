@@ -1,6 +1,7 @@
 import Category from "../models/Category"
 import dbConnect from ".."
 import { ObjectId } from "mongoose"
+import PublishedPosts from "../models/PublishedPosts"
 export default class categoriesController {
   public static getCategories = async () => {
     await dbConnect()
@@ -34,5 +35,31 @@ export default class categoriesController {
     await newCategory.save()
     await categoryToUpdate.save()
     return newCategory
+  }
+
+  public static findPublishedPostsByCategory = async (categoryName: string | null, page: number, limit: number, order: string  = '-publishedAt') => {
+    await dbConnect();
+
+    const category = await Category.findOne({name: categoryName});
+
+    if (!category) {
+      return null
+    }
+
+    const posts = await PublishedPosts.find({categories: category._id})
+    .limit(limit)
+    .skip((page - 1) * limit)
+    .sort(order)
+    .populate('categories', '-_id -type -__v -childCategories')
+    .lean();
+
+    const count = await PublishedPosts.find({categories: category._id}).count().exec();
+    const numOfPages = Math.ceil(count / 15)
+
+    return {
+      number_of_pages: numOfPages,
+      number_of_posts: count,
+      posts: posts
+    }
   }
 }
