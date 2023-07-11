@@ -1,0 +1,19 @@
+.userSection {
+  display: block;
+  & h1 {
+    display: flex;
+    align-items: center;
+    font-size: 2.5em;
+    height: fit-content;
+    & img {
+      border-radius: 100%;
+      border: 2px solid #3f3f46;
+      aspect-ratio: 1/1;
+      width: 60px;
+      margin-right: 8px;
+    }
+  }
+  & h3 {
+    margin-left: 8px;
+  }
+}
