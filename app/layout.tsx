@@ -46,7 +46,7 @@ export default function RootLayout({
     const handleAnchorClick = (event: MouseEvent) => {
       const targetUrl = (event.currentTarget as HTMLAnchorElement).href;
       const currentUrl = location.href;
-      if (targetUrl !== currentUrl) {
+      if (targetUrl !== currentUrl && targetUrl !== `${currentUrl}#`) {
         NProgress.start();
       }
     };
