@@ -144,7 +144,6 @@ export class postController {
     })
     .limit(limit)
     .skip((page - 1) * limit)
-    .sort('-publishedAt')
     .exec();
     
     const count = await PublishedPosts.find({
