@@ -14,7 +14,7 @@
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   & h5, & h4 {
     opacity: 0;
-    transition: all ease 0.3s;
+    transition: all ease 0.2s;
     height: fit-content;
     margin-top: 2px;
     margin-bottom: 2px;
@@ -45,7 +45,7 @@
       padding-top: 4px;
       padding-bottom: 4px;
       border-radius: 4px;
-      transition: all ease 0.2s;
+      transition: all ease 0.1s;
       &:hover {
         background-color: #db47cf2d;
         color: #490b44;
