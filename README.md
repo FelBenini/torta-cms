@@ -1,6 +1,6 @@
 # 🥧 tortaCMS
 
-![Alt text](https://i.imgur.com/u6DxJPJ.png)
+<img src='https://i.imgur.com/u6DxJPJ.png#banner' alt='tortaCMS banner' />
 
 A headless content management system made with Next.JS
 
@@ -53,6 +53,12 @@ You can easily deploy tortaCMS on Vercel with MongoDB Atlas for free.
 - Then go to https://vercel.com/dashboard and add a new project choosing the tortaCMS repository that you created as your template.
 - After that create all the environment variables on your vercel project, just like the ones in the '.env.local.example'. Your environment variables should end up looking like the image below.
 
-![Alt text](https://i.imgur.com/qNbFQEJ.png)
+![environment variables on vercel](https://i.imgur.com/qNbFQEJ.png)
 
 Success! Now you have tortaCMS hosted and running on the cloud! You are good to go to start your new project using tortaCMS!
+
+<style>
+img[src$="#banner"] {
+  border-radius: 8px
+}
+</style>
