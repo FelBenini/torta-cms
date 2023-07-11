@@ -58,7 +58,7 @@ You can easily deploy tortaCMS on Vercel with MongoDB Atlas for free.
 Success! Now you have tortaCMS hosted and running on the cloud! You are good to go to start your new project using tortaCMS!
 
 <style>
-img[src$="#banner"] {
+img {
   border-radius: 8px
 }
 </style>
