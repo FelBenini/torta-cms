@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 import styles from './topbar.module.scss'
-import { Button } from '@mui/material'
+import { Button, LinearProgress } from '@mui/material'
 import Link from 'next/link'
 import { BsPencilFill } from 'react-icons/bs'
 import { LogoutButton } from '../Auth'
@@ -24,10 +24,27 @@ const style = {
   p: 4,
 };
 
+const loadingStyle = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '100%',
+  height: '100%',
+  bgcolor: '#ffffffdb',
+  borderRadius: '8px',
+  zIndex: 999,
+  display: 'flex',
+  justifyContent: 'center',
+  flexDirection: 'column',
+  boxShadow: 'none'
+}
+
 
 const Topbar = () => {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true);
+  const [loading, setLoading] = useState(false);
   const handleClose = () => setOpen(false);
   return (
     <>
@@ -40,7 +57,7 @@ const Topbar = () => {
           </Button>
         </h3>
         <h3>
-          <LogoutButton onClick={() => handleOpen()}/>
+          <LogoutButton onClick={() => handleOpen()} />
         </h3>
         <Link href='/dashboard/newpost'>
           <Button
@@ -56,18 +73,27 @@ const Topbar = () => {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-        sx={{backdropFilter: 'blur(3px)'}}
+        sx={{ backdropFilter: 'blur(3px)' }}
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" sx={{marginBottom: '12px'}} textAlign='center' variant="h5" component="h2">
+          {loading ? <Box sx={loadingStyle}>
+            <Typography id="modal-modal-title" sx={{ marginBottom: '12px' }} textAlign='center' variant="h5" component="h3">
+              Logging you out
+            </Typography>
+            <LinearProgress sx={{width: '80%', margin: '0 auto', borderRadius: '8px'}} />
+          </Box> : <></>}
+          <Typography id="modal-modal-title" sx={{ marginBottom: '12px' }} textAlign='center' variant="h5" component="h2">
             You are logging out of tortaCMS
           </Typography>
-          <Typography sx={{marginTop: '12px'}} textAlign='center'>
+          <Typography sx={{ marginTop: '12px' }} textAlign='center'>
             Are you Sure?
           </Typography>
-          <ButtonGroup sx={{width: '100%', marginTop: '32px'}} aria-label="outlined primary button group">
-            <Button onClick={handleClose} sx={{width: '50%'}}>No, go back</Button>
-            <Button onClick={() => signOut()} variant="contained" sx={{width: '50%'}}>Yes, log me out</Button>
+          <ButtonGroup sx={{ width: '100%', marginTop: '32px' }} aria-label="outlined primary button group">
+            <Button onClick={handleClose} sx={{ width: '50%' }}>No, go back</Button>
+            <Button onClick={() => {
+              setLoading(true)
+              signOut()
+}} variant="contained" sx={{ width: '50%' }}>Yes, log me out</Button>
           </ButtonGroup>
         </Box>
       </Modal>
