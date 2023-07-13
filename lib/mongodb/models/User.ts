@@ -5,7 +5,7 @@ interface IUser {
   password: string,
   email: string,
   role: string,
-  updatedAt?: string,
+  updatedAt?: Date,
   profilePic?: string,
   apiKey?: string
 }

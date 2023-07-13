@@ -1,4 +1,5 @@
 import mongoose, { model } from 'mongoose'
+import { ICategory } from './Category';
 
 export interface IPost {
   title: string,
@@ -7,12 +8,12 @@ export interface IPost {
   published?: boolean,
   publishedAt?: Date,
   backgroundImage?: string,
-  categories?: mongoose.Schema.Types.ObjectId[],
+  categories?: mongoose.Schema.Types.ObjectId[] | string[] | ICategory[],
   tags?: string[],
   summary?: string,
-  postedBy: mongoose.Schema.Types.ObjectId,
+  postedBy: mongoose.Schema.Types.ObjectId | string,
   updatedAt?: Date,
-  publishedPost?: mongoose.Schema.Types.ObjectId,
+  publishedPost?: mongoose.Schema.Types.ObjectId | string,
   type?: string
 }
 

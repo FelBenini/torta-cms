@@ -3,8 +3,8 @@ import mongoose, { model, Document } from 'mongoose'
 export interface ICategory {
   name: string,
   type: string,
-  childCategories?: Array<mongoose.ObjectId> | Array<ICategory>,
-  mainCategory?: mongoose.ObjectId | ICategory
+  childCategories?: Array<mongoose.ObjectId> | Array<ICategory> | string,
+  mainCategory?: mongoose.ObjectId | ICategory | string
 }
 
 export interface ICategoryDocument extends ICategory, Document { }
