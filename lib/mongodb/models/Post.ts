@@ -6,7 +6,7 @@ export interface IPost {
   createdAt?: Date,
   content: string,
   published?: boolean,
-  publishedAt?: Date,
+  publishedAt?: Date | number,
   backgroundImage?: string,
   categories?: mongoose.Schema.Types.ObjectId[] | string[] | ICategory[],
   tags?: string[],
