@@ -1,6 +1,6 @@
-import mongoose, { model } from 'mongoose'
+import mongoose, { model, Document } from 'mongoose'
 
-interface ICategory {
+export interface ICategory {
   name: string,
   type: string,
   childCategories?: Array<mongoose.ObjectId> | Array<ICategory>,
