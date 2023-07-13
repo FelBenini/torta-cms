@@ -1,10 +1,10 @@
 import mongoose, { model } from 'mongoose'
 
-export type PostType = {
+export interface IPost {
   title: string,
   createdAt?: Date,
   content: string,
-  published: boolean,
+  published?: boolean,
   publishedAt?: Date,
   backgroundImage?: string,
   categories?: mongoose.Schema.Types.ObjectId[],
@@ -16,7 +16,13 @@ export type PostType = {
   type?: string
 }
 
-const PostSchema = new mongoose.Schema<PostType>({
+export interface IPostDocument extends IPost, mongoose.Document { }
+export interface IPostModel extends mongoose.Model<IPostDocument> {
+    buildUser(args: IPost): IPostDocument
+}
+
+
+const PostSchema: mongoose.Schema = new mongoose.Schema({
   title: {type: String, required: true},
   createdAt: {type: Date, required: true, default: Date.now()},
   content: {type: String, required: true},
@@ -32,6 +38,7 @@ const PostSchema = new mongoose.Schema<PostType>({
   type: {type: String, default: 'post'}
 })
 
-const Post = mongoose.models.Post ||  model<PostType>('Post', PostSchema);
+const Post = mongoose.models.Post<IPost> ||  model<IPostDocument, IPostModel>('Post', PostSchema);
 
 export default Post
+export type PostType = IPost;
