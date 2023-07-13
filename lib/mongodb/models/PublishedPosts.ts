@@ -1,5 +1,14 @@
 import mongoose, { model } from 'mongoose'
-import { IPost, IPostDocument, IPostModel } from './Post';
+import { IPost } from './Post';
+
+export interface IPublishedPost extends IPost {
+  draftPost: IPost | string | mongoose.ObjectId
+}
+
+export interface IPublishedPostDocument extends IPublishedPost, mongoose.Document { }
+export interface IPublishedPostModel extends mongoose.Model<IPublishedPostDocument> {
+    buildUser(args: IPublishedPost): IPublishedPostDocument
+}
 
 const PublishedPostsSchema: mongoose.Schema = new mongoose.Schema({
   title: {type: String, required: true},
@@ -14,6 +23,6 @@ const PublishedPostsSchema: mongoose.Schema = new mongoose.Schema({
   draftPost: {type: mongoose.Schema.Types.ObjectId, ref: 'Posts', required: true}
 })
 
-const PublishedPosts = mongoose.models.PublishedPosts<IPost> ||  model<IPostDocument, IPostModel>('PublishedPosts', PublishedPostsSchema);
+const PublishedPosts = mongoose.models.PublishedPosts<IPublishedPost> ||  model<IPublishedPostDocument, IPublishedPostModel>('PublishedPosts', PublishedPostsSchema);
 
 export default PublishedPosts
