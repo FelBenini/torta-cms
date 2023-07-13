@@ -1,5 +1,5 @@
 'use client'
-import { Button, TextField } from "@mui/material";
+import { Button, LinearProgress, TextField } from "@mui/material";
 import { IoLogOutOutline } from 'react-icons/io5'
 import { FiAlertCircle } from 'react-icons/fi'
 import { useState } from 'react'
@@ -23,6 +23,7 @@ export const LogoutButton = ({onClick}: {onClick: () => void}) => {
 }
 
 export const LoginForm = () => {
+  const [loading, setLoading] = useState(false)
   const searchParams = useSearchParams()
   const callback = searchParams.get('callbackUrl')
   const [formValues, setFormValues] = useState({ username: '', password: '' })
@@ -30,6 +31,7 @@ export const LoginForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setLoading(true)
     await signIn("credentials", {
       username: formValues.username,
       password: formValues.password,
@@ -40,6 +42,8 @@ export const LoginForm = () => {
   return (
     <main className={styles.loginPage}>
       <form onSubmit={handleSubmit}>
+        {loading ? <LinearProgress sx={{width: 'calc(100% + 12px)', borderRadius: '8px'}} />
+        : <span aria-hidden style={{height: '4px'}}></span>}
         <div className={styles.imgLogo}>
           <Image src={Logo.src} width={80} height={80} alt='tortaCMS logo' />
           <h2>Log into <em>tortaCMS</em></h2>
