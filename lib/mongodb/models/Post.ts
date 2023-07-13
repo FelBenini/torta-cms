@@ -12,7 +12,7 @@ export interface IPost {
   tags?: string[],
   summary?: string,
   postedBy: mongoose.Schema.Types.ObjectId | string,
-  updatedAt?: Date,
+  updatedAt?: Date | number,
   publishedPost?: mongoose.Schema.Types.ObjectId | string,
   type?: string
 }
