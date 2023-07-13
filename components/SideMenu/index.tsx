@@ -43,7 +43,7 @@ const SideMenu = () => {
       <nav>
         <Link href="/dashboard/user">
           <FaRegUser size={25} />
-          <h5>User</h5>
+          <h5>Profile</h5>
         </Link>
       </nav>
       <nav>
