@@ -18,7 +18,7 @@ function generateApiKey(length: number) {
 export class userController {
   public static getUserByName = async (username: string) => {
     await dbConnect()
-    const user = await User.findOne({username: username}).exec()
+    const user = await User.findOne({username: {$regex: new RegExp(username, 'i')}}).exec()
     if (!user) {
       return null
     }
