@@ -14,19 +14,27 @@ You will need Node.js installed on your system and a MongoDB database.
 
 ### Installing
 
-- First clone this repository
+- 1 First clone this repository
 
 ```bash 
 git clone https://github.com/FelBenini/torta-cms.git
+cd torta-cms
 ```
 
-- And install its dependencies
+- Or use degit to install
+
+```bash
+npx degit https://github.com/FelBenini/torta-cms torta-cms
+cd torta-cms
+```
+
+- 2 And install its dependencies
 
 ```bash
 npm install
 ```
 
-- Rename '.env.local.example' to '.env.local' and change its values, it should look something like this:
+- 3 Rename '.env.local.example' to '.env.local' and change its values, it should look something like this:
 
 ```makefile
 CONNECTION_STRING='mongodb://localhost:27017/tortaCMS' #mongoDB connection string
@@ -34,7 +42,7 @@ NEXTAUTH_SECRET='asdfasdfdasfa0j324asdioahdAAsdfasfsaddfasofjadspo243432zafaASdg
 NEXTAUTH_URL='http://localhost:3000'
 ```
 
-- Finally build and run the project
+- 4 Finally build and run the project
 
 ```bash
 npm run build
