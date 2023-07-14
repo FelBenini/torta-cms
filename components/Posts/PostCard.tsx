@@ -27,12 +27,12 @@ function getFormattedDate(date: Date) {
   return `${month}/${day}/${year} - ${hours}:${minutes}`;
 }
 
-const PostCard = ({ post }: { post: Post }) => {
+const PostCard = ({ post, type = 'post' }: { post: Post, type: string }) => {
   return (
     <div className={styles.postCard}>
       <div>
         <h2>
-          <Link href={`/dashboard/post/${post._id}`}>{post.title.replace(/(<([^>]+)>)/ig, '')}</Link>
+          <Link href={`/dashboard/${type}/${post._id}`}>{post.title.replace(/(<([^>]+)>)/ig, '')}</Link>
         </h2>
         <h4>
           {post.postedBy.toString()}

@@ -29,7 +29,7 @@ const SideMenu = () => {
         </Link>
       </nav>
       <nav>
-        <Link href="#">
+        <Link href="/dashboard/pages">
           <RiPagesLine size={30} />
           <h5>Pages</h5>
         </Link>
