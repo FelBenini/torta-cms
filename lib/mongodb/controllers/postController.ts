@@ -49,13 +49,13 @@ export class postController {
 
   public static getPublishedPosts = async (page: number, limit: number, sort: string = '-publishedAt') => {
     await dbConnect();
-    const posts = await PublishedPosts.find({}, '-__v, -createdAt')
+    const posts = await PublishedPosts.find({type: {$ne: 'page'}}, '-__v, -createdAt')
       .limit(limit)
       .skip((page - 1) * limit)
       .sort(sort)
       .lean();
 
-    const count = await PublishedPosts.find().count().exec();
+    const count = await PublishedPosts.find({type: {$ne: 'page'}}).count().exec();
     const numOfPages = Math.ceil(count / 15)
     return {
       number_of_pages: numOfPages,
@@ -78,7 +78,7 @@ export class postController {
 
   public static getOnePostById = async (id: string) => {
     await dbConnect();
-    const post = await Post.findById(id).exec();
+    const post = await Post.findOne({_id: id, type: {$ne: 'page'}}).exec();
     if (post) {
       return post;
     }
@@ -110,7 +110,8 @@ export class postController {
         tags: post?.tags || null,
         summary: post?.summary || null,
         postedBy: post.postedBy,
-        draftPost: post._id
+        draftPost: post._id,
+        type: post.type
       })
       await publishedPost.save()
       post.published = true
@@ -140,14 +141,16 @@ export class postController {
   public static searchForPublishedPosts = async (query: string, page: number, limit: number) => {
     await dbConnect();
     const posts = await PublishedPosts.find({
-      $or: [{title: {$regex: new RegExp(query, "i")}}, {content: {$regex: new RegExp(query, "i")}}]
+      $or: [{title: {$regex: new RegExp(query, "i")}}, {content: {$regex: new RegExp(query, "i")}}],
+      type: {$ne: 'page'}
     })
     .limit(limit)
     .skip((page - 1) * limit)
     .exec();
     
     const count = await PublishedPosts.find({
-      $or: [{title: {$regex: new RegExp(query, "i")}}, {content: {$regex: new RegExp(query, "i")}}]
+      $or: [{title: {$regex: new RegExp(query, "i")}}, {content: {$regex: new RegExp(query, "i")}}],
+      type: {$ne: 'page'}
     }).count().exec();
     const numOfPages = Math.ceil(count / 15)
     return {
