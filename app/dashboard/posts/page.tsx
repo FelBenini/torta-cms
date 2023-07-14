@@ -23,7 +23,7 @@ const Posts = async ({
         <h1>All posts - page {searchParams.page || 1} of {Math.ceil(res.numOfPosts / 15)}</h1>
         <h3>Total: {res.numOfPosts} posts</h3>
         {res.posts.map((post, index) => (
-          <PostCard post={post as Post} key={index}/>
+          <PostCard post={post as Post} key={index} type='post'/>
         ))}
       </section>
       {Math.ceil(res.numOfPosts / 15) == 1 ? <div style={{height: '1.5svh'}}></div> :
