@@ -1,5 +1,6 @@
 import dbConnect from "..";
 import Post from "../models/Post";
+import Category from "../models/Category";
 import User, { type UserType } from "../models/User";
 import bcrypt from 'bcryptjs'
 
@@ -43,6 +44,13 @@ export class userController {
         postedBy: adminUser.username
       })
       await firstPost.save()
+      const firstPage = new Post({
+        title: 'My first blog page',
+        content: '<p>This is the first page of my blog.</p>',
+        postedBy: adminUser.username,
+        type: 'page'
+      })
+      await firstPage.save()
       return adminUser
     }
   }
