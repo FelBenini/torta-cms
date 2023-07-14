@@ -3,6 +3,7 @@ import RouterRefresh from '@/components/RouterRefresh';
 import WritePost from '@/components/WritePost';
 import categoriesController from '@/lib/mongodb/controllers/categoriesController';
 import { postController } from '@/lib/mongodb/controllers/postController';
+import { redirect } from 'next/navigation';
 
 type Props = {
   params?: {
@@ -15,6 +16,9 @@ type Props = {
 
 const fetchPost = async (id: string) => {
   const res = await postController.getOnePostById(id)
+  if (!res) {
+    redirect('/dashboard/posts?message=This post does not exist')
+  }
   const string = JSON.stringify(res)
   const json = JSON.parse(string)
   return json
