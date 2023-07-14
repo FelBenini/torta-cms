@@ -18,7 +18,7 @@ export class postController {
     return post
   }
 
-  public static createPost = async (username: string) => {
+  public static createPost = async (username: string, type: string) => {
     await dbConnect();
     const userPosting = await User.findOne({ username: username }).exec()
     const postDraft: PostType = {
@@ -26,6 +26,7 @@ export class postController {
       content: '<p>Write your content here</p>',
       postedBy: userPosting.username,
       published: false,
+      type: type
     }
     const post = await Post.create(postDraft)
     await post.save()

@@ -5,14 +5,16 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { useEffect } from 'react';
 import styles from './styles.module.scss'
 import Stack from '@mui/material/Stack';
+import { useSearchParams } from 'next/navigation'
 
 const NewPostPage = () => {
   const router = useRouter()
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     const createPost = async () => {
-      const { data } = await axios.post(`/api/create-new-post`)
-      router.push(`/dashboard/post/${data.location}`)
+      const { data } = await axios.post(`/api/create-new-post?type=${searchParams.get('type')}`)
+      router.push(`/dashboard/${searchParams.get('type')}/${data.location}`)
     }
     console.log('use effect')
     createPost()
