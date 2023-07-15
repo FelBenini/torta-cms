@@ -39,12 +39,12 @@ export class postController {
       .limit(15)
       .skip((page - 1) * 15)
       .sort('-createdAt')
-      .lean()
+      .exec()
 
     const count = await Post.find({type: {$ne: 'page'}}).count()
     return {
       numOfPosts: count,
-      posts: posts
+      posts: posts as PostType[]
     }
   }
 
@@ -106,6 +106,7 @@ export class postController {
         title: post.title,
         content: post.content,
         publishedAt: Date.now(),
+        published: true,
         backgroundImage: post?.backgroundImage || null,
         categories: post?.categories || null,
         tags: post?.tags || null,

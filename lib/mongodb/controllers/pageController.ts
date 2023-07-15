@@ -8,7 +8,7 @@ export class pageController {
       .limit(15)
       .skip((page - 1) * 15)
       .sort('-createdAt')
-      .lean()
+      .exec()
 
     const count = await Post.find({ type: 'page' }).count()
     return {

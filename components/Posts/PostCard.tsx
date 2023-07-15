@@ -8,9 +8,9 @@ export type Post = {
   title: string,
   postedBy: string,
   _id: ObjectId,
-  published: boolean,
+  published?: boolean,
   content: string,
-  createdAt: Date,
+  createdAt?: Date,
   summary?: string,
   tags?: Array<string>
   categories?: Array<any>,
@@ -37,7 +37,7 @@ const PostCard = ({ post, type = 'post' }: { post: Post, type: string }) => {
         <h4>
           {post.postedBy.toString()}
           {post.published ? <span className={styles.chipPublished}>Published</span> : <span className={styles.chipNotPublished}>Not published</span>}
-          created at: {getFormattedDate(post.createdAt)}
+          created at: {getFormattedDate(new Date(post.createdAt as Date))}
         </h4>
         {post.content.length > 200 ?
           <p>{post.content.slice(0, 200).replace(/(<([^>]+)>)/ig, '')}...</p> :

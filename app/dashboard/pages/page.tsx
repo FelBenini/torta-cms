@@ -1,10 +1,7 @@
 import React from 'react'
-import PaginationComponent from '@/components/Pagination'
-import PostCard from '@/components/Posts/PostCard'
-import {type Post} from '@/components/Posts/PostCard'
-import styles from '../posts/styles.module.scss'
-import RouterRefresh from '@/components/RouterRefresh'
+import ListOfPosts from '@/components/Posts/List'
 import { pageController } from '@/lib/mongodb/controllers/pageController'
+import RouterRefresh from '@/components/RouterRefresh'
 
 export const revalidate = 0
 
@@ -14,19 +11,12 @@ const Pages = async ({
   searchParams: { page: string | undefined };
 }) => {
   const res = await pageController.getAllPages(searchParams.page as number | undefined || 1)
+  const string = JSON.stringify(res)
+  const json = JSON.parse(string)
   return (
     <>
       <RouterRefresh />
-      <section className={styles.sectionStyles}>
-        <h1>All pages - page {searchParams.page || 1} of {Math.ceil(res.numOfPosts / 15)}</h1>
-        <h3>Total: {res.numOfPosts} pages</h3>
-        {res.posts.map((post, index) => (
-          <PostCard post={post as Post} key={index} type={'page'}/>
-        ))}
-      </section>
-      {Math.ceil(res.numOfPosts / 15) == 1 ? <div style={{height: '1.5svh'}}></div> :
-        <PaginationComponent num={Math.ceil(res.numOfPosts / 15)} pageNum={searchParams.page || '1'}/>
-      }
+      <ListOfPosts initialData={json} type='page' page={searchParams?.page || '1'}/>
     </>
   )
 }
