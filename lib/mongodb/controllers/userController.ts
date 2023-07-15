@@ -41,14 +41,16 @@ export class userController {
       const firstPost = new Post({
         title: 'Hello world!',
         content: '<p>Start writing your content!</p>',
-        postedBy: adminUser.username
+        postedBy: adminUser.username,
+        published: false
       })
       await firstPost.save()
       const firstPage = new Post({
         title: 'My first blog page',
         content: '<p>This is the first page of my blog.</p>',
         postedBy: adminUser.username,
-        type: 'page'
+        type: 'page',
+        published: false
       })
       await firstPage.save()
       return adminUser
