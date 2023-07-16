@@ -1,6 +1,7 @@
 import React from 'react'
 import RouterRefresh from '@/components/RouterRefresh'
 import { postController } from '@/lib/mongodb/controllers/postController'
+import Topbar from '@/components/TopBar'
 import ListOfPosts from '@/components/Posts/List'
 
 export const revalidate = 0
@@ -15,6 +16,7 @@ const Posts = async ({
   const json = JSON.parse(string)
   return (
     <>
+      <Topbar />
       <RouterRefresh />
       <ListOfPosts initialData={json} type='post' page={searchParams?.page || '1'}/>
     </>

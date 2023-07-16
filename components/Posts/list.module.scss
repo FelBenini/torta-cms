@@ -2,7 +2,6 @@
   margin-top: 20px;
   width: 100%;
   margin: 0 auto;
-  margin-right: 14px;
   flex-direction: column;
   & h1 {
     font-size: 2rem;
@@ -18,4 +17,9 @@
     margin: 12px auto;
     margin-bottom: 24px;
   }
+}
+
+.latestPosts {
+  width: 100%;
+  margin: 0 auto;
 }
