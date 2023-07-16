@@ -8,9 +8,11 @@ const LatestPosts = async ({user}: {user: string}) => {
   .sort('-createdAt')
   .limit(3)
   .exec()
+  const string = JSON.stringify(posts)
+  const json = JSON.parse(string)
   return (
     <section className={styles.latestPosts}>
-      <ListOfPosts initialData={{numOfPosts: 3, posts}} type='post' page='1' latest={true} />
+      <ListOfPosts initialData={{numOfPosts: 3, posts: json}} type='post' page='1' latest={true} />
     </section>
   )
 }

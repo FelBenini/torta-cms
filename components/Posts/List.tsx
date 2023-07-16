@@ -1,6 +1,6 @@
 'use client'
 import { PostType } from '@/lib/mongodb/models/Post'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PostCard from './PostCard'
 import styles from './list.module.scss'
 import mongoose from 'mongoose'
@@ -24,6 +24,9 @@ type PropsType = {
 
 const ListOfPosts = ({ initialData, type, page, limit = 15, latest = false }: PropsType) => {
   const [posts, setPosts] = useState(initialData)
+  useEffect(() => {
+    setPosts(initialData)
+  })
   return (
     <>
       <section className={styles.sectionStyles}>

@@ -9,6 +9,7 @@ const PaginationComponent = ({num, pageNum}: {num: number, pageNum: string}) => 
   const router = useRouter()
   const [page, setPage] = useState(parseInt(pageNum))
   const handleChange = (e: React.ChangeEvent<unknown>, value: number) => {
+    router.refresh()
     setPage(value)
     router.push(`?page=${value}`)
     NProgress.start();

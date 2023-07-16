@@ -14,7 +14,7 @@ const NewPostPage = () => {
   useEffect(() => {
     const createPost = async () => {
       const { data } = await axios.post(`/api/create-new-post?type=${searchParams.get('type')}`)
-      router.push(`/dashboard/${searchParams.get('type')}/${data.location}`)
+      router.push(`/dashboard/${searchParams.get('type') || 'post'}/${data.location}`)
     }
     console.log('use effect')
     createPost()
