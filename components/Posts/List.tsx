@@ -5,6 +5,7 @@ import PostCard from './PostCard'
 import styles from './list.module.scss'
 import mongoose from 'mongoose'
 import PaginationComponent from '../Pagination'
+import { BsClock } from 'react-icons/bs'
 
 interface Post extends PostType {
   _id: mongoose.ObjectId
@@ -35,7 +36,7 @@ const ListOfPosts = ({ initialData, type, page, limit = 15, latest = false }: Pr
             <h1>All {type}s - page {page || 1} of {Math.ceil(posts.numOfPosts / limit)}</h1>
             <h3>Total: {posts.numOfPosts} posts</h3>
           </>
-          : <h1>Your latest {type}s</h1>}
+          : <h1><BsClock style={{marginBottom: '-4px'}} /> Your latest {type}s</h1>}
         {posts.posts.map((post, index) => (
           <PostCard post={post as Post} key={index} type={type} />
         ))}
