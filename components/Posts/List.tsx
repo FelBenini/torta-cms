@@ -8,6 +8,7 @@ import PaginationComponent from '../Pagination'
 import { BsClock } from 'react-icons/bs'
 import { Button } from '@mui/material'
 import { AiOutlineFileSearch } from 'react-icons/ai'
+import Link from 'next/link'
 
 interface Post extends PostType {
   _id: mongoose.ObjectId
@@ -29,13 +30,15 @@ const ListOfPosts = ({ initialData, type, page, limit = 15, latest = false }: Pr
   const [posts, setPosts] = useState(initialData)
   useEffect(() => {
     setPosts(initialData)
-  })
+  }, [initialData])
   if (posts.numOfPosts <= 0) {
     return (
       <div className={styles.noPosts}>
         <h1><AiOutlineFileSearch style={{marginBottom: '-0.1em'}}/> No {type}s found</h1>
         <p>Start writing a new one!</p>
-        <Button sx={{padding: '8px 60px'}} variant='contained'>New {type}</Button>
+        <Link href={`/dashboard/newpost?type=${type}`}>
+          <Button sx={{padding: '8px 60px'}} variant='contained'>New {type}</Button>
+        </Link>
       </div>
     )
   }
