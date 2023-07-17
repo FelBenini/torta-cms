@@ -9,7 +9,7 @@ import { FaRegTrashAlt } from 'react-icons/fa'
 import { HiOutlinePencil } from 'react-icons/hi'
 import Link from 'next/link'
 
-const OptionsPost = ({id}: {id: string}) => {
+const OptionsPost = ({id, type}: {id: string, type: 'post' | 'page'}) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -40,8 +40,8 @@ const OptionsPost = ({id}: {id: string}) => {
         anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
         TransitionComponent={Fade}
       >
-        <Link href={`/dashboard/post/${id}`} style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)'}}><MenuItem onClick={handleClose}><HiOutlinePencil size={20} style={{marginRight: 5}}/> Edit post</MenuItem></Link>
-        <MenuItem onClick={handleClose}><FaRegTrashAlt size={18} style={{marginRight: 6}}/> Delete post</MenuItem>
+        <Link href={`/dashboard/${type}/${id}`} style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)'}}><MenuItem onClick={handleClose}><HiOutlinePencil size={20} style={{marginRight: 5}}/> Edit {type}</MenuItem></Link>
+        <MenuItem onClick={handleClose}><FaRegTrashAlt size={18} style={{marginRight: 6}}/> Delete {type}</MenuItem>
       </Menu>
     </>
   )

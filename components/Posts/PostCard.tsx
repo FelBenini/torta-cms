@@ -27,7 +27,7 @@ function getFormattedDate(date: Date) {
   return `${month}/${day}/${year} - ${hours}:${minutes}`;
 }
 
-const PostCard = ({ post, type = 'post' }: { post: Post, type: string }) => {
+const PostCard = ({ post, type = 'post' }: { post: Post, type: 'post' | 'page' }) => {
   return (
     <div className={styles.postCard}>
       <div>
@@ -44,7 +44,7 @@ const PostCard = ({ post, type = 'post' }: { post: Post, type: string }) => {
           <p>{post.content.replace(/(<([^>]+)>)/ig, '')}</p>
         }
       </div>
-      <OptionsPost id={post._id.toString()}/>
+      <OptionsPost id={post._id.toString()} type={type}/>
     </div>
   )
 }
