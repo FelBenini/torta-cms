@@ -11,7 +11,9 @@ const StatisticsDashboard = ({username}: {username: string}) => {
     total_num_of_pages: 0,
     total_num_of_posts: 0,
     published_posts: 0,
-    published_pages: 0
+    published_pages: 0,
+    num_of_categories: 0,
+    num_of_images: 0
   })
   useEffect(() => {
     async function getData() {
@@ -27,10 +29,12 @@ const StatisticsDashboard = ({username}: {username: string}) => {
         <span>
           <h3>Your posts: <b>{info.num_of_posts}</b></h3>
           <h3>Your pages: <b>{info.num_of_pages}</b></h3>
+          <h3>Images: <b>{info.num_of_images}</b></h3>
         </span>
         <span>
           <h3>Total posts: <b>{info.total_num_of_posts}</b></h3>
           <h3>Total pages: <b>{info.total_num_of_pages}</b></h3>
+          <h3>Categories: <b>{info.num_of_categories}</b></h3>
         </span>
         <span>
           <h3>Published posts: <b>{info.published_posts}</b></h3>

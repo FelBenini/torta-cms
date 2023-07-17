@@ -2,6 +2,8 @@ import Post from "@/lib/mongodb/models/Post";
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 import dbConnect from "@/lib/mongodb";
+import Category from "@/lib/mongodb/models/Category";
+import Image from "@/lib/mongodb/models/Image";
 import PublishedPosts from "@/lib/mongodb/models/PublishedPosts";
 
 export async function GET(req: NextRequest) {
@@ -17,6 +19,8 @@ export async function GET(req: NextRequest) {
   const total_num_of_pages = await Post.find({type: 'page'}).count().exec();
   const published_posts = await PublishedPosts.find({type: {$ne: 'page'}}).count().exec();
   const published_pages = await PublishedPosts.find({type: 'page'}).count().exec();
+  const num_of_categories = await Category.find().count().exec();
+  const num_of_images = await Image.find().count().exec();
 
   return NextResponse.json({
     num_of_pages,
@@ -24,6 +28,8 @@ export async function GET(req: NextRequest) {
     total_num_of_pages,
     total_num_of_posts,
     published_posts,
-    published_pages
+    published_pages,
+    num_of_categories,
+    num_of_images
   })
 }
