@@ -13,6 +13,7 @@ const Dashboard = async () => {
       <section>
         <DataGraph />
         <StatisticsDashboard username={session?.user?.name as string}/>
+        <hr />
         <LatestPosts user={session?.user?.name as string} />
       </section>
     </>

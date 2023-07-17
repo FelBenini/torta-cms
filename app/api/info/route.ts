@@ -7,12 +7,12 @@ import Image from "@/lib/mongodb/models/Image";
 import PublishedPosts from "@/lib/mongodb/models/PublishedPosts";
 
 export async function GET(req: NextRequest) {
-  await dbConnect();
   const token = await getToken({req})
   if (!token) {
     return NextResponse.json({}, {status: 401})
   }
-
+  
+  await dbConnect();
   const num_of_posts = await Post.find({type: {$ne: 'page'}, postedBy: token.name}).count().exec();
   const num_of_pages = await Post.find({type: 'page', postedBy: token.name}).count().exec();
   const total_num_of_posts = await Post.find({type: {$ne: 'page'}}).count().exec();
