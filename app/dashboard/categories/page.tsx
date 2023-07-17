@@ -3,6 +3,7 @@ import styles from './style.module.scss'
 import categoriesController from '@/lib/mongodb/controllers/categoriesController'
 import CategoryCard from './CategoryCard'
 import { ICategory } from '@/lib/mongodb/models/Category'
+import Topbar from './Topbar'
 
 interface Category extends ICategory {
   _id: string
@@ -15,7 +16,7 @@ const Categories = async () => {
   return (
     <>
       <section className={styles.categoriesSection}>
-        <h1>Total: {categories.length} categories</h1>
+        <Topbar length={categories.length}/>
         {categories.map((category: Category, index: number)  => (
           <CategoryCard id={category._id as string} key={index}/>
         ))}

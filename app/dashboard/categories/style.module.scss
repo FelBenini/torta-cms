@@ -4,6 +4,13 @@
   display: flex;
   height: fit-content;
   min-height: fit-content;
+  & span {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
   & h1 {
     height: fit-content;
     font-weight: 500;
