@@ -5,6 +5,26 @@
   border-radius: 12px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   margin: 8px;
+  & .information {
+    display: flex;
+    justify-content: space-between;
+    max-height: 90%;
+    width: 95%;
+    margin-left: 2.5%;
+    & span {
+      height: 85%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    & h3 {
+      font-weight: 400;
+      margin-bottom: 12%;
+      & b {
+        font-weight: 600;
+      }
+    }
+  }
   & h1 {
     font-size: calc(32px + 7%);
     color: #3e3e46;

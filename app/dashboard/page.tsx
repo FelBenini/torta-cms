@@ -12,7 +12,7 @@ const Dashboard = async () => {
       <Topbar />
       <section>
         <DataGraph />
-        <StatisticsDashboard />
+        <StatisticsDashboard username={session?.user?.name as string}/>
         <LatestPosts user={session?.user?.name as string} />
       </section>
     </>
