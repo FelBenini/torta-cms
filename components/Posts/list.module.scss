@@ -19,6 +19,23 @@
   }
 }
 
+.noPosts {
+  width: 100%;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: calc(45svh - 110px);
+  & h1 {
+    font-weight: 400;
+    color: #53535c;
+  }
+  & p {
+    font-weight: 600;
+  }
+}
+
 .latestPosts {
   width: 100%;
   margin: 0 auto;
