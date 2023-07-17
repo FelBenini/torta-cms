@@ -17,7 +17,7 @@ const CategoryCard = ({id}: {id: string}) => {
   }, [id])
   if (loading && info === null) {
     return (
-      <Skeleton variant='rounded' width={'100%'} height={72} animation='wave'/>
+      <Skeleton variant='rounded' width={'100%'} height={72} animation='wave' sx={{marginBottom: '4px'}}/>
     )
   }
   return (
