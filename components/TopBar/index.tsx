@@ -41,7 +41,7 @@ const loadingStyle = {
 }
 
 
-const Topbar = () => {
+const Topbar = ({ type = 'post' }: { type?: 'post' | 'page' }) => {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true);
   const [loading, setLoading] = useState(false);
@@ -59,12 +59,12 @@ const Topbar = () => {
         <h3>
           <LogoutButton onClick={() => handleOpen()} />
         </h3>
-        <Link href='/dashboard/newpost'>
+        <Link href={`/dashboard/newpost?type=${type}`}>
           <Button
             sx={{ height: 50, alignSelf: 'center', padding: '0 36px' }}
             variant='contained'
             startIcon={<BsPencilFill size={15} />}>
-            New Post
+            New {type.charAt(0).toUpperCase() + type.slice(1)}
           </Button>
         </Link>
       </nav>
@@ -80,7 +80,7 @@ const Topbar = () => {
             <Typography id="modal-modal-title" sx={{ marginBottom: '12px' }} textAlign='center' variant="h5" component="h3">
               Logging you out
             </Typography>
-            <LinearProgress sx={{width: '80%', margin: '0 auto', borderRadius: '8px'}} />
+            <LinearProgress sx={{ width: '80%', margin: '0 auto', borderRadius: '8px' }} />
           </Box> : <></>}
           <Typography id="modal-modal-title" sx={{ marginBottom: '12px' }} textAlign='center' variant="h5" component="h2">
             You are logging out of tortaCMS
@@ -93,7 +93,7 @@ const Topbar = () => {
             <Button onClick={() => {
               setLoading(true)
               signOut()
-}} variant="contained" sx={{ width: '50%' }}>Yes, log me out</Button>
+            }} variant="contained" sx={{ width: '50%' }}>Yes, log me out</Button>
           </ButtonGroup>
         </Box>
       </Modal>
