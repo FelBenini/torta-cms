@@ -15,6 +15,7 @@ const Categories = async () => {
   return (
     <>
       <section className={styles.categoriesSection}>
+        <h1>Total: {categories.length} categories</h1>
         {categories.map((category: Category, index: number)  => (
           <CategoryCard id={category._id as string} key={index}/>
         ))}
