@@ -9,7 +9,7 @@ export async function GET(req: NextRequest, {params}: {params: {id: string}}) {
     return NextResponse.json({}, {status: 401})
   }
   await dbConnect();
-  const category = await Category.findById(params.id).exec();
+  const category = await Category.findById(params.id).populate('childCategories').exec();
   if (!category) {
     return NextResponse.json({}, {status: 404})
   }
