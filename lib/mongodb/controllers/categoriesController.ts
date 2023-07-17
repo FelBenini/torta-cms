@@ -5,7 +5,7 @@ import PublishedPosts from "../models/PublishedPosts"
 export default class categoriesController {
   public static getCategories = async () => {
     await dbConnect()
-    const categories = await Category.find({type: 'father'}).populate('childCategories').lean();
+    const categories = await Category.find({type: 'father'}).populate('childCategories').exec();
     return categories;
   }
 
