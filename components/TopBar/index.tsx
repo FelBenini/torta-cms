@@ -50,11 +50,13 @@ const Topbar = ({ type = 'post' }: { type?: 'post' | 'page' }) => {
     <>
       <nav className={styles.topbar}>
         <h3>
-          <Button
-            sx={{ color: '#52525b' }}
-            startIcon={<FiLayers size={25} />}>
-            Categories
-          </Button>
+          <Link href='/dashboard/categories'>
+            <Button
+              sx={{ color: '#52525b' }}
+              startIcon={<FiLayers size={25} />}>
+              Categories
+            </Button>
+          </Link>
         </h3>
         <h3>
           <LogoutButton onClick={() => handleOpen()} />
