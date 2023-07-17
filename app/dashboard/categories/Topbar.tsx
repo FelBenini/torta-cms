@@ -1,7 +1,8 @@
 'use client'
-import { Box, Button } from "@mui/material"
+import { Box, Button, Select, TextField, MenuItem, InputLabel, FormControl } from "@mui/material"
 import Modal from '@mui/material/Modal';
-import {useState} from 'react'
+import { useState } from 'react'
+import styles from './style.module.scss'
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -17,8 +18,17 @@ const style = {
 
 const Topbar = ({ length }: { length: number }) => {
   const [open, setOpen] = useState(false)
+  const [mainCategory, setMainCategory] = useState(0)
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+  }
+
+  const handleSelectChange = (event: any) => {
+    setMainCategory(event.target.value);
+  };
   return (
     <>
       <span>
@@ -26,12 +36,22 @@ const Topbar = ({ length }: { length: number }) => {
         <Button onClick={handleOpen} variant='contained' sx={{ height: '48px' }}>New Category</Button>
       </span>
       <Modal
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description">
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description">
         <Box sx={style}>
-          <p>Adding new category here</p>
+          <form className={styles.form} onSubmit={handleFormSubmit}>
+            <h2>Add New Category</h2>
+            <p>Main Category:</p>
+            <Select sx={{ width: '100%', marginTop: '12px' }} onChange={handleSelectChange} value={mainCategory}>
+              <MenuItem value={0}>None</MenuItem>
+              <MenuItem value='something'>ASDsadasd</MenuItem>
+            </Select>
+            <p>Choose your category&apos;s name:</p>
+            <TextField sx={{ width: '100%', marginTop: '12px' }} label='Category name' />
+            <Button variant="contained" sx={{ width: '100%', marginTop: '24px' }} type='submit'>Add Category</Button>
+          </form>
         </Box>
       </Modal>
     </>
