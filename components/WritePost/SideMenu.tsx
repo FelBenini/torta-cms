@@ -59,20 +59,37 @@ const SideMenu = ({ summaryProp, postId, tags, categories, postCategories, image
         >
           <h3>Categories</h3>
         </AccordionSummary>
-        <AccordionDetails sx={{width: '85%'}}>
+        <AccordionDetails sx={{ width: '85%' }}>
           {categories?.map((category, index) => {
+            const childCategories = category.childCategories.map((category, index) => {
+              if (postCategories.includes(category._id)) {
+                return (
+                  <p className={styles.paragraphCategory} key={index}><Checkbox defaultChecked onClick={() => updateCategories(category._id.toString())} />{category.name}</p>
+                )
+              } else {
+                return (
+                  <p key={index} className={styles.paragraphCategory}><Checkbox onClick={() => updateCategories(category._id.toString())} />{category.name}</p>
+                )
+              }
+            })
             if (postCategories.includes(category._id)) {
               return (
-                <p className={styles.paragraphCategory} key={index}><Checkbox defaultChecked onClick={() => updateCategories(category._id.toString())}/>{category.name}</p>
+                <div className={styles.paragraphCategory} key={index}>
+                  <p><Checkbox defaultChecked onClick={() => updateCategories(category._id.toString())} />{category.name}</p>
+                  {childCategories}
+                </div>
               )
             } else {
               return (
-                <p key={index} className={styles.paragraphCategory}><Checkbox onClick={() => updateCategories(category._id.toString())}/>{category.name}</p>
+                <div className={styles.paragraphCategory} key={index}>
+                  <p><Checkbox onClick={() => updateCategories(category._id.toString())} />{category.name}</p>
+                  {childCategories}
+                </div>
               )
             }
           })}
           <p onClick={() => setOpen(true)} className={styles.link}>Add new category</p>
-          <NewCategoryModal openState={open} setOpenState={setOpen} categories={categories || []}/>
+          <NewCategoryModal openState={open} setOpenState={setOpen} categories={categories || []} />
         </AccordionDetails>
       </Accordion>
       <div className={styles.line}></div>
