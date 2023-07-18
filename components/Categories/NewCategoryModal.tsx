@@ -52,6 +52,9 @@ const NewCategoryModal = ({ openState, setOpenState, categories }: { openState: 
     await axios.post(`/api/category`, query)
     router.push(`${pathname}?new-category=${name}`);
     router.refresh();
+    setMainCategory(0);
+    setName('')
+    setOpenState(false);
   }
 
   const handleSelectChange = (event: any) => {
