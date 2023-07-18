@@ -3,6 +3,7 @@ import { Button } from "@mui/material"
 import { useState } from 'react'
 import { ICategory } from "@/lib/mongodb/models/Category";
 import NewCategoryModal from "@/components/Categories/NewCategoryModal";
+import styles from './style.module.scss'
 
 interface Category extends ICategory {
   _id: string
@@ -25,7 +26,7 @@ const Topbar = ({ length, categories }: { length: number, categories: Array<Cate
   const handleOpen = () => setOpen(true);
   return (
     <>
-      <span>
+      <span className={styles.topping}>
         <h3>Total: {length} {length === 1 ? 'category' : 'categories'}</h3>
         <Button onClick={handleOpen} variant='contained' sx={{ height: '48px' }}>New Category</Button>
       </span>
