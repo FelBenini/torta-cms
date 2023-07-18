@@ -15,5 +15,8 @@ export async function GET(req: NextRequest, { params }: { params: { slug: string
     title: {$regex: titleRegex}
   }).exec();
 
+  if (!post) {
+    return NextResponse.json({}, {status: 404})
+  }
   return NextResponse.json(post);
 }
