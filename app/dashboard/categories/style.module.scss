@@ -36,5 +36,13 @@
   }
   & h3 {
     font-weight: 400;
+    height: fit-content;
+    margin: 12px 0px;
+  }
+  & h5 {
+    margin: 0px;
+    height: fit-content;
+    margin: 6px;
+    color: #a21caf;
   }
 }
