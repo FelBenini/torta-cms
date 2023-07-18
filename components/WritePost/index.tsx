@@ -56,7 +56,7 @@ const WritePost = ({ post, categories }: { post: Post, categories: Array<Categor
   const handleContentChange = async () => {
     clearTimeout(timer)
     const newTimer = setTimeout(() => {
-      handleSave()}, 500)
+      handleSave()}, 750)
     console.log('contentchange')
 
     setTimer(newTimer)
