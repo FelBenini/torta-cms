@@ -13,10 +13,11 @@ import { GiSettingsKnobs } from 'react-icons/gi'
 import Checkbox from '@mui/material/Checkbox';
 import { ObjectId } from 'mongoose';
 import ImageUpload from './ImageUpload';
+import NewCategoryModal from '../Categories/NewCategoryModal';
 
 export type CategoryType = {
   name: string,
-  _id: ObjectId | string,
+  _id: string,
   type: string,
   childCategories: Array<CategoryType>
 }
@@ -24,6 +25,7 @@ export type CategoryType = {
 const SideMenu = ({ summaryProp, postId, tags, categories, postCategories, imageUrl }: { summaryProp: string | undefined, postId: string, tags?: Array<string>, postCategories: Array<string | ObjectId>, categories: Array<CategoryType> | undefined, imageUrl?: string }) => {
   const router = useRouter()
   const [summary, setSummary] = useState(summaryProp)
+  const [open, setOpen] = useState(false)
 
   const handleSummaryBlur = async () => {
     if (summary === summaryProp) {
@@ -69,7 +71,8 @@ const SideMenu = ({ summaryProp, postId, tags, categories, postCategories, image
               )
             }
           })}
-          <AddCategoryForm />
+          <p onClick={() => setOpen(true)} className={styles.link}>Add new category</p>
+          <NewCategoryModal openState={open} setOpenState={setOpen} categories={categories || []}/>
         </AccordionDetails>
       </Accordion>
       <div className={styles.line}></div>
@@ -77,38 +80,6 @@ const SideMenu = ({ summaryProp, postId, tags, categories, postCategories, image
       <InputTags tagsData={tags || []} id={postId} />
       <h5><AiOutlineInfoCircle size={18} /> Separate tags by pressing enter</h5>
     </div>
-  )
-}
-
-const AddCategoryForm = () => {
-  const router = useRouter()
-  const [style, setStyle] = useState({display: 'none'})
-  const [name, setName] = useState('')
-  const handleDisplay = () => {
-    if (style.display === 'none') {
-      setStyle({display: 'block'})
-    } else {
-      setStyle({display: 'none'})
-    }
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    await axios.post(`/api/category`, {
-      name: name,
-      type: 'father',
-    })
-    router.refresh()
-    setName('')
-  }
-  return (
-    <>
-      <p onClick={handleDisplay} className={styles.link}>Add new category</p>
-      <form className={styles.formCategory} style={style} onSubmit={handleSubmit}>
-        <input type='text' value={name} onChange={(e) => setName(e.target.value)} placeholder='Category name'/>
-        <button type='submit'>Add</button>
-      </form>
-    </>
   )
 }
 
