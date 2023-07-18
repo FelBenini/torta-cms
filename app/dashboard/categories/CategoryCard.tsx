@@ -26,10 +26,12 @@ const CategoryCard = ({id}: {id: string}) => {
   }
   return (
     <div className={styles.categoryCard}>
+      <h5>Name:</h5>
       <h3>{info?.name}</h3>
-      {info?.childCategories.length ? <h5>Child categories</h5> : <></>}
+      {info?.childCategories.length ? <h5>Child categories:</h5> : <></>}
       {info?.childCategories.map((category, index) => (
         <div className={styles.categoryCard} key={index}>
+          <h5>Category&apos;s name:</h5>
           <h3>{category.name}</h3>
         </div>
       ))}
