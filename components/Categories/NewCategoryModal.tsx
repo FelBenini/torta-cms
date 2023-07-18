@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import styles from './newcategory.module.scss'
 import { ICategory } from "@/lib/mongodb/models/Category";
 import axios from 'axios'
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 interface Category extends ICategory {
   _id: string
@@ -28,6 +28,7 @@ const NewCategoryModal = ({ openState, setOpenState, categories }: { openState: 
   setOpenState: (value: SetStateAction<boolean>) => void,
   categories: Array<Category>}) => {
   const router = useRouter()
+  const pathname = usePathname()
   const [mainCategory, setMainCategory] = useState(0)
   const [name, setName] = useState('')
 
@@ -49,7 +50,8 @@ const NewCategoryModal = ({ openState, setOpenState, categories }: { openState: 
     }
 
     await axios.post(`/api/category`, query)
-    router.refresh()
+    router.push(`${pathname}?new-category=${name}`);
+    router.refresh();
   }
 
   const handleSelectChange = (event: any) => {

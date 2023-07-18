@@ -28,9 +28,12 @@
   padding: 6px 12px;
   background-color: #fafafa;
   box-shadow: rgba(0, 0, 0, 0.062) 0px 4px 12px;
-  height: 64px;
+  height: fit-content;
   margin-bottom: 4px;
   border-radius: 8px;
+  & .categoryCard {
+    border: 1px solid #3f3f4625;
+  }
   & h3 {
     font-weight: 400;
   }
