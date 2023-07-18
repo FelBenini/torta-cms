@@ -51,6 +51,7 @@ export class postController {
   public static getPublishedPosts = async (page: number, limit: number, sort: string = '-publishedAt') => {
     await dbConnect();
     const posts = await PublishedPosts.find({type: {$ne: 'page'}}, '-__v, -createdAt')
+      .select('-content')
       .limit(limit)
       .skip((page - 1) * limit)
       .sort(sort)
@@ -146,6 +147,7 @@ export class postController {
       $or: [{title: {$regex: new RegExp(query, "i")}}, {content: {$regex: new RegExp(query, "i")}}],
       type: {$ne: 'page'}
     })
+    .select('-content')
     .limit(limit)
     .skip((page - 1) * limit)
     .exec();

@@ -33,7 +33,8 @@ export async function GET(req: NextRequest) {
 
   const modifiedPosts = data.posts.map((post) => {
     const modifiedContent = post.content?.replaceAll('src="../../image', `src="${origin}/image`);
-    return { ...post, content: modifiedContent };
+    const redirectUrl = `${post.publishedAt.getDate()}/0${post.publishedAt.getMonth() + 1}/${post.publishedAt.getFullYear()}/${post.title.replace(/ /g, '-')}`
+    return { ...post, content: modifiedContent, postUrl: redirectUrl };
   })
 
   data.posts = modifiedPosts

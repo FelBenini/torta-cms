@@ -47,6 +47,7 @@ export default class categoriesController {
     }
 
     const posts = await PublishedPosts.find({categories: category._id})
+    .select('-content')
     .limit(limit)
     .skip((page - 1) * limit)
     .sort(order)
