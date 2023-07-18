@@ -4,6 +4,7 @@ import categoriesController from '@/lib/mongodb/controllers/categoriesController
 import CategoryCard from './CategoryCard'
 import { ICategory } from '@/lib/mongodb/models/Category'
 import Topbar from './Topbar'
+import { FiLayers } from 'react-icons/fi'
 
 interface Category extends ICategory {
   _id: string
@@ -16,6 +17,7 @@ const Categories = async () => {
   return (
     <>
       <section className={styles.categoriesSection}>
+        <h1><FiLayers style={{marginBottom: '-4px', marginRight: '8px'}} />All Categories</h1>
         <Topbar length={categories.length} categories={categories}/>
         {categories.map((category: Category, index: number)  => (
           <CategoryCard id={category._id as string} key={index}/>

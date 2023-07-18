@@ -13,6 +13,12 @@
   }
   & h1 {
     height: fit-content;
+    font-weight: 400;
+    font-size: 2rem;
+    color: #3f3f46;
+  }
+  & h3 {
+    height: fit-content;
     font-weight: 500;
   }
 }

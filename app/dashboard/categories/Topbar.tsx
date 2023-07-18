@@ -37,7 +37,7 @@ const Topbar = ({ length, categories }: { length: number, categories: Array<Cate
   return (
     <>
       <span>
-        <h1>Total: {length} {length === 1 ? 'category' : 'categories'}</h1>
+        <h3>Total: {length} {length === 1 ? 'category' : 'categories'}</h3>
         <Button onClick={handleOpen} variant='contained' sx={{ height: '48px' }}>New Category</Button>
       </span>
       <Modal
