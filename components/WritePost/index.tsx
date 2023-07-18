@@ -22,10 +22,8 @@ const WritePost = ({ post, categories }: { post: Post, categories: Array<Categor
   const router = useRouter()
   const [saving, setSaving] = useState(false)
   const [publishedText, setPublishedText] = useState(post.published ? 'Publish Changes' : 'Publish')
+  const [timer, setTimer] = useState<any>(null)
   async function handleSave() {
-    if (saving) {
-      return
-    }
     setSaving(true)
     const { status } = await axios.put(`/api/content/save-content-changes/${post._id}`, {
       title: title,
@@ -54,11 +52,16 @@ const WritePost = ({ post, categories }: { post: Post, categories: Array<Categor
         }
         setShowing(open);
       };
+
   const handleContentChange = async () => {
-    setSaving(true)
-    setTimeout(() => {
-      handleSave()}, 5000)
+    clearTimeout(timer)
+    const newTimer = setTimeout(() => {
+      handleSave()}, 500)
+    console.log('contentchange')
+
+    setTimer(newTimer)
     }
+
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     setTitle(e.currentTarget.innerHTML)
   }
