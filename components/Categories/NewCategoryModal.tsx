@@ -1,9 +1,12 @@
+'use client'
 import React, { SetStateAction, useState } from 'react';
 import { Button, Select, TextField, MenuItem } from "@mui/material"
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import styles from './newcategory.module.scss'
 import { ICategory } from "@/lib/mongodb/models/Category";
+import axios from 'axios'
+import { useRouter } from 'next/navigation';
 
 interface Category extends ICategory {
   _id: string
@@ -24,10 +27,29 @@ const style = {
 const NewCategoryModal = ({ openState, setOpenState, categories }: { openState: boolean,
   setOpenState: (value: SetStateAction<boolean>) => void,
   categories: Array<Category>}) => {
+  const router = useRouter()
   const [mainCategory, setMainCategory] = useState(0)
+  const [name, setName] = useState('')
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    const query: {
+      name: string,
+      type: 'father' | 'child',
+      mainCategory?: string | number
+    } = {
+      name: name,
+      type: 'father'
+    };
+    if (mainCategory === 0) {
+      query.type = 'father'
+    } else {
+      query.type = 'child'
+      query.mainCategory = mainCategory
+    }
+
+    await axios.post(`/api/category`, query)
+    router.refresh()
   }
 
   const handleSelectChange = (event: any) => {
@@ -53,7 +75,7 @@ const NewCategoryModal = ({ openState, setOpenState, categories }: { openState: 
             ))}
           </Select>
           <p>Choose your category&apos;s name:</p>
-          <TextField sx={{ width: '100%', marginTop: '12px' }} label='Category name' />
+          <TextField value={name} onChange={(e) => setName(e.target.value)} sx={{ width: '100%', marginTop: '12px' }} label='Category name' />
           <Button variant="contained" sx={{ width: '100%', marginTop: '24px' }} type='submit'>Add Category</Button>
         </form>
       </Box>
