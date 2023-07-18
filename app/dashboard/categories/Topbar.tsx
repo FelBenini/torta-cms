@@ -3,6 +3,11 @@ import { Box, Button, Select, TextField, MenuItem, InputLabel, FormControl } fro
 import Modal from '@mui/material/Modal';
 import { useState } from 'react'
 import styles from './style.module.scss'
+import { ICategory } from "@/lib/mongodb/models/Category";
+
+interface Category extends ICategory {
+  _id: string
+}
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -16,7 +21,7 @@ const style = {
   p: 4,
 };
 
-const Topbar = ({ length }: { length: number }) => {
+const Topbar = ({ length, categories }: { length: number, categories: Array<Category> }) => {
   const [open, setOpen] = useState(false)
   const [mainCategory, setMainCategory] = useState(0)
   const handleOpen = () => setOpen(true);
@@ -46,7 +51,11 @@ const Topbar = ({ length }: { length: number }) => {
             <p>Main Category:</p>
             <Select sx={{ width: '100%', marginTop: '12px' }} onChange={handleSelectChange} value={mainCategory}>
               <MenuItem value={0}>None</MenuItem>
-              <MenuItem value='something'>ASDsadasd</MenuItem>
+              {categories.map((category, index) => (
+                <MenuItem value={category._id} key={index}>
+                  {category.name}
+                </MenuItem>
+              ))}
             </Select>
             <p>Choose your category&apos;s name:</p>
             <TextField sx={{ width: '100%', marginTop: '12px' }} label='Category name' />
