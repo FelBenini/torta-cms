@@ -13,7 +13,9 @@ export async function GET(req: NextRequest, { params }: { params: { slug: string
       $lte: `${params.year}-${params.month}-${endDate}`
     },
     title: {$regex: titleRegex}
-  }).exec();
+  })
+  .select(['-_id', '-draftPost', '-__v'])
+  .exec();
 
   if (!post) {
     return NextResponse.json({}, {status: 404})
