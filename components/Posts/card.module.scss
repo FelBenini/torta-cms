@@ -2,21 +2,21 @@
   width: calc(100% - 32px);
   padding: 8px 16px;
   margin: 2px auto;
-  background-color: #fafafa;
-  box-shadow: rgba(0, 0, 0, 0.062) 0px 4px 12px;
+  background-color: var(--card-color);
+  box-shadow: var(--box-shadow);
   border-radius: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   transition: all ease 0.2s;
   &:hover {
-    background-color: #ffffff;
+    background-color: var(--card-color-hover);
   }
   & div {
     width: 80%;
   }
   & a {
-    color: #8a1691;
+    color: var(--dark-purple);
     text-decoration: none;
     word-wrap: break-word;
     word-break: break-all;
@@ -26,7 +26,7 @@
   }
   & h4 {
     font-weight: 400;
-    color: #27272a;
+    color: var(--text-color-bolder);
     font-size: 16px;
     display: flex;
     margin-top: -12px;
@@ -40,15 +40,15 @@
     width: 60%;
     word-break: break-all;
     word-wrap: break-word;
-    color: #3f3f46;
+    color: var(--text-color-lighter);
   }
 }
 
 .chipPublished {
   font-size: 10px;
   font-weight: 600;
-  background-color: #4e46e531;
-  color: #2e2972;
+  background-color: var(--blueish-transparent);
+  color: var(--blueish);
   padding: 3px 5px;
   margin-left: 8px;
   margin-right: 8px;
@@ -58,8 +58,8 @@
 .chipNotPublished {
   font-size: 10px;
   font-weight: 600;
-  background-color: #db277731;
-  color: #9d174d;
+  background-color: var(--pinkish-transparent);
+  color: var(--pinkish);
   padding: 3px 5px;
   margin-left: 8px;
   margin-right: 8px;

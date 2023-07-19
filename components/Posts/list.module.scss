@@ -5,13 +5,13 @@
   flex-direction: column;
   & h1 {
     font-size: 2rem;
-    color: #3e3e46;
+    color: var(--text-color);
     font-weight: 400;
     width: calc(100% - 16px);
     margin: 12px auto;
   }
   & h3 {
-    color: #53535c;
+    color: var(--text-color-light);
     font-weight: 600;
     width: calc(100% - 16px);
     margin: 12px auto;
@@ -29,7 +29,7 @@
   margin-top: calc(45svh - 110px);
   & h1 {
     font-weight: 400;
-    color: #53535c;
+    color: var(--text-color-light);
   }
   & p {
     font-weight: 600;

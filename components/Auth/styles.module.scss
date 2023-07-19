@@ -9,7 +9,7 @@
   align-items: center;
   & .erroMsg {
     font-size: 0.8rem;
-    color: #be123c;
+    color: var(--danger-red);
     height: fit-content;
     margin-top: -12px;
     & svg {
@@ -19,7 +19,7 @@
   & form {
     display: flex;
     flex-direction: column;
-    background-color: #fafaf9;
+    background-color: var(--background-color-1);
     width: 350px;
     max-width: 95%;
     display: flex;
@@ -28,14 +28,14 @@
     height: 450px;
     padding: 0 12px;
     padding-bottom: 28px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    box-shadow: var(--box-shadow);
     border-radius: 12px;
     & .imgLogo {
       text-align: center;
       & h2 {
         margin-top: -10px;
         font-size: 20px;
-        color: #3f3f46;
+        color: var(--text-color-lighter);
         font-weight: 400;
         & em {
           background: linear-gradient(347deg, rgba(2,0,36,1) 0%, #db29db 49%, #d946ef 100%);
