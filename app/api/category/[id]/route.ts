@@ -3,6 +3,7 @@ import Category from "@/lib/mongodb/models/Category";
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 import Post from "@/lib/mongodb/models/Post";
+import categoriesController from "@/lib/mongodb/controllers/categoriesController";
 
 export async function GET(req: NextRequest, {params}: {params: {id: string}}) {
   const token = await getToken({req})
@@ -26,5 +27,15 @@ export async function GET(req: NextRequest, {params}: {params: {id: string}}) {
 }
 
 export async function DELETE(req: NextRequest, {params}: {params: {id: string}}) {
+  const token = await getToken({req})
+  if (!token) {
+    return NextResponse.json({}, {status: 401})
+  }
+
+  const deletion = await categoriesController.deleteCategory(params.id);
+
+  if (!deletion) {
+    return NextResponse.json({'message': 'Category not found'}, {status: 404})
+  }
   return NextResponse.json(params.id)
 }

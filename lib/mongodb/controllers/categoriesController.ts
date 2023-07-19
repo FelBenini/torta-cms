@@ -2,6 +2,7 @@ import Category from "../models/Category"
 import dbConnect from ".."
 import { ObjectId } from "mongoose"
 import PublishedPosts from "../models/PublishedPosts"
+import Post from "../models/Post"
 export default class categoriesController {
   public static getCategories = async () => {
     await dbConnect()
@@ -62,5 +63,17 @@ export default class categoriesController {
       number_of_posts: count,
       posts: posts
     }
+  }
+  public static deleteCategory = async (id: string) => {
+    await dbConnect();
+    const category = await Category.findById(id).exec();
+    if (!category) {
+      return null
+    }
+
+    await Post.updateMany({categories: category._id}, {"$pull": {categories: category._id}});
+    await Category.findByIdAndDelete(id);
+
+    return true
   }
 }
