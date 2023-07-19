@@ -4,11 +4,25 @@ import { ICategory } from '@/lib/mongodb/models/Category'
 import Topbar from './Topbar'
 import { FiLayers } from 'react-icons/fi'
 import CategoryCard from './CategoryCard'
+import { Box, Modal } from '@mui/material'
+import { useState } from 'react'
 
 interface Category extends ICategory {
   _id: string
   childCategories: Array<Category>
 }
+
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  borderRadius: '8px',
+  boxShadow: 24,
+  p: 4,
+};
 
 const ListOfCategories = ({ categories }: { categories: Array<Category> }) => {
   const countSubCategories = (categories: Array<Category>) => {
@@ -20,13 +34,20 @@ const ListOfCategories = ({ categories }: { categories: Array<Category> }) => {
     })
     return count
   }
+  const [open, setOpen] = useState(false)
 
   return (
     <>
+      <Modal open={open}
+      onClose={() => setOpen(false)}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description">
+        <Box sx={style}></Box>
+      </Modal>
       <h1><FiLayers style={{ marginBottom: '-4px', marginRight: '8px' }} />All Categories</h1>
       <Topbar length={categories.length + countSubCategories(categories)} categories={categories} />
       {categories.map((category: Category, index: number) => (
-        <CategoryCard id={category._id as string} key={index} />
+        <CategoryCard openModalState={setOpen} id={category._id as string} key={index} />
       ))}
     </>
   )

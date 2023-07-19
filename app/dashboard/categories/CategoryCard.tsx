@@ -11,7 +11,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { FaRegTrashAlt } from 'react-icons/fa'
 
-const CategoryCard = ({ id }: { id: string }) => {
+const CategoryCard = ({ id, openModalState }: { id: string, openModalState: (value: React.SetStateAction<boolean>) => void }) => {
   const pathname = useSearchParams()
   const [info, setInfo] = useState<{ name: string, childCategories: Array<ICategory> } | null>(null)
   const [loading, setLoading] = useState(true)
@@ -35,7 +35,7 @@ const CategoryCard = ({ id }: { id: string }) => {
       <h5>Name:</h5>
       <span className={styles.inline}>
         <h3>{info?.name}</h3>
-        <OptionsMenu name={info?.name as string} />
+        <OptionsMenu name={info?.name as string} openModalState={openModalState}/>
       </span>
       {info?.childCategories.length ? <h5>Child categories:</h5> : <></>}
       {info?.childCategories.map((category, index) => (
@@ -43,7 +43,7 @@ const CategoryCard = ({ id }: { id: string }) => {
           <h5>Subcategory&apos;s name:</h5>
           <span className={styles.inline}>
             <h3>{category.name}</h3>
-            <OptionsMenu name={category.name} />
+            <OptionsMenu name={category.name} openModalState={openModalState}/>
           </span>
         </div>
       ))}
@@ -51,7 +51,7 @@ const CategoryCard = ({ id }: { id: string }) => {
   )
 }
 
-function OptionsMenu({name}: {name: string}) {
+function OptionsMenu({name, openModalState}: {name: string, openModalState: (value: React.SetStateAction<boolean>) => void}) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -60,6 +60,10 @@ function OptionsMenu({name}: {name: string}) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const handleDeleteClick = () => {
+    openModalState(true);
+    handleClose()
+  }
 
   return (
     <>
@@ -78,7 +82,7 @@ function OptionsMenu({name}: {name: string}) {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}><FaRegTrashAlt size={18} style={{marginRight: 6}}/> Delete {name} Category</MenuItem>
+        <MenuItem onClick={handleDeleteClick}><FaRegTrashAlt size={18} style={{marginRight: 6}}/> Delete {name} Category</MenuItem>
       </Menu>
     </>
   )
