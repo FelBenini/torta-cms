@@ -2,6 +2,8 @@ import dbConnect from '@/lib/mongodb';
 import Image from '@/lib/mongodb/models/Image'
 import { NextResponse } from "next/server";
 
+export const revalidate = 10
+
 export async function GET(req: Request, url: any) {
   await dbConnect()
   const title = url.params.title
