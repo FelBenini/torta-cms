@@ -64,7 +64,11 @@ const NewCategoryModal = ({ openState, setOpenState, categories }: { openState: 
   return (
     <Modal
       open={openState}
-      onClose={() => setOpenState(false)}
+      onClose={() => {
+        setName('')
+        setMainCategory(0)
+        setOpenState(false)
+      }}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description">
       <Box sx={style}>
