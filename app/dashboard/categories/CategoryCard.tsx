@@ -17,7 +17,7 @@ interface Category extends ICategory {
 
 const CategoryCard = ({ id, openModalState, setData }: { id: string, openModalState: (value: React.SetStateAction<boolean>) => void, setData: (value: React.SetStateAction<{name: string, id: string}>) => void}) => {
   const pathname = useSearchParams()
-  const [info, setInfo] = useState<{ _id: string, name: string, childCategories: Array<Category> } | null>(null)
+  const [info, setInfo] = useState<{ _id: string, name: string, childCategories: Array<Category>, num_of_posts: number } | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -39,6 +39,7 @@ const CategoryCard = ({ id, openModalState, setData }: { id: string, openModalSt
       <h5>Name:</h5>
       <span className={styles.inline}>
         <h3>{info?.name}</h3>
+        <h4>Posts on this category: <b>{info?.num_of_posts}</b></h4>
         <OptionsMenu id={info?._id as string} setData={setData} name={info?.name as string} openModalState={openModalState}/>
       </span>
       {info?.childCategories.length ? <h5>Child categories:</h5> : <></>}

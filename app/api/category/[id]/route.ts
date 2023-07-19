@@ -2,6 +2,7 @@ import dbConnect from "@/lib/mongodb";
 import Category from "@/lib/mongodb/models/Category";
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
+import Post from "@/lib/mongodb/models/Post";
 
 export async function GET(req: NextRequest, {params}: {params: {id: string}}) {
   const token = await getToken({req})
@@ -13,7 +14,15 @@ export async function GET(req: NextRequest, {params}: {params: {id: string}}) {
   if (!category) {
     return NextResponse.json({}, {status: 404})
   }
-  return NextResponse.json(category)
+  const num = await Post.find({categories: params.id}).count().exec();
+
+  return NextResponse.json({
+    _id: category._id,
+    name: category.name,
+    type: category.type,
+    num_of_posts: num,
+    childCategories: category.childCategories
+  })
 }
 
 export async function DELETE(req: NextRequest, {params}: {params: {id: string}}) {

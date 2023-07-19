@@ -45,12 +45,17 @@
     font-weight: 500;
     height: fit-content;
     margin: 12px;
+    width: 20%;
   }
   & h5 {
     margin: 0px;
     height: fit-content;
     margin: 6px;
     color: #a21caf;
+    font-weight: 400;
+  }
+  & h4 {
+    width: 30%;
     font-weight: 400;
   }
 }
