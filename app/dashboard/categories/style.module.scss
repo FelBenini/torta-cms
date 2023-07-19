@@ -15,7 +15,7 @@
     height: fit-content;
     font-weight: 400;
     font-size: 2rem;
-    color: #3f3f46;
+    color: var(--text-color-lighter);
   }
   & h3 {
     height: fit-content;
@@ -26,8 +26,8 @@
 .categoryCard {
   width: calc(100% - 24px);
   padding: 6px 12px;
-  background-color: #fafafa;
-  box-shadow: rgba(0, 0, 0, 0.062) 0px 4px 12px;
+  background-color: var(--card-color);
+  box-shadow: var(--box-shadow);
   height: fit-content;
   margin-bottom: 4px;
   border-radius: 8px;
@@ -38,7 +38,7 @@
     justify-content: space-between;
   }
   & .categoryCard {
-    border: 1px solid #3f3f4625;
+    border: 1px solid var(--border-line-light);
     margin-top: 12px;
   }
   & h3 {
@@ -51,7 +51,7 @@
     margin: 0px;
     height: fit-content;
     margin: 6px;
-    color: #a21caf;
+    color: var(--lighter-purple);
     font-weight: 400;
   }
   & h4 {
@@ -73,7 +73,7 @@
     font-weight: 500;
     & b {
       font-weight: 700;
-      color: #e11d48;
+      color: var(--danger-red);
     }
   }
 }

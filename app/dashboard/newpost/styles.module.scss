@@ -12,14 +12,14 @@
     animation-duration: 2s;
   }
   & p {
-    color: #6b7280;
+    color: var(--text-color-light);
     padding-top: 24px;
     font-weight: 600;
   }
 }
 
 @keyframes floating {
-  0% {color: #6b7280;}
-  50% {color: #3a414d;}
-  100% {color: #6b7280;}
+  0% {color: var(--text-color-light);}
+  50% {color: var(--text-color-bolder);}
+  100% {color: var(--text-color-light);}
 }
