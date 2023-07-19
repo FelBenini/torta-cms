@@ -1,5 +1,5 @@
 .SideMenu {
-  background-color: #fafaf9;
+  background-color: var(--card-color);
   width: fit-content;
   position: fixed;
   margin-left: 12px;
@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-shadow: var(--side-menu-box-shadow);
   & h5, & h4 {
     opacity: 0;
     transition: all ease 0.2s;
@@ -21,7 +21,7 @@
     text-align: center;
   }
   & h4 {
-    color: #252525c2;
+    color: var(--text-color-lighter);
     margin-top: -4px;
   }
   &:hover {
@@ -34,9 +34,9 @@
     flex-direction: column;
     align-items: center;
     margin: 12px 0;
-    color: #52525b;
+    color: var(--text-color-lighter);
     & a {
-      color: #52525b;
+      color: var(--text-color-lighter);
       text-decoration: none;
       width: 100%;
       display: flex;
@@ -47,8 +47,8 @@
       border-radius: 4px;
       transition: all ease 0.1s;
       &:hover {
-        background-color: #db47cf2d;
-        color: #490b44;
+        background-color: var(--transparent-purple);
+        color: var(--darker-purple);
       }
     }
   }
@@ -69,9 +69,9 @@
     scrollbar-gutter: stable both-edges;
     overflow-y: auto;
     margin-left: 8px;
-    scrollbar-base-color: #f5f5f5;
+    scrollbar-base-color: var(--background-color-1);
     scrollbar-width: thin;
-    scrollbar-color: #85858569;
+    scrollbar-color: var(--scrollbar-color);
   
   }
 }

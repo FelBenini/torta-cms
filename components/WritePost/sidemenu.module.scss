@@ -7,7 +7,7 @@
 
   & h5 {
     font-weight: 400;
-    color: #4b5563;
+    color: var(--text-color-light);
     margin-left: 12px;
 
     & svg {
@@ -22,30 +22,30 @@
   }
 
   & h3 {
-    color: #3f3f46;
+    color: var(--text-color-light);
   }
 
   & .line {
     width: 96%;
     height: 2px;
-    background-color: #3f3f463f;
+    background-color: var(--text-color);
   }
 
   & textarea {
     resize: none;
     font-size: 16px;
     border: none;
-    outline: 3px solid rgba(0, 0, 0, 0.384);
+    outline: 3px solid var(--outline-color);
     padding: 2px;
     border-radius: 4px;
 
     &:focus {
-      outline: 3px solid rgba(0, 0, 0, 0.712);
+      outline: 3px solid var(--outline-stronger);
     }
   }
 
   & h1 {
-    color: #c026d3;
+    color: var(--clean-purple);
 
     & svg {
       margin-bottom: -4px;
@@ -53,14 +53,14 @@
   }
 
   & .link {
-    color: #c026d3;
+    color: var(--clean-purple);
     cursor: pointer;
   }
 
   & .paragraphCategory {
     height: fit-content;
     margin: 0px;
-    border-top: 1px solid #737373b0;
+    border-top: 1px solid var(--text-color-light);
     & p {
       height: fit-content;
       margin: 4px 0px;
@@ -73,7 +73,7 @@
   }
 
   & button {
-    background-color: #c026d3;
+    background-color: var(--clean-purple);
     color: white;
     font-size: 20px;
     margin-left: calc(100% - 40px);
@@ -86,7 +86,7 @@
     transition: ease 0.2s all;
 
     &:hover {
-      background-color: #a21caf;
+      background-color: var(--lighter-purple);
     }
   }
 }
