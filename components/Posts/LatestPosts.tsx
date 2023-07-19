@@ -6,7 +6,7 @@ import dbConnect from '@/lib/mongodb'
 
 const LatestPosts = async ({user}: {user: string}) => {
   await dbConnect();
-  const posts = await Post.find({postedBy: user})
+  const posts = await Post.find({postedBy: user, type: {$ne: 'page'}})
   .sort('-createdAt')
   .limit(3)
   .exec()
