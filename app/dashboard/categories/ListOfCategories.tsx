@@ -66,7 +66,7 @@ const ListOfCategories = ({ categories }: { categories: Array<Category> }) => {
             <h4>You are deleting the category <b>{data.name}</b></h4>
             <p>This action is irreversible</p>
             <ButtonGroup sx={{width: '100%'}}>
-              <Button onClick={() => setOpen(false)} sx={{width: '50%'}}>
+              <Button variant='outlined' color='secondary' onClick={() => setOpen(false)} sx={{width: '50%'}}>
                 No, go back
               </Button>
               <Button type='submit' color='warning' sx={{width: '50%'}} variant='contained'>
