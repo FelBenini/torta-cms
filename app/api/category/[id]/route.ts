@@ -15,3 +15,7 @@ export async function GET(req: NextRequest, {params}: {params: {id: string}}) {
   }
   return NextResponse.json(category)
 }
+
+export async function DELETE(req: NextRequest, {params}: {params: {id: string}}) {
+  return NextResponse.json(params.id)
+}

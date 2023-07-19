@@ -30,6 +30,9 @@ const theme = createTheme({
     },
     secondary: {
       main: '#6b7280',
+    },
+    warning: {
+      main: '#e11d48',
     }
   }
 })

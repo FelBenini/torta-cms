@@ -4,8 +4,12 @@ import { ICategory } from '@/lib/mongodb/models/Category'
 import Topbar from './Topbar'
 import { FiLayers } from 'react-icons/fi'
 import CategoryCard from './CategoryCard'
-import { Box, Modal } from '@mui/material'
+import { Box, Button, ButtonGroup, Modal } from '@mui/material'
+import styles from './style.module.scss'
 import { useState } from 'react'
+import { FaTrash } from 'react-icons/fa'
+import axios from 'axios'
+import { usePathname, useRouter } from 'next/navigation'
 
 interface Category extends ICategory {
   _id: string
@@ -34,19 +38,42 @@ const ListOfCategories = ({ categories }: { categories: Array<Category> }) => {
     })
     return count
   }
+  const router = useRouter()
+  const pathname = usePathname()
   const [open, setOpen] = useState(false)
-  const [data, setData] = useState({name: '', id: ''})
+  const [data, setData] = useState({ name: '', id: '' })
+
+  const handleDeletion = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await axios.delete(`/api/category/${data.id}`)
+    router.push(`${pathname}?deleted=${data.name}`)
+    router.refresh()
+    setOpen(false)
+  }
 
   return (
     <>
       <Modal open={open}
-      onClose={() => setOpen(false)}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description">
+        onClose={() => setOpen(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description">
         <Box sx={style}>
-          <h2>Are you sure?</h2>
-          <h4>You are deleting {data.name}</h4>
-          <p>{data.id}</p>
+          <form className={styles.deletionForm} onSubmit={handleDeletion}>
+            <h2>Are you sure?</h2>
+            <div>
+              <FaTrash color='#e11d48' size={65} />
+            </div>
+            <h4>You are deleting the category <b>{data.name}</b></h4>
+            <p>This action is irreversible</p>
+            <ButtonGroup sx={{width: '100%'}}>
+              <Button onClick={() => setOpen(false)} sx={{width: '50%'}}>
+                No, go back
+              </Button>
+              <Button type='submit' color='warning' sx={{width: '50%'}} variant='contained'>
+                Yes, delete
+              </Button>
+            </ButtonGroup>
+          </form>
         </Box>
       </Modal>
       <h1><FiLayers style={{ marginBottom: '-4px', marginRight: '8px' }} />All Categories</h1>
