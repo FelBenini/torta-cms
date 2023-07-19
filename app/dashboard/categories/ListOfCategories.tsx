@@ -35,6 +35,7 @@ const ListOfCategories = ({ categories }: { categories: Array<Category> }) => {
     return count
   }
   const [open, setOpen] = useState(false)
+  const [data, setData] = useState({name: '', id: ''})
 
   return (
     <>
@@ -42,12 +43,16 @@ const ListOfCategories = ({ categories }: { categories: Array<Category> }) => {
       onClose={() => setOpen(false)}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description">
-        <Box sx={style}></Box>
+        <Box sx={style}>
+          <h2>Are you sure?</h2>
+          <h4>You are deleting {data.name}</h4>
+          <p>{data.id}</p>
+        </Box>
       </Modal>
       <h1><FiLayers style={{ marginBottom: '-4px', marginRight: '8px' }} />All Categories</h1>
       <Topbar length={categories.length + countSubCategories(categories)} categories={categories} />
       {categories.map((category: Category, index: number) => (
-        <CategoryCard openModalState={setOpen} id={category._id as string} key={index} />
+        <CategoryCard setData={setData} openModalState={setOpen} id={category._id as string} key={index} />
       ))}
     </>
   )

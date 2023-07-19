@@ -11,9 +11,9 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { FaRegTrashAlt } from 'react-icons/fa'
 
-const CategoryCard = ({ id, openModalState }: { id: string, openModalState: (value: React.SetStateAction<boolean>) => void }) => {
+const CategoryCard = ({ id, openModalState, setData }: { id: string, openModalState: (value: React.SetStateAction<boolean>) => void, setData: (value: React.SetStateAction<{name: string, id: string}>) => void}) => {
   const pathname = useSearchParams()
-  const [info, setInfo] = useState<{ name: string, childCategories: Array<ICategory> } | null>(null)
+  const [info, setInfo] = useState<{ _id: string, name: string, childCategories: Array<ICategory> } | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const CategoryCard = ({ id, openModalState }: { id: string, openModalState: (val
       <h5>Name:</h5>
       <span className={styles.inline}>
         <h3>{info?.name}</h3>
-        <OptionsMenu name={info?.name as string} openModalState={openModalState}/>
+        <OptionsMenu id={info?._id as string} setData={setData} name={info?.name as string} openModalState={openModalState}/>
       </span>
       {info?.childCategories.length ? <h5>Child categories:</h5> : <></>}
       {info?.childCategories.map((category, index) => (
@@ -43,7 +43,7 @@ const CategoryCard = ({ id, openModalState }: { id: string, openModalState: (val
           <h5>Subcategory&apos;s name:</h5>
           <span className={styles.inline}>
             <h3>{category.name}</h3>
-            <OptionsMenu name={category.name} openModalState={openModalState}/>
+            <OptionsMenu id={info?._id as string} setData={setData} name={category.name} openModalState={openModalState}/>
           </span>
         </div>
       ))}
@@ -51,7 +51,7 @@ const CategoryCard = ({ id, openModalState }: { id: string, openModalState: (val
   )
 }
 
-function OptionsMenu({name, openModalState}: {name: string, openModalState: (value: React.SetStateAction<boolean>) => void}) {
+function OptionsMenu({name, id, openModalState, setData}: {name: string, id: string, openModalState: (value: React.SetStateAction<boolean>) => void, setData: (value: React.SetStateAction<{name: string, id: string}>) => void}) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -61,6 +61,7 @@ function OptionsMenu({name, openModalState}: {name: string, openModalState: (val
     setAnchorEl(null);
   };
   const handleDeleteClick = () => {
+    setData({name: name, id: id})
     openModalState(true);
     handleClose()
   }
