@@ -38,6 +38,7 @@ model PublishedPost {
   id              String    @id @default(auto()) @map("_id") @db.ObjectId
   draftPost       String    @unique @db.ObjectId
   title           String
+  searchTitle     String
   createdAt       DateTime? @default(now())
   content         String
   published       Boolean

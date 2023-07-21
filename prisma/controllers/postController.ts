@@ -130,6 +130,9 @@ export class PostController {
   }
 
   public static publishAPost = async (id: string) => {
+    const searchTitle = (title: string): string => {
+      return title.replaceAll('-', '').replaceAll(' ', '-')
+    }
     const post = await prisma.post.findFirst({
       where: { id: id }
     })
@@ -141,6 +144,7 @@ export class PostController {
         data: {
           title: post.title,
           content: post.content,
+          searchTitle: searchTitle(post.title),
           publishedAt: new Date(Date.now()),
           published: true,
           backgroundImage: post?.backgroundImage || null,
