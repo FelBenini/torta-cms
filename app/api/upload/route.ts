@@ -1,6 +1,6 @@
 import mime from "mime";
 import { NextRequest, NextResponse } from "next/server";
-import imageController from '@/lib/mongodb/controllers/imageController'
+import ImageController from '@/prisma/controllers/imageController'
 
 export async function POST(request: NextRequest) {
   const url = new URL(request.url)
@@ -20,8 +20,8 @@ export async function POST(request: NextRequest) {
     /\.[^/.]+$/,
     ""
   )}-${uniqueSuffix}.${mime.getExtension(file.type)}`;
-  const mongoImg = await imageController.saveAnImage(file, filename, mime.getExtension(file.type) as string)
-  console.log(mongoImg._id)
+  const mongoImg = await ImageController.saveAnImage(file, filename, mime.getExtension(file.type) as string)
+  console.log(mongoImg.id)
 
   return NextResponse.json({'location': `${hostname}/image/${mongoImg.day}/${mongoImg.month}/${mongoImg.year}/${mongoImg.title}`})
 }
