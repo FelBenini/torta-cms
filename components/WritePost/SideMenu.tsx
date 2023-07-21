@@ -11,18 +11,11 @@ import InputTags from './TagsInput';
 import { AiOutlineInfoCircle } from 'react-icons/ai'
 import { GiSettingsKnobs } from 'react-icons/gi'
 import Checkbox from '@mui/material/Checkbox';
-import { ObjectId } from 'mongoose';
 import ImageUpload from './ImageUpload';
 import NewCategoryModal from '../Categories/NewCategoryModal';
+import { Prisma } from '@prisma/client';
 
-export type CategoryType = {
-  name: string,
-  _id: string,
-  type: string,
-  childCategories: Array<CategoryType>
-}
-
-const SideMenu = ({ summaryProp, postId, tags, categories, postCategories, imageUrl }: { summaryProp: string | undefined, postId: string, tags?: Array<string>, postCategories: Array<string | ObjectId>, categories: Array<CategoryType> | undefined, imageUrl?: string }) => {
+const SideMenu = ({ summaryProp, postId, tags, categories, postCategories, imageUrl }: { summaryProp: string | null | undefined, postId: string, tags: Array<string> | null | undefined, postCategories: Array<string> | null | undefined, categories: Array<Prisma.CategoryCreateInput> | undefined | undefined, imageUrl: string | null | undefined }) => {
   const router = useRouter()
   const [summary, setSummary] = useState(summaryProp)
   const [open, setOpen] = useState(false)
@@ -47,9 +40,9 @@ const SideMenu = ({ summaryProp, postId, tags, categories, postCategories, image
     <div className={styles.sideMenu}>
       <h1><GiSettingsKnobs /> Settings</h1>
       <h3 className={styles.titleMargin}>Summary</h3>
-      <textarea style={{ width: '95%', height: 200 }} value={summary} onChange={(e) => setSummary(e.target.value)} onBlur={handleSummaryBlur} />
+      <textarea style={{ width: '95%', height: 200 }} value={summary || ''} onChange={(e) => setSummary(e.target.value)} onBlur={handleSummaryBlur} />
       <h3 className={styles.titleMargin}>Main Image</h3>
-      <ImageUpload postId={postId} initialValue={imageUrl} />
+      <ImageUpload postId={postId} initialValue={imageUrl || ''} />
       <Accordion sx={{ boxShadow: 'none', borderRadius: 0 }}>
         <AccordionSummary
           expandIcon={<MdOutlineExpandMore size={30} />}
@@ -61,28 +54,28 @@ const SideMenu = ({ summaryProp, postId, tags, categories, postCategories, image
         </AccordionSummary>
         <AccordionDetails sx={{ width: '85%' }}>
           {categories?.map((category, index) => {
-            const childCategories = category.childCategories.map((category, index) => {
-              if (postCategories.includes(category._id)) {
+            const childCategories = (category.childCategories as string[]).map((category, index) => {
+              if (postCategories?.includes(category)) {
                 return (
-                  <p className={styles.paragraphCategory} key={index}><Checkbox defaultChecked onClick={() => updateCategories(category._id.toString())} />{category.name}</p>
+                  <p className={styles.paragraphCategory} key={index}><Checkbox defaultChecked onClick={() => updateCategories(category)} />{category}</p>
                 )
               } else {
                 return (
-                  <p key={index} className={styles.paragraphCategory}><Checkbox onClick={() => updateCategories(category._id.toString())} />{category.name}</p>
+                  <p key={index} className={styles.paragraphCategory}><Checkbox onClick={() => updateCategories(category)} />{category}</p>
                 )
               }
             })
-            if (postCategories.includes(category._id)) {
+            if (postCategories?.includes(category?.id as string)) {
               return (
                 <div className={styles.paragraphCategory} key={index}>
-                  <p><Checkbox defaultChecked onClick={() => updateCategories(category._id.toString())} />{category.name}</p>
+                  <p><Checkbox defaultChecked onClick={() => updateCategories(category?.id as string)} />{category.name}</p>
                   {childCategories}
                 </div>
               )
             } else {
               return (
                 <div className={styles.paragraphCategory} key={index}>
-                  <p><Checkbox onClick={() => updateCategories(category._id.toString())} />{category.name}</p>
+                  <p><Checkbox onClick={() => updateCategories(category?.id as string)} />{category.name}</p>
                   {childCategories}
                 </div>
               )

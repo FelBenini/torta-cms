@@ -9,10 +9,9 @@ import { BsClock } from 'react-icons/bs'
 import { Button } from '@mui/material'
 import { AiOutlineFileSearch } from 'react-icons/ai'
 import Link from 'next/link'
+import { Prisma } from '@prisma/client'
 
-interface Post extends PostType {
-  _id: mongoose.ObjectId
-}
+type Post = Prisma.PostCreateInput
 
 type PropsType = {
   initialData: {

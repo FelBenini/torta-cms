@@ -7,10 +7,7 @@ import styles from './newcategory.module.scss'
 import { ICategory } from "@/lib/mongodb/models/Category";
 import axios from 'axios'
 import { usePathname, useRouter } from 'next/navigation';
-
-interface Category extends ICategory {
-  _id: string
-}
+import { Prisma } from '@prisma/client';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -26,7 +23,7 @@ const style = {
 
 const NewCategoryModal = ({ openState, setOpenState, categories }: { openState: boolean,
   setOpenState: (value: SetStateAction<boolean>) => void,
-  categories: Array<Category>}) => {
+  categories: Array<Prisma.CategoryCreateInput>}) => {
   const router = useRouter()
   const pathname = usePathname()
   const [mainCategory, setMainCategory] = useState(0)
@@ -77,8 +74,8 @@ const NewCategoryModal = ({ openState, setOpenState, categories }: { openState: 
           <p>Main Category:</p>
           <Select sx={{ width: '100%', marginTop: '12px' }} onChange={handleSelectChange} value={mainCategory}>
             <MenuItem value={0}>None</MenuItem>
-            {categories.map((category: Category, index: number) => (
-              <MenuItem value={category._id} key={index}>
+            {categories.map((category: Prisma.CategoryCreateInput, index: number) => (
+              <MenuItem value={category.id} key={index}>
                 {category.name}
               </MenuItem>
             ))}

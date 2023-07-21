@@ -1,6 +1,4 @@
-import { PrismaClient, Prisma } from "@prisma/client"
-
-const prisma = new PrismaClient({})
+import { prisma } from '../prismaClient'
 
 export default class ImageController {
   public static saveAnImage = async (blob: Blob, filename: string, filetype: string) => {

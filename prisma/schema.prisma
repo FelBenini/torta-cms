@@ -27,6 +27,7 @@ model Post {
 
 model Category {
   id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
   posts           Post[]   @relation(fields: [postIds], references: [id])
   postIds         String[] @db.ObjectId
   type            String

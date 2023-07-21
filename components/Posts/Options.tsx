@@ -9,7 +9,7 @@ import { FaRegTrashAlt } from 'react-icons/fa'
 import { HiOutlinePencil } from 'react-icons/hi'
 import Link from 'next/link'
 
-const OptionsPost = ({id, type}: {id: string, type: 'post' | 'page'}) => {
+const OptionsPost = ({id, type}: {id: string | undefined, type: 'post' | 'page'}) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {

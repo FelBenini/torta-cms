@@ -1,7 +1,6 @@
-import { PrismaClient, Prisma } from "@prisma/client"
+import { Prisma } from "@prisma/client"
 import bcrypt from 'bcryptjs'
-
-const prisma = new PrismaClient({})
+import { prisma } from '../prismaClient'
 
 function generateApiKey(length: number) {
   let result = '';

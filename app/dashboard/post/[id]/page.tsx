@@ -2,7 +2,7 @@ import React from 'react'
 import RouterRefresh from '@/components/RouterRefresh';
 import WritePost from '@/components/WritePost';
 import categoriesController from '@/lib/mongodb/controllers/categoriesController';
-import { postController } from '@/lib/mongodb/controllers/postController';
+import PostController from '@/prisma/controllers/postController';
 import { redirect } from 'next/navigation';
 
 type Props = {
@@ -15,7 +15,7 @@ type Props = {
 };
 
 const fetchPost = async (id: string) => {
-  const res = await postController.getOnePostById(id)
+  const res = await PostController.getOnePostById(id)
   if (!res) {
     redirect('/dashboard/posts?message=This post does not exist')
   }

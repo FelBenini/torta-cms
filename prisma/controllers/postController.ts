@@ -1,6 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient({})
+import { prisma } from '../prismaClient'
 
 export default class PostController {
   public static updatePost = async (id: string, title: string, content: string) => {
