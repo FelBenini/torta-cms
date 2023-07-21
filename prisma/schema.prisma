@@ -21,7 +21,7 @@ model Post {
   summary         String?
   postedBy        String
   updatedAt       DateTime?
-  publishedPost   String?    @unique @db.ObjectId
+  publishedPost   String?    @db.ObjectId
   type            String?
 }
 

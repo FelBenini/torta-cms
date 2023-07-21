@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient({})
 
-export class PostController {
+export default class PostController {
   public static updatePost = async (id: string, title: string, content: string) => {
     const post = await prisma.post.update({
       where: { id: id },

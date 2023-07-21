@@ -1,4 +1,4 @@
-import { postController } from "@/lib/mongodb/controllers/postController";
+import PostController from "@/prisma/controllers/postController";
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -14,6 +14,9 @@ export async function POST(req: NextRequest) {
   } else {
     type = 'post'
   }
-  const newPost = await postController.createPost(token.name as string, type)
-  return NextResponse.json({location: newPost._id}, {status: 201})
+  const newPost = await PostController.createPost(token.name as string, type)
+  if (!newPost) {
+    return NextResponse.json({}, {status: 400})
+  }
+  return NextResponse.json({location: newPost}, {status: 201})
 }
