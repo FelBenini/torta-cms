@@ -66,10 +66,10 @@ export default class CategoriesController {
     })
   }
 
-  public static deleteCategory = async (name: string) => {
+  public static deleteCategory = async (id: string) => {
     const categoryFind = await prisma.category.findFirst({
       where: {
-        name: name
+        id: id
       }
     })
     if (!categoryFind) {
@@ -77,7 +77,7 @@ export default class CategoriesController {
     }
     const category = await prisma.category.delete({
       where: {
-        name: name
+        id: id
       }
     })
     return categoryFind
