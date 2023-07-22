@@ -41,7 +41,7 @@ export default class CategoriesController {
       },
       data: {
         childCategories: {
-          set: [...categoryToUpdate?.childCategories as string[], newCategory.id]
+          set: [...categoryToUpdate?.childCategories as string[], newCategory.name]
         }
       }
     })
@@ -64,5 +64,22 @@ export default class CategoriesController {
         }
       }
     })
+  }
+
+  public static deleteCategory = async (name: string) => {
+    const categoryFind = await prisma.category.findFirst({
+      where: {
+        name: name
+      }
+    })
+    if (!categoryFind) {
+      return null
+    }
+    const category = await prisma.category.delete({
+      where: {
+        name: name
+      }
+    })
+    return categoryFind
   }
 }

@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import React from 'react'
-import { type ObjectId } from 'mongoose'
 import styles from './card.module.scss'
 import OptionsPost from './Options'
 import { Prisma } from '@prisma/client'
