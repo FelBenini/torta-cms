@@ -34,7 +34,7 @@ export default class CategoriesController {
         mainCategory: fatherCategory
       }
     })
-    const categoryToUpdate = await prisma.category.findFirst({where: { id: fatherCategory }})
+    const categoryToUpdate = await prisma.category.findFirst({ where: { id: fatherCategory } })
     const updatedCategory = await prisma.category.update({
       where: {
         id: fatherCategory
@@ -74,6 +74,20 @@ export default class CategoriesController {
     })
     if (!categoryFind) {
       return null
+    }
+    if (categoryFind.type === 'child') {
+      const categoryFather = await prisma.category.findFirst({ where: { id: categoryFind?.mainCategory as string } })
+      if (!categoryFather) {
+        return null
+      }
+      await prisma.category.update({
+        where: {
+          id: categoryFather?.id as string
+        },
+        data: {
+          childCategories: { set: categoryFather?.childCategories.filter((category) => category !== categoryFind.name) }
+        }
+      })
     }
     const category = await prisma.category.delete({
       where: {
