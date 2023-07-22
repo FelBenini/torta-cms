@@ -4,7 +4,6 @@ import { Button, Select, TextField, MenuItem } from "@mui/material"
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import styles from './newcategory.module.scss'
-import { ICategory } from "@/lib/mongodb/models/Category";
 import axios from 'axios'
 import { usePathname, useRouter } from 'next/navigation';
 import { Prisma } from '@prisma/client';

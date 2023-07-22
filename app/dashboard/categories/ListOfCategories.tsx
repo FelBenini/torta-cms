@@ -1,6 +1,5 @@
 'use client'
 import React from 'react'
-import { ICategory } from '@/lib/mongodb/models/Category'
 import Topbar from './Topbar'
 import { FiLayers } from 'react-icons/fi'
 import CategoryCard from './CategoryCard'
@@ -10,11 +9,7 @@ import { useState } from 'react'
 import { FaTrash } from 'react-icons/fa'
 import axios from 'axios'
 import { usePathname, useRouter } from 'next/navigation'
-
-interface Category extends ICategory {
-  _id: string
-  childCategories: Array<Category>
-}
+import { Prisma } from '@prisma/client'
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -28,11 +23,11 @@ const style = {
   p: 4,
 };
 
-const ListOfCategories = ({ categories }: { categories: Array<Category> }) => {
-  const countSubCategories = (categories: Array<Category>) => {
+const ListOfCategories = ({ categories }: { categories: Array<Prisma.CategoryCreateInput> }) => {
+  const countSubCategories = (categories: Array<Prisma.CategoryCreateInput>) => {
     let count = 0;
     categories.map((category) => {
-      category.childCategories?.map((category) => {
+      (category.childCategories as string[]).map((category: string) => {
         count++
       })
     })
@@ -78,8 +73,8 @@ const ListOfCategories = ({ categories }: { categories: Array<Category> }) => {
       </Modal>
       <h1><FiLayers style={{ marginBottom: '-4px', marginRight: '8px' }} />All Categories</h1>
       <Topbar length={categories.length + countSubCategories(categories)} categories={categories} />
-      {categories.map((category: Category, index: number) => (
-        <CategoryCard setData={setData} openModalState={setOpen} id={category._id as string} key={index} />
+      {categories.map((category: Prisma.CategoryCreateInput, index: number) => (
+        <CategoryCard setData={setData} openModalState={setOpen} id={category.id as string} key={index} />
       ))}
     </>
   )

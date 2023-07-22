@@ -15,8 +15,7 @@ model Post {
   published       Boolean
   publishedAt     DateTime?
   backgroundImage String?
-  categories      Category[] @relation(fields: [categoryIds], references: [id])
-  categoryIds     String[]   @db.ObjectId
+  categories     String[]   @db.ObjectId
   tags            String[]
   summary         String?
   postedBy        String
@@ -27,9 +26,7 @@ model Post {
 
 model Category {
   id              String   @id @default(auto()) @map("_id") @db.ObjectId
-  name            String
-  posts           Post[]   @relation(fields: [postIds], references: [id])
-  postIds         String[] @db.ObjectId
+  name            String   @unique
   type            String
   childCategories String[] @db.ObjectId
   mainCategory    String?  @db.ObjectId

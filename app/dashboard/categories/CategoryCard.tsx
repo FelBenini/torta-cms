@@ -10,14 +10,11 @@ import { BiDotsVerticalRounded } from 'react-icons/bi'
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { FaRegTrashAlt } from 'react-icons/fa'
-
-interface Category extends ICategory {
-  _id: string
-}
+import { Prisma } from '@prisma/client'
 
 const CategoryCard = ({ id, openModalState, setData }: { id: string, openModalState: (value: React.SetStateAction<boolean>) => void, setData: (value: React.SetStateAction<{name: string, id: string}>) => void}) => {
   const pathname = useSearchParams()
-  const [info, setInfo] = useState<{ _id: string, name: string, childCategories: Array<Category>, num_of_posts: number } | null>(null)
+  const [info, setInfo] = useState<{ id: string, name: string, childCategories: Array<string>, num_of_posts: number } | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -40,11 +37,11 @@ const CategoryCard = ({ id, openModalState, setData }: { id: string, openModalSt
       <span className={styles.inline}>
         <h3>{info?.name}</h3>
         <h4>Posts on this category: <b>{info?.num_of_posts}</b></h4>
-        <OptionsMenu id={info?._id as string} setData={setData} name={info?.name as string} openModalState={openModalState}/>
+        <OptionsMenu id={info?.id as string} setData={setData} name={info?.name as string} openModalState={openModalState}/>
       </span>
       {info?.childCategories.length ? <h5>Child categories:</h5> : <></>}
-      {info?.childCategories.map((category: Category, index) => (
-        <CategoryCard id={category._id} openModalState={openModalState} setData={setData} key={index} />
+      {info?.childCategories.map((category, index) => (
+        <CategoryCard id={category} openModalState={openModalState} setData={setData} key={index} />
       ))}
     </div>
   )
