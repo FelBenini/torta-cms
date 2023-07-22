@@ -1,12 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { ObjectId } from "mongoose";
 import CategoriesController from "@/prisma/controllers/categoriesController";
 import { getToken } from "next-auth/jwt";
 
 type categoryType = {
   name: string,
   type: string,
-  childCategories: Array<string | ObjectId>,
+  childCategories: Array<string>,
   mainCategory: string
 }
 
