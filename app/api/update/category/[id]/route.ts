@@ -1,23 +1,39 @@
-import dbConnect from "@/lib/mongodb";
-import { postController } from "@/lib/mongodb/controllers/postController";
+import PostController from "@/prisma/controllers/postController";
+import { prisma } from "@/prisma/prismaClient";
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
-  await dbConnect()
   const token = await getToken({ req })
   if (!token) {
     return NextResponse.json({ 'message': 'Not authorized' }, { status: 401 })
   }
   const body = await req.json()
-  const post = await postController.getOnePostById(params.id)
+  const post = await PostController.getOnePostById(params.id)
+  if (!post) {
+    return NextResponse.json({}, {status: 404})
+  }
   if (post.categories.includes(body.category)) {
-    post.categories.pull(body.category)
-    await post.save()
-    return NextResponse.json({ 'removed': post.categories })
+    const newPost = await prisma.post.update({
+      where: {
+        id: params.id
+      },
+      data: {
+        categories: post.categories.splice(post.categories.indexOf(body.category), 1)
+      }
+    })
+    return NextResponse.json({ 'removed': newPost.categories })
   } else {
-    post.categories.push(body.category)
-    await post.save()
-    return NextResponse.json({ 'included': 'included' })
+    const newPost = await prisma.post.update({
+      where: {
+        id: params.id
+      },
+      data: {
+        categories: {
+          push: body.category
+        }
+      }
+    })
+    return NextResponse.json({ 'included': newPost.categories })
   }
 }

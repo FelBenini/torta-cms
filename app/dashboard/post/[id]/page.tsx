@@ -1,7 +1,7 @@
 import React from 'react'
 import RouterRefresh from '@/components/RouterRefresh';
 import WritePost from '@/components/WritePost';
-import categoriesController from '@/lib/mongodb/controllers/categoriesController';
+import CategoriesController from '@/prisma/controllers/categoriesController';
 import PostController from '@/prisma/controllers/postController';
 import { redirect } from 'next/navigation';
 
@@ -25,7 +25,7 @@ const fetchPost = async (id: string) => {
 }
 
 const fetchCategories = async () => {
-  const res = await categoriesController.getCategories()
+  const res = await CategoriesController.getCategories()
   const string = JSON.stringify(res)
   const json = JSON.parse(string)
   return json

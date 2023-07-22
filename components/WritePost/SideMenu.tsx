@@ -65,7 +65,7 @@ const SideMenu = ({ summaryProp, postId, tags, categories, postCategories, image
                 )
               }
             })
-            if (postCategories?.includes(category?.id as string)) {
+            if (postCategories?.includes(category?.name as string)) {
               return (
                 <div className={styles.paragraphCategory} key={index}>
                   <p><Checkbox defaultChecked onClick={() => updateCategories(category?.name as string)} />{category.name}</p>
