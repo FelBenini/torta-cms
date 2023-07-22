@@ -74,7 +74,7 @@ const ListOfCategories = ({ categories }: { categories: Array<Prisma.CategoryCre
       <h1><FiLayers style={{ marginBottom: '-4px', marginRight: '8px' }} />All Categories</h1>
       <Topbar length={categories.length + countSubCategories(categories)} categories={categories} />
       {categories.map((category: Prisma.CategoryCreateInput, index: number) => (
-        <CategoryCard setData={setData} openModalState={setOpen} id={category.name as string} key={index} />
+        <CategoryCard setData={setData} openModalState={setOpen} id={category.name} key={index} />
       ))}
     </>
   )
