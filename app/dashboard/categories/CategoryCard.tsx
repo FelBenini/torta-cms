@@ -19,7 +19,7 @@ const CategoryCard = ({ id, openModalState, setData }: { id: string, openModalSt
   useEffect(() => {
     console.log(pathname)
     const fetchCategory = async (id: string) => {
-      const { data } = await axios.get(`/api/category/${id}`)
+      const { data } = await axios.get(`/api/category/${encodeURIComponent( id ).replace(/[!'()]/g, escape).replace(/\*/g, "%2A")}`)
       setInfo(data)
       setLoading(false)
     }
