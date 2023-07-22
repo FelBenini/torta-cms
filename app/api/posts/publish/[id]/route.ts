@@ -1,4 +1,4 @@
-import { postController } from "@/lib/mongodb/controllers/postController";
+import PostController from "@/prisma/controllers/postController";
 import { getToken } from "next-auth/jwt"
 import { NextResponse, NextRequest } from "next/server"
 
@@ -8,6 +8,6 @@ export async function POST(req: NextRequest, {params}: {params: {id: string}}) {
     return NextResponse.json({'message': 'Unauthorized'}, {status: 401})
   }
   const {id} = params;
-  const post = await postController.publishAPost(id);
+  const post = await PostController.publishAPost(id);
   return NextResponse.json(post);
 }
