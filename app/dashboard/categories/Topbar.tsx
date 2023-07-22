@@ -1,13 +1,9 @@
 'use client'
 import { Button } from "@mui/material"
 import { useState } from 'react'
-import { ICategory } from "@/lib/mongodb/models/Category";
 import NewCategoryModal from "@/components/Categories/NewCategoryModal";
 import styles from './style.module.scss'
-
-interface Category extends ICategory {
-  _id: string
-}
+import { Prisma } from "@prisma/client";
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -21,7 +17,7 @@ const style = {
   p: 4,
 };
 
-const Topbar = ({ length, categories }: { length: number, categories: Array<Category> }) => {
+const Topbar = ({ length, categories }: { length: number, categories: Array<Prisma.CategoryCreateInput> }) => {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true);
   return (

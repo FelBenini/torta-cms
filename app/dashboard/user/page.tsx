@@ -1,5 +1,4 @@
-import { userController } from '@/lib/mongodb/controllers/userController'
-import { UserType } from '@/lib/mongodb/models/User';
+import UserController from '@/prisma/controllers/userController'
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import React from 'react'
@@ -7,7 +6,7 @@ import styles from './styles.module.scss'
 
 const UserPage = async () => {
   const session = await getServerSession()
-  const user = await userController.findOne(session?.user?.name as string);
+  const user = await UserController.findOne(session?.user?.name as string);
 
   if (!user) {
     return redirect('/');

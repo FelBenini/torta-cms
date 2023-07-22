@@ -12,7 +12,7 @@ import Logo from '../SideMenu/tortacms.svg'
 import Image from "next/image";
 import { signIn } from "next-auth/react";
 import axios from 'axios'
-import { UserType } from "@/lib/mongodb/models/User";
+import { Prisma } from "@prisma/client";
 
 export const LogoutButton = ({onClick}: {onClick: () => void}) => {
   return (
@@ -76,7 +76,7 @@ export const RegisterForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    const user: UserType = {
+    const user: Prisma.UserCreateInput = {
       username: formValues.username,
       password: formValues.password,
       role: 'admin',

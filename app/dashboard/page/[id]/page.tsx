@@ -1,8 +1,8 @@
 import React from 'react'
 import RouterRefresh from '@/components/RouterRefresh';
 import WritePost from '@/components/WritePost';
-import categoriesController from '@/lib/mongodb/controllers/categoriesController';
-import { pageController } from '@/lib/mongodb/controllers/pageController';
+import CategoriesController from '@/prisma/controllers/categoriesController';
+import PageController from '@/prisma/controllers/pageController';
 import { redirect } from 'next/navigation';
 
 type Props = {
@@ -15,7 +15,7 @@ type Props = {
 };
 
 const fetchPost = async (id: string) => {
-  const res = await pageController.getOnePageById(id)
+  const res = await PageController.getOnePageById(id)
   if (!res) {
     redirect('/dashboard/posts?message=This post does not exist')
   }
@@ -25,7 +25,7 @@ const fetchPost = async (id: string) => {
 }
 
 const fetchCategories = async () => {
-  const res = await categoriesController.getCategories()
+  const res = await CategoriesController.getCategories()
   const string = JSON.stringify(res)
   const json = JSON.parse(string)
   return json

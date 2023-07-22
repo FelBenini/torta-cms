@@ -1,13 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { ObjectId } from "mongoose";
-import categoriesController from "@/lib/mongodb/controllers/categoriesController";
+import CategoriesController from "@/prisma/controllers/categoriesController";
 import { getToken } from "next-auth/jwt";
 
 type categoryType = {
   name: string,
   type: string,
-  childCategories: Array<string | ObjectId>,
-  mainCategory: string | ObjectId
+  childCategories: Array<string>,
+  mainCategory: string
 }
 
 export async function POST(req: NextRequest) {
@@ -16,7 +15,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ 'message': 'Unauthorized' }, { status: 401 })
   }
   const data: categoryType = await req.json()
-  const category = await categoriesController.addCategory(data.name, data.type, data.mainCategory)
+  const category = await CategoriesController.addCategory(data.name, data.type, data.mainCategory)
   if (!category) {
     return NextResponse.json({'message': 'Bad request'}, {status: 400})
   }

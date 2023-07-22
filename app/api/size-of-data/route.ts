@@ -1,6 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
-import getSizeOfData from "@/lib/mongodb/dataFunctions";
+import dbController from "@/prisma/controllers/dbController";
 import { getToken } from "next-auth/jwt";
+
+async function getSizeOfData() {
+  const data = await dbController.getSizeOfDatabase()
+  const total = data.categoryCollection + data.postCollection + data.userCollection + data.imageCollection;
+  
+  return {
+    sizeOfImg: data.imageCollection,
+    mongoSize: data,
+    total,
+  }
+}
 
 export async function GET(req: NextRequest) {
   const token = await getToken({req})

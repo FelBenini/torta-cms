@@ -1,5 +1,5 @@
-import categoriesController from "@/lib/mongodb/controllers/categoriesController";
-import { postController } from "@/lib/mongodb/controllers/postController";
+import CategoriesController from "@/prisma/controllers/categoriesController";
+import PostController from "@/prisma/controllers/postController";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -7,24 +7,24 @@ export async function GET(req: NextRequest) {
   const { origin } = new URL(req.url)
   const page = parseInt(searchParams.get('page') as string) || 1
   const limit = parseInt(searchParams.get('limit') as string) || 15
-  let order: string;
+  let order: 'asc' | 'desc';
   if (searchParams.get('order') !== 'oldest') {
-    order = '-publishedAt'
+    order = 'desc'
   } else {
-    order = 'publishedAt'
+    order = 'asc'
   }
 
   if (searchParams.get('search')) {
-    const queriedData = await postController.searchForPublishedPosts(searchParams.get('search') as string, page, limit);
+    const queriedData = await PostController.searchForPublishedPosts(searchParams.get('search') as string, page, limit);
     return NextResponse.json(queriedData)
   }
 
   let data;
 
   if (!searchParams.get('category')) {
-    data = await postController.getPublishedPosts(page, limit, order);
+    data = await PostController.getPublishedPosts(page, limit, order);
   } else {
-    data = await categoriesController.findPublishedPostsByCategory(searchParams.get('category'), page, limit, order)
+    data = await CategoriesController.findPublishedPostsByCategory(searchParams.get('category') as string, page, limit, order)
   }
 
   if (!data) {
@@ -33,7 +33,7 @@ export async function GET(req: NextRequest) {
 
   const modifiedPosts = data.posts.map((post) => {
     const modifiedContent = post.content?.replaceAll('src="../../image', `src="${origin}/image`);
-    const redirectUrl = `${post.publishedAt.getDate()}/0${post.publishedAt.getMonth() + 1}/${post.publishedAt.getFullYear()}/${post.title.replace(/ /g, '-')}`
+    const redirectUrl = `${post.publishedAt?.getDate()}/0${post.publishedAt?.getMonth() as number + 1}/${post.publishedAt?.getFullYear()}/${post.searchTitle}`
     return { ...post, content: modifiedContent, postUrl: redirectUrl };
   })
 

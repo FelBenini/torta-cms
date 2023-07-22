@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { LoginForm, RegisterForm } from "@/components/Auth";
 import { redirect } from 'next/navigation'
-import { userController } from "@/lib/mongodb/controllers/userController";
+import UserController from "@/prisma/controllers/userController";
 
 export const metadata = {
   title: 'tortaCMS',
@@ -10,12 +10,12 @@ export const metadata = {
 
 export default async function Home() {
   const session = await getServerSession();
-  const isFirstUser: Boolean = await userController.checkIfFirstUser();
+  const isFirstUser: Boolean = await UserController.checkIfFirstUser();
   if (session) {
     redirect('/dashboard')
   }
 
-  if (isFirstUser) {
+  if (!isFirstUser) {
     return (
       <>
       <RegisterForm />
