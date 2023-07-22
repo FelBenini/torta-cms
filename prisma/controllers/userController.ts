@@ -49,4 +49,16 @@ export default class UserController {
       return false
     }
   }
+
+  public static findOne = async (name: string) => {
+    const user = await prisma.user.findFirst({
+      where: {
+        username: name
+      }
+    })
+    if (!user) {
+      return null
+    }
+    return user
+  }
 }

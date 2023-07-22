@@ -1,6 +1,6 @@
 import React from 'react'
 import ListOfPosts from '@/components/Posts/List'
-import { pageController } from '@/lib/mongodb/controllers/pageController'
+import PageController from '@/prisma/controllers/pageController'
 import RouterRefresh from '@/components/RouterRefresh'
 import Topbar from '@/components/TopBar'
 
@@ -11,7 +11,7 @@ const Pages = async ({
 }: {
   searchParams: { page: string | undefined };
 }) => {
-  const res = await pageController.getAllPages(searchParams.page as number | undefined || 1)
+  const res = await PageController.getAllPages(searchParams.page as number | undefined || 1)
   const string = JSON.stringify(res)
   const json = JSON.parse(string)
   return (

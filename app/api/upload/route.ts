@@ -20,8 +20,8 @@ export async function POST(request: NextRequest) {
     /\.[^/.]+$/,
     ""
   )}-${uniqueSuffix}.${mime.getExtension(file.type)}`;
-  const mongoImg = await ImageController.saveAnImage(file, filename, mime.getExtension(file.type) as string)
-  console.log(mongoImg.id)
+  const dbImg = await ImageController.saveAnImage(file, filename, mime.getExtension(file.type) as string)
+  console.log(dbImg.id)
 
-  return NextResponse.json({'location': `${hostname}/image/${mongoImg.day}/${mongoImg.month}/${mongoImg.year}/${mongoImg.title}`})
+  return NextResponse.json({'location': `${hostname}/image/${dbImg.day}/${dbImg.month}/${dbImg.year}/${dbImg.title}`})
 }
