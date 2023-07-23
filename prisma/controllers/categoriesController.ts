@@ -57,13 +57,37 @@ export default class CategoriesController {
     if (!category) {
       return null
     }
-    const posts = await prisma.post.findMany({
+    const posts = await prisma.publishedPost.findMany({
       where: {
         categories: {
-          has: category.id
+          has: categoryName
+        },
+        NOT: {
+          type: 'page'
+        }
+      },
+      orderBy: [
+        { createdAt: order }
+      ],
+      take: limit,
+      skip: (page - 1) * limit
+    })
+    const count = await prisma.publishedPost.count({
+      where: {
+        categories: {
+          has: categoryName
+        },
+        NOT: {
+          type: 'page'
         }
       }
     })
+    const numOfPages = Math.ceil(count / 15)
+    return {
+      number_of_pages: numOfPages,
+      number_of_posts: count,
+      posts: posts
+    }
   }
 
   public static deleteCategory = async (id: string) => {
