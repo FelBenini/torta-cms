@@ -11,6 +11,7 @@ class RemoveDataFromPost {
   tags: string[] | null | undefined | Prisma.PublishedPostCreatetagsInput
   postUrl: string = ''
   postedBy: string = ''
+  content: string = ''
   summary: string | null | undefined
   constructor(post: Prisma.PublishedPostCreateInput) {
     this.title = post.title
@@ -21,6 +22,7 @@ class RemoveDataFromPost {
     this.tags = post.tags
     this.summary = post.summary
     this.postedBy = post.postedBy
+    this.content = post.content
   }
 }
 
@@ -32,6 +34,9 @@ export async function GET(req: NextRequest, { params }: { params: { slug: string
       publishedAt: {
         gte: new Date(`${params.year}-${params.month}-${params.day}`),
         lte: new Date(`${params.year}-${params.month}-${endDate}`)
+      },
+      NOT: {
+        type: 'page'
       }
     }
   })
