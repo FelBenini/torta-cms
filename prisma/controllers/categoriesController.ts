@@ -48,7 +48,7 @@ export default class CategoriesController {
     return newCategory
   }
 
-  public static findPublishedPostsByCategory = async (categoryName: string, page: number, limit: number, order: 'desc' | 'asc') => {
+  public static findPublishedPostsByCategory = async (categoryName: string, page: number, limit: number, order: 'desc' | 'asc', type: 'post' | 'page') => {
     const category = await prisma.category.findFirst({
       where: {
         name: categoryName
@@ -62,9 +62,7 @@ export default class CategoriesController {
         categories: {
           has: categoryName
         },
-        NOT: {
-          type: 'page'
-        }
+        type: type
       },
       orderBy: [
         { createdAt: order }
@@ -77,9 +75,7 @@ export default class CategoriesController {
         categories: {
           has: categoryName
         },
-        NOT: {
-          type: 'page'
-        }
+        type: type
       }
     })
     const numOfPages = Math.ceil(count / 15)

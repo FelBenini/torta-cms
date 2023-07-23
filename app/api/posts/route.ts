@@ -50,7 +50,7 @@ export async function GET(req: NextRequest) {
   }
 
   if (searchParams.get('search')) {
-    const queriedData = await PostController.searchForPublishedPosts(searchParams.get('search') as string, page, limit);
+    const queriedData = await PostController.searchForPublishedPosts(searchParams.get('search') as string, page, limit, 'post');
     const modifiedQueriedData = queriedData.posts.map(post => {
       const redirectUrl = `${post.publishedAt?.getDate()}/0${post.publishedAt?.getMonth() as number + 1}/${post.publishedAt?.getFullYear()}/${post.searchTitle}`
       const newPost: any = { ...post, postUrl: redirectUrl };
@@ -62,9 +62,9 @@ export async function GET(req: NextRequest) {
   let data;
 
   if (!searchParams.get('category')) {
-    data = await PostController.getPublishedPosts(page, limit, order);
+    data = await PostController.getPublishedPosts(page, limit, order, 'post');
   } else {
-    data = await CategoriesController.findPublishedPostsByCategory(searchParams.get('category') as string, page, limit, order)
+    data = await CategoriesController.findPublishedPostsByCategory(searchParams.get('category') as string, page, limit, order, 'post')
   }
 
   if (!data) {
