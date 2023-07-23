@@ -77,6 +77,6 @@ export async function GET(req: NextRequest) {
     const newPost: any = { ...post, content: modifiedContent, postUrl: redirectUrl };
     return new RemoveDataFromPost(newPost, redirectUrl)
   })
-
+  
   return NextResponse.json(new CreateResponse(modifiedPosts, data.number_of_pages, data.number_of_posts))
 }

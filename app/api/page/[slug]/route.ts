@@ -36,5 +36,7 @@ export async function GET(req: NextRequest, { params }: { params: { slug: string
   if (!page) {
     return NextResponse.json({}, { status: 404 })
   }
+  page.content = page.content?.replaceAll('src="../../image', `src="${origin}/image`)
+  
   return NextResponse.json(new RemoveDataFromPost(page));
 }
