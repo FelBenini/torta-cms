@@ -28,6 +28,7 @@ class RemoveDataFromPost {
 
 export async function GET(req: NextRequest, { params }: { params: { slug: string, day: string, month: string, year: string } }) {
   const endDate = parseInt(params.day) + 1
+  const { origin } = new URL(req.url)
   const post = await prisma.publishedPost.findFirst({
     where: {
       searchTitle: params.slug,

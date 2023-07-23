@@ -27,6 +27,7 @@ class RemoveDataFromPost {
 }
 
 export async function GET(req: NextRequest, { params }: { params: { slug: string } }) {
+  const { origin } = new URL(req.url)
   const page = await prisma.publishedPost.findFirst({
     where: {
       searchTitle: params.slug,
@@ -37,6 +38,6 @@ export async function GET(req: NextRequest, { params }: { params: { slug: string
     return NextResponse.json({}, { status: 404 })
   }
   page.content = page.content?.replaceAll('src="../../image', `src="${origin}/image`)
-  
+
   return NextResponse.json(new RemoveDataFromPost(page));
 }

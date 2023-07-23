@@ -162,10 +162,12 @@ export default class PostController {
       })
       return publishedPost
     }
-
+    if (!post.publishedPost) {
+      return
+    }
     const publishedPost = await prisma.publishedPost.update({
       where: {
-        id: id
+        id: post.publishedPost
       },
       data: {
         title: post.title,
