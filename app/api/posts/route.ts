@@ -3,17 +3,17 @@ import PostController from "@/prisma/controllers/postController";
 import { Prisma } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
-export class RemoveDataFromPost {
+class RemoveDataFromPost {
   title: string = ''
   backgroundImage?: string | null = ''
   publishedAt: Date | null | undefined | string = new Date(Date.now())
   updatedAt: Date | null | undefined | string = new Date(Date.now())
-  categories: Array<string> | undefined | null | Prisma.PostCreatecategoriesInput
-  tags: string[] | null | undefined | Prisma.PostCreatetagsInput
+  categories: Array<string> | undefined | null | Prisma.PublishedPostCreatecategoriesInput
+  tags: string[] | null | undefined | Prisma.PublishedPostCreatetagsInput
   postUrl: string = ''
   postedBy: string = ''
   summary: string | null | undefined
-  constructor(post: Prisma.PostCreateInput, postUrl: string) {
+  constructor(post: Prisma.PublishedPostCreateInput, postUrl: string) {
     this.title = post.title
     this.backgroundImage = post.backgroundImage
     this.publishedAt = post.publishedAt

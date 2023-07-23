@@ -1,9 +1,30 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from '@/prisma/prismaClient'
+import { Prisma } from "@prisma/client";
 
-const prisma = new PrismaClient({})
+class RemoveDataFromPost {
+  title: string = ''
+  backgroundImage?: string | null = ''
+  publishedAt: Date | null | undefined | string = new Date(Date.now())
+  updatedAt: Date | null | undefined | string = new Date(Date.now())
+  categories: Array<string> | undefined | null | Prisma.PublishedPostCreatecategoriesInput
+  tags: string[] | null | undefined | Prisma.PublishedPostCreatetagsInput
+  postUrl: string = ''
+  postedBy: string = ''
+  summary: string | null | undefined
+  constructor(post: Prisma.PublishedPostCreateInput) {
+    this.title = post.title
+    this.backgroundImage = post.backgroundImage
+    this.publishedAt = post.publishedAt
+    this.updatedAt = post.updatedAt
+    this.categories = post.categories
+    this.tags = post.tags
+    this.summary = post.summary
+    this.postedBy = post.postedBy
+  }
+}
 
-export async function GET(req: NextRequest, { params }: { params: { slug: string, day: string, month: string, year: string }}) {
+export async function GET(req: NextRequest, { params }: { params: { slug: string, day: string, month: string, year: string } }) {
   const endDate = parseInt(params.day) + 1
   const post = await prisma.publishedPost.findFirst({
     where: {
@@ -15,7 +36,7 @@ export async function GET(req: NextRequest, { params }: { params: { slug: string
     }
   })
   if (!post) {
-    return NextResponse.json({}, {status: 404})
+    return NextResponse.json({}, { status: 404 })
   }
-  return NextResponse.json(post);
+  return NextResponse.json(new RemoveDataFromPost(post));
 }
