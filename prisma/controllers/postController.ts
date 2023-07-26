@@ -1,7 +1,7 @@
 import { prisma } from '../prismaClient'
 
 export default class PostController {
-  public static updatePost = async (id: string, title: string, content: string) => {
+  public static updatePost = async (id: number, title: string, content: string) => {
     const post = await prisma.post.update({
       where: { id: id },
       data: {
@@ -78,7 +78,7 @@ export default class PostController {
     }
   }
 
-  public static updateSummary = async (id: string, summary: string) => {
+  public static updateSummary = async (id: number, summary: string) => {
     if (summary === '') {
       return
     }
@@ -93,7 +93,7 @@ export default class PostController {
     return post.summary
   }
 
-  public static getOnePostById = async (id: string) => {
+  public static getOnePostById = async (id: number) => {
     const post = await prisma.post.findFirst({
       where: {
         id: id,
@@ -108,7 +108,7 @@ export default class PostController {
     return null
   }
 
-  public static updateTags = async (id: string, tags: Array<string>) => {
+  public static updateTags = async (id: number, tags: Array<string>) => {
     if (tags.length <= 0) {
       return null
     }
@@ -123,7 +123,7 @@ export default class PostController {
     return post.tags
   }
 
-  public static publishAPost = async (id: string) => {
+  public static publishAPost = async (id: number) => {
     const searchTitle = (title: string): string => {
       return title.replaceAll('-', '').replaceAll(' ', '-')
     }

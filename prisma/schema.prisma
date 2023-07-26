@@ -28,7 +28,7 @@ model Category {
   id              Int   @id @default(autoincrement())
   name            String   @unique
   type            String
-  childCategories Int[]
+  childCategories String[]
   mainCategory    String?
 }
 
@@ -45,6 +45,7 @@ model PublishedPost {
   tags            String[]
   summary         String?
   postedBy        String
+  draftPost       Int?
   updatedAt       DateTime?
   type            String?
 }

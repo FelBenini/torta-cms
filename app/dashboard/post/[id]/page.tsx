@@ -15,7 +15,7 @@ type Props = {
 };
 
 const fetchPost = async (id: string) => {
-  const res = await PostController.getOnePostById(id)
+  const res = await PostController.getOnePostById(parseInt(id))
   if (!res) {
     redirect('/dashboard/posts?message=This post does not exist')
   }
