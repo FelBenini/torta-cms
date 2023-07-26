@@ -8,7 +8,7 @@ async function getSizeOfData() {
   
   return {
     sizeOfImg: data.imageCollection,
-    mongoSize: data,
+    postgresSize: data,
     total,
   }
 }

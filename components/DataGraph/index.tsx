@@ -16,8 +16,8 @@ const DataGraph = () => {
   })
   const fetchData = async () => {
     const {data} = await axios.get('/api/size-of-data')
-    const totalMongo = data.mongoSize.userCollection + data.mongoSize.postCollection + data.mongoSize.categoryCollection
-    setInfo({sizeOfImg: data.sizeOfImg, sizeOfDb: totalMongo, total: data.total})
+    const totalPostgres = data.postgresSize.userCollection + data.postgresSize.postCollection + data.postgresSize.categoryCollection
+    setInfo({sizeOfImg: data.sizeOfImg, sizeOfDb: totalPostgres, total: data.total})
   }
   useEffect(() => {
     fetchData()
