@@ -1,7 +1,6 @@
 'use client'
 import React from 'react'
 import TextEditor from '../TextEditor'
-import { type Post } from '../Posts/PostCard'
 import { useState } from 'react'
 import styles from './styles.module.scss'
 import IconButton from '@mui/material/IconButton'
@@ -12,10 +11,11 @@ import { AiOutlineSave } from 'react-icons/ai'
 import axios from 'axios'
 import Drawer from '@mui/material/Drawer';
 import { FaPaperPlane } from 'react-icons/fa'
-import SideMenu, { CategoryType } from './SideMenu'
+import SideMenu from './SideMenu'
 import { useRouter } from 'next/navigation'
+import { Prisma } from '@prisma/client'
 
-const WritePost = ({ post, categories }: { post: Post, categories: Array<CategoryType> | undefined}) => {
+const WritePost = ({ post, categories }: { post: Prisma.PostCreateInput, categories: Array<Prisma.CategoryCreateInput> | undefined}) => {
   const [content, setContent] = useState(post.content)
   const [title, setTitle] = useState(post.title)
   const [showing, setShowing] = useState(false)
@@ -25,7 +25,7 @@ const WritePost = ({ post, categories }: { post: Post, categories: Array<Categor
   const [timer, setTimer] = useState<any>(null)
   async function handleSave() {
     setSaving(true)
-    const { status } = await axios.put(`/api/content/save-content-changes/${post._id}`, {
+    const { status } = await axios.put(`/api/content/save-content-changes/${post.id}`, {
       title: title,
       content: content
     })
@@ -35,7 +35,7 @@ const WritePost = ({ post, categories }: { post: Post, categories: Array<Categor
   const publishPost = async () => {
     setPublishedText('Publishing...')
     await handleSave()
-    await axios.post(`/api/posts/publish/${post._id}`)
+    await axios.post(`/api/posts/publish/${post.id}`)
     setPublishedText('Published!')
     router.refresh()
   }
@@ -71,7 +71,7 @@ const WritePost = ({ post, categories }: { post: Post, categories: Array<Categor
         anchor='right'
         open={showing}
         onClose={toggleDrawer(false)}
-      ><SideMenu summaryProp={post.summary} tags={post?.tags} postId={post._id.toString()} postCategories={post?.categories || []} categories={categories || []} imageUrl={post.backgroundImage}/></Drawer>
+      ><SideMenu summaryProp={post?.summary || ''} tags={post?.tags as string[]} postId={post.id as string} postCategories={post?.categories as string[]} categories={categories} imageUrl={post.backgroundImage}/></Drawer>
       <Stack direction='row' spacing={4} justifyContent='flex-end'>
         {saving ?
           <p>Saving changes...</p> :

@@ -1,13 +1,13 @@
-import { userController } from "@/lib/mongodb/controllers/userController";
+import UserController from "@/prisma/controllers/userController";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   const req = await request.json()
-  const checkFirstUser = await userController.checkIfFirstUser();
-  if (!checkFirstUser) {
+  const checkFirstUser = await UserController.checkIfFirstUser();
+  if (checkFirstUser) {
     return NextResponse.json({'message': 'Admin user already register'}, {status: 401})
   } else {
-    userController.createFirstUser(req)
+    await UserController.createFirstUser(req)
     return NextResponse.json(req, {status: 201})
   }
 }

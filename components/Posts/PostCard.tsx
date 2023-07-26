@@ -1,21 +1,8 @@
 import Link from 'next/link'
 import React from 'react'
-import { type ObjectId } from 'mongoose'
 import styles from './card.module.scss'
 import OptionsPost from './Options'
-
-export type Post = {
-  title: string,
-  postedBy: string,
-  _id: ObjectId,
-  published?: boolean,
-  content: string,
-  createdAt?: Date,
-  summary?: string,
-  tags?: Array<string>
-  categories?: Array<any>,
-  backgroundImage?: string
-}
+import { Prisma } from '@prisma/client'
 
 function getFormattedDate(date: Date) {
   let year = date.getFullYear();
@@ -27,12 +14,12 @@ function getFormattedDate(date: Date) {
   return `${month}/${day}/${year} - ${hours}:${minutes}`;
 }
 
-const PostCard = ({ post, type = 'post' }: { post: Post, type: 'post' | 'page' }) => {
+const PostCard = ({ post, type = 'post' }: { post: Prisma.PostCreateInput, type: 'post' | 'page' }) => {
   return (
     <div className={styles.postCard}>
       <div>
         <h2>
-          <Link href={`/dashboard/${type}/${post._id}`}>{post.title.replace(/(<([^>]+)>)/ig, '')}</Link>
+          <Link href={`/dashboard/${type}/${post.id}`}>{post.title.replace(/(<([^>]+)>)/ig, '')}</Link>
         </h2>
         <h4>
           {post.postedBy.toString()}
@@ -44,7 +31,7 @@ const PostCard = ({ post, type = 'post' }: { post: Post, type: 'post' | 'page' }
           <p>{post.content.replace(/(<([^>]+)>)/ig, '')}</p>
         }
       </div>
-      <OptionsPost id={post._id.toString()} type={type}/>
+      <OptionsPost id={post.id} type={type}/>
     </div>
   )
 }

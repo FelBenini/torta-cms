@@ -1,21 +1,18 @@
-import dbConnect from '..';
-import Image from '../models/Image'
+import { prisma } from '../prismaClient'
 
-export default class imageController {
+export default class ImageController {
   public static saveAnImage = async (blob: Blob, filename: string, filetype: string) => {
     const buffer = Buffer.from(await blob.arrayBuffer());
     const date = new Date(Date.now())
-    await dbConnect();
 
-    const img = new Image({
+    const img = await prisma.image.create({data: {
       title: filename,
       day: parseInt(date.getDate().toString().padStart(2, "0")),
       month: parseInt((date.getMonth() + 1).toString().padStart(2, '0')),
       year: date.getFullYear(),
       data: buffer,
       contentType: `image/${filetype}`
-    })
-    await img.save()
+    }})
     return img
   }
 }

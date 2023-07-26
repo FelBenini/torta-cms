@@ -1,7 +1,7 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from 'bcryptjs'
-import { userController } from "../mongodb/controllers/userController";
+import UserController from "@/prisma/controllers/userController";
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -23,14 +23,14 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const authUser = await userController.getUserByName(credentials?.username as string)
+        const authUser = await UserController.getUserByName(credentials?.username as string)
         if (!authUser) {
           return null
         }
         if (!bcrypt.compareSync(credentials?.password as string, authUser.password)) {
           return null
         }
-        const user = { id: authUser._id, name: authUser.username, email: authUser.role };
+        const user = { id: authUser.id, name: authUser.username, email: authUser.role };
         return user;
       },
     }),

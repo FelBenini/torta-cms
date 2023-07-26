@@ -1,23 +1,20 @@
 'use client'
-import { PostType } from '@/lib/mongodb/models/Post'
 import React, { useState, useEffect } from 'react'
 import PostCard from './PostCard'
 import styles from './list.module.scss'
-import mongoose from 'mongoose'
 import PaginationComponent from '../Pagination'
 import { BsClock } from 'react-icons/bs'
 import { Button } from '@mui/material'
 import { AiOutlineFileSearch } from 'react-icons/ai'
 import Link from 'next/link'
+import { Prisma } from '@prisma/client'
 
-interface Post extends PostType {
-  _id: mongoose.ObjectId
-}
+type Post = Prisma.PostCreateInput
 
 type PropsType = {
   initialData: {
     numOfPosts: number,
-    posts: Array<PostType> | [],
+    posts: Array<Prisma.PostCreateInput> | [],
 
   },
   type: 'post' | 'page',

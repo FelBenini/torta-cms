@@ -26,24 +26,18 @@ class RemoveDataFromPost {
   }
 }
 
-export async function GET(req: NextRequest, { params }: { params: { slug: string, day: string, month: string, year: string } }) {
-  const endDate = parseInt(params.day) + 1
+export async function GET(req: NextRequest, { params }: { params: { slug: string } }) {
   const { origin } = new URL(req.url)
-  const post = await prisma.publishedPost.findFirst({
+  const page = await prisma.publishedPost.findFirst({
     where: {
       searchTitle: params.slug,
-      publishedAt: {
-        gte: new Date(`${params.year}-${params.month}-${params.day}`),
-        lte: new Date(`${params.year}-${params.month}-${endDate}`)
-      },
-      NOT: {
-        type: 'page'
-      }
+      type: 'page'
     }
   })
-  if (!post) {
+  if (!page) {
     return NextResponse.json({}, { status: 404 })
   }
-  post.content = post.content?.replaceAll('src="../../image', `src="${origin}/image`)
-  return NextResponse.json(new RemoveDataFromPost(post));
+  page.content = page.content?.replaceAll('src="../../image', `src="${origin}/image`)
+
+  return NextResponse.json(new RemoveDataFromPost(page));
 }
