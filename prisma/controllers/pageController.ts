@@ -23,7 +23,7 @@ export default class PageController {
     }
   }
 
-  public static getOnePageById = async (id: string) => {
+  public static getOnePageById = async (id: number) => {
     const page = await prisma.post.findFirst({
       where: {
         id: id,
