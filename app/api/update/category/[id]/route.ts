@@ -11,7 +11,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   const body = await req.json()
   const post = await PostController.getOnePostById(params.id)
   if (!post) {
-    return NextResponse.json({}, {status: 404})
+    return NextResponse.json({}, { status: 404 })
   }
   if (post.categories.includes(body.category)) {
     const newPost = await prisma.post.update({
@@ -19,7 +19,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
         id: params.id
       },
       data: {
-        categories: post.categories.splice(post.categories.indexOf(body.category), 1)
+        categories: { set: post.categories.filter((category) => category !== body.category) }
       }
     })
     return NextResponse.json({ 'removed': newPost.categories })

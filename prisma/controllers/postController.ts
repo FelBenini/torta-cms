@@ -54,12 +54,10 @@ export default class PostController {
     }
   }
 
-  public static getPublishedPosts = async (page: number, limit: number, sort: 'desc' | 'asc' = 'desc') => {
+  public static getPublishedPosts = async (page: number, limit: number, sort: 'desc' | 'asc' = 'desc', type: 'post' | 'page') => {
     const posts = await prisma.publishedPost.findMany({
       where: {
-        NOT: {
-          type: 'page'
-        }
+        type: type
       },
       orderBy: [
         { createdAt: sort }
@@ -69,9 +67,7 @@ export default class PostController {
     })
     const count = await prisma.publishedPost.count({
       where: {
-        NOT: {
-          type: 'page'
-        }
+        type: type
       }
     })
     const numOfPages = Math.ceil(count / 15)
@@ -166,10 +162,12 @@ export default class PostController {
       })
       return publishedPost
     }
-
+    if (!post.publishedPost) {
+      return
+    }
     const publishedPost = await prisma.publishedPost.update({
       where: {
-        id: id
+        id: post.publishedPost
       },
       data: {
         title: post.title,
@@ -188,7 +186,7 @@ export default class PostController {
     return publishedPost
   }
 
-  public static searchForPublishedPosts = async (query: string, page: number, limit: number) => {
+  public static searchForPublishedPosts = async (query: string, page: number, limit: number, type: 'post' | 'page') => {
     const whereQuery = {
       OR: [{
         title: {
@@ -200,9 +198,7 @@ export default class PostController {
           contains: query
         }
       }],
-      NOT: {
-        type: 'page'
-      }
+      type: type
     }
     const posts = await prisma.publishedPost.findMany({
       where: whereQuery,

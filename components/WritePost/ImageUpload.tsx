@@ -60,8 +60,8 @@ const ImageUpload = ({ postId, initialValue }: { postId: string, initialValue: s
       </Box>
         : <></>}
       {imgLink !== '' ?
-        <img style={{ borderRadius: '8px' }} className={styles.imgPreview} src={imgLink} alt='Main image preview' />
-        : <p style={{ textAlign: 'center' }}>No image uploaded yet</p>
+        <img style={{ borderRadius: '8px', width: '96.5%' }} className={styles.imgPreview} src={imgLink} alt='Main image preview' />
+        : <p style={{ textAlign: 'center', width: '96.5%' }}>No image uploaded yet</p>
       }
 
       <label className={styles.uploadFile}>
