@@ -3,38 +3,37 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgres"
   url      = env("CONNECTION_STRING")
 }
 
 model Post {
-  id              String     @id @default(auto()) @map("_id") @db.ObjectId
+  id              Int     @id @default(autoincrement())
   title           String
   createdAt       DateTime?  @default(now())
   content         String
   published       Boolean
   publishedAt     DateTime?
   backgroundImage String?
-  categories     String[]
+  categories      String[]
   tags            String[]
   summary         String?
   postedBy        String
   updatedAt       DateTime?
-  publishedPost   String?    @db.ObjectId
+  publishedPost   Int?
   type            String?
 }
 
 model Category {
-  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  id              Int   @id @default(autoincrement())
   name            String   @unique
   type            String
-  childCategories String[]
+  childCategories Int[]
   mainCategory    String?
 }
 
 model PublishedPost {
-  id              String    @id @default(auto()) @map("_id") @db.ObjectId
-  draftPost       String    @unique @db.ObjectId
+  id              Int    @id @default(autoincrement())
   title           String
   searchTitle     String
   createdAt       DateTime? @default(now())
@@ -51,7 +50,7 @@ model PublishedPost {
 }
 
 model User {
-  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  id         Int @id @default(autoincrement())
   username   String    @unique
   password   String
   email      String    @unique
@@ -62,7 +61,7 @@ model User {
 }
 
 model Image {
-  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  id          Int @id @default(autoincrement())
   title       String
   day         Int
   month       Int
