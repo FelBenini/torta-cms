@@ -16,7 +16,7 @@ function generateApiKey(length: number) {
 
 export default class UserController {
   public static getUserByName = async (username: string) => {
-    const user = await prisma.user.findFirst({where: {username: {equals: username, mode: 'insensitive'}}})
+    const user = await prisma.user.findFirst({where: {username: username}})
     if (!user) {
       return null
     }
