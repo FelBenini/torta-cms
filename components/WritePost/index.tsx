@@ -13,9 +13,10 @@ import Drawer from '@mui/material/Drawer';
 import { FaPaperPlane } from 'react-icons/fa'
 import SideMenu from './SideMenu'
 import { useRouter } from 'next/navigation'
-import { Prisma } from '@prisma/client'
+import { Category } from '@/lib/DataModels/Category'
+import { Post } from '@/lib/DataModels/Post'
 
-const WritePost = ({ post, categories }: { post: Prisma.PostCreateInput, categories: Array<Prisma.CategoryCreateInput> | undefined}) => {
+const WritePost = ({ post, categories }: { post: Post, categories: Array<Category> | undefined}) => {
   const [content, setContent] = useState(post.content)
   const [title, setTitle] = useState(post.title)
   const [showing, setShowing] = useState(false)

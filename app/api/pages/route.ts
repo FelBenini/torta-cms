@@ -2,29 +2,7 @@ import CategoriesController from "@/prisma/controllers/categoriesController";
 import PostController from "@/prisma/controllers/postController";
 import { Prisma } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-
-class RemoveDataFromPost {
-  title: string = ''
-  backgroundImage?: string | null = ''
-  publishedAt: Date | null | undefined | string = new Date(Date.now())
-  updatedAt: Date | null | undefined | string = new Date(Date.now())
-  categories: Array<string> | undefined | null | Prisma.PublishedPostCreatecategoriesInput
-  tags: string[] | null | undefined | Prisma.PublishedPostCreatetagsInput
-  postUrl: string = ''
-  postedBy: string = ''
-  summary: string | null | undefined
-  constructor(post: Prisma.PublishedPostCreateInput, postUrl: string) {
-    this.title = post.title
-    this.backgroundImage = post.backgroundImage
-    this.publishedAt = post.publishedAt
-    this.updatedAt = post.updatedAt
-    this.categories = post.categories
-    this.tags = post.tags
-    this.summary = post.summary
-    this.postUrl = postUrl
-    this.postedBy = post.postedBy
-  }
-}
+import { RemoveDataFromPost } from "../page/[slug]/route";
 
 class CreateResponse {
   posts?: RemoveDataFromPost[]
@@ -54,7 +32,7 @@ export async function GET(req: NextRequest) {
     const modifiedQueriedData = queriedData.posts.map(post => {
       const redirectUrl = `${post.publishedAt?.getDate()}/0${post.publishedAt?.getMonth() as number + 1}/${post.publishedAt?.getFullYear()}/${post.searchTitle}`
       const newPost: any = { ...post, postUrl: redirectUrl };
-      return new RemoveDataFromPost(newPost, redirectUrl)
+      return new RemoveDataFromPost(newPost)
     })
     return NextResponse.json(new CreateResponse(modifiedQueriedData, queriedData.number_of_pages, queriedData.number_of_posts))
   }
@@ -75,7 +53,7 @@ export async function GET(req: NextRequest) {
     const modifiedContent = post.content?.replaceAll('src="../../image', `src="${origin}/image`);
     const redirectUrl = `/${post.searchTitle}`
     const newPost: any = { ...post, content: modifiedContent, postUrl: redirectUrl };
-    return new RemoveDataFromPost(newPost, redirectUrl)
+    return new RemoveDataFromPost(newPost)
   })
   
   return NextResponse.json(new CreateResponse(modifiedPosts, data.number_of_pages, data.number_of_posts))
