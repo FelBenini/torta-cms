@@ -9,7 +9,11 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     return NextResponse.json({ 'message': 'Not authorized' }, { status: 401 })
   }
   const body = await req.json()
-  const post = await PostController.getOnePostById(params.id)
+  const post = await prisma.post.findFirst({
+    where: {
+      id: params.id
+    }
+  })
   if (!post) {
     return NextResponse.json({}, { status: 404 })
   }
@@ -27,13 +31,18 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     })
     return NextResponse.json({ 'removed': newPost.categories })
   } else {
-
+    let newCategories: string
+    if (post.categories === '' || post.categories === ' ' || post.categories === ', ' || !post.categories) {
+      newCategories = `${body.category}, `
+    } else {
+      newCategories = `${post.categories}${body.category}, `
+    }
     const newPost = await prisma.post.update({
       where: {
         id: params.id
       },
       data: {
-        categories: `${post.categories}${body.category}, `
+        categories: newCategories
       }
     })
     return NextResponse.json({ 'included': newPost.categories })
