@@ -55,12 +55,14 @@
   & .link {
     color: var(--clean-purple);
     cursor: pointer;
+    margin: 4px;
+    display: block;
   }
 
   & .paragraphCategory {
     height: fit-content;
     margin: 0px;
-    border-top: 1px solid var(--text-color-light);
+    border-top: 1px solid var(--scrollbar-color);
     & p {
       height: fit-content;
       margin: 4px 0px;
