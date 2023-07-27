@@ -10,7 +10,7 @@ export default class CategoriesController {
     return categories
   }
 
-  public static addCategory = async (name: string, type: string = 'father', fatherCategory?: string) => {
+  public static addCategory = async (name: string, type: string = 'father', fatherCategory?: number) => {
     if (fatherCategory) {
       const father = await prisma.category.findFirst({
         where: {
@@ -86,7 +86,7 @@ export default class CategoriesController {
     }
   }
 
-  public static deleteCategory = async (id: string) => {
+  public static deleteCategory = async (id: number) => {
     const categoryFind = await prisma.category.findFirst({
       where: {
         id: id
@@ -96,13 +96,13 @@ export default class CategoriesController {
       return null
     }
     if (categoryFind.type === 'child') {
-      const categoryFather = await prisma.category.findFirst({ where: { id: categoryFind?.mainCategory as string } })
+      const categoryFather = await prisma.category.findFirst({ where: { id: categoryFind?.mainCategory as number } })
       if (!categoryFather) {
         return null
       }
       await prisma.category.update({
         where: {
-          id: categoryFather?.id as string
+          id: categoryFather?.id as number
         },
         data: {
           childCategories: { set: categoryFather?.childCategories.filter((category) => category !== categoryFind.name) }

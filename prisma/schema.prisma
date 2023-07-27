@@ -29,7 +29,7 @@ model Category {
   name            String   @unique
   type            String
   childCategories String[]
-  mainCategory    String?
+  mainCategory    Int?
 }
 
 model PublishedPost {
