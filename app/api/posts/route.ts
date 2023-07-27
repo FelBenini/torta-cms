@@ -1,3 +1,4 @@
+import { splitString } from "@/lib/DataModels/splitString";
 import CategoriesController from "@/prisma/controllers/categoriesController";
 import PostController from "@/prisma/controllers/postController";
 import { Prisma } from "@prisma/client";
@@ -18,16 +19,8 @@ class RemoveDataFromPost {
     this.backgroundImage = post.backgroundImage
     this.publishedAt = post.publishedAt
     this.updatedAt = post.updatedAt
-    if (post.categories !== '' && post.categories !== '' && post.categories !== ', ') {
-      this.categories = post.categories?.split(', ')
-    } else {
-      this.categories = []
-    }
-    if (post.tags && post.tags !== '' && post.tags !== ', ') {
-      this.categories = post.tags?.split(', ')
-    } else {
-      this.categories = []
-    }
+    this.categories = splitString(post.categories as string)
+    this.tags = splitString(post.tags as string)
     this.summary = post.summary
     this.postUrl = postUrl
     this.postedBy = post.postedBy
