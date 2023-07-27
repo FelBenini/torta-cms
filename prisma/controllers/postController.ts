@@ -108,16 +108,21 @@ export default class PostController {
     return null
   }
 
-  public static updateTags = async (id: number, tags: Array<string>) => {
-    if (tags.length <= 0) {
+  public static updateTags = async (id: string, initialTags: Array<string>) => {
+    if (initialTags.length <= 0) {
       return null
+    }
+    const tags: string = initialTags.filter(tag => tag !== null).filter(tag => tag !== '').join(', ')
+    let tagsToUpdate: string | null = tags
+    if (tags === '' || tags === ', ') {
+      tagsToUpdate = null
     }
     const post = await prisma.post.update({
       where: {
         id: id
       },
       data: {
-        tags: [...tags]
+        tags: tagsToUpdate
       }
     })
     return post.tags
@@ -142,8 +147,8 @@ export default class PostController {
           publishedAt: new Date(Date.now()),
           published: true,
           backgroundImage: post?.backgroundImage || null,
-          categories: post?.categories || null,
-          tags: post?.tags || null,
+          categories: post?.categories || ' ',
+          tags: post?.tags || ' ',
           summary: post?.summary || null,
           postedBy: post.postedBy,
           draftPost: post.id,
@@ -175,8 +180,8 @@ export default class PostController {
         updatedAt: new Date(Date.now()),
         published: true,
         backgroundImage: post?.backgroundImage || null,
-        categories: post?.categories || null,
-        tags: post?.tags || null,
+        categories: post?.categories || ' ',
+        tags: post?.tags || ' ',
         summary: post?.summary || null,
         postedBy: post.postedBy,
         draftPost: post.id,

@@ -40,9 +40,7 @@ export default class CategoriesController {
         id: fatherCategory
       },
       data: {
-        childCategories: {
-          set: [...categoryToUpdate?.childCategories as string[], newCategory.name]
-        }
+        childCategories: `${categoryToUpdate?.childCategories}, ${newCategory}`
       }
     })
     return newCategory
@@ -60,7 +58,7 @@ export default class CategoriesController {
     const posts = await prisma.publishedPost.findMany({
       where: {
         categories: {
-          has: categoryName
+          contains: `${categoryName},`
         },
         type: type
       },
@@ -73,7 +71,7 @@ export default class CategoriesController {
     const count = await prisma.publishedPost.count({
       where: {
         categories: {
-          has: categoryName
+          contains: `${categoryName},`
         },
         type: type
       }
@@ -100,12 +98,14 @@ export default class CategoriesController {
       if (!categoryFather) {
         return null
       }
+      const arrayChildCategories = categoryFather.childCategories?.split(', ')
+      const updatedChildCategories = arrayChildCategories?.filter((category) => category !== categoryFind.name) 
       await prisma.category.update({
         where: {
           id: categoryFather?.id as number
         },
         data: {
-          childCategories: { set: categoryFather?.childCategories.filter((category) => category !== categoryFind.name) }
+          childCategories: `${updatedChildCategories?.join(', ')}, `
         }
       })
     }

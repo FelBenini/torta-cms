@@ -15,8 +15,8 @@ model Post {
   published       Boolean
   publishedAt     DateTime?
   backgroundImage String?
-  categories      String[]
-  tags            String[]
+  categories     String?
+  tags            String?
   summary         String?
   postedBy        String
   updatedAt       DateTime?
@@ -28,8 +28,8 @@ model Category {
   id              Int   @id @default(autoincrement())
   name            String   @unique
   type            String
-  childCategories String[]
-  mainCategory    Int?
+  childCategories String?  @default(" ")
+  mainCategory    String?
 }
 
 model PublishedPost {
@@ -41,8 +41,8 @@ model PublishedPost {
   published       Boolean
   publishedAt     DateTime?
   backgroundImage String?
-  categories      String[]
-  tags            String[]
+  categories      String?
+  tags            String?
   summary         String?
   postedBy        String
   draftPost       Int?
