@@ -30,7 +30,7 @@ export const authOptions: NextAuthOptions = {
         if (!bcrypt.compareSync(credentials?.password as string, authUser.password)) {
           return null
         }
-        const user = { id: authUser.id, name: authUser.username, email: authUser.role };
+        const user = { id: String(authUser.id), name: authUser.username, email: authUser.role };
         return user;
       },
     }),
