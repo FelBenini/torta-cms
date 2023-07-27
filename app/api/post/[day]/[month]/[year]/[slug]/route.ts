@@ -7,8 +7,8 @@ class RemoveDataFromPost {
   backgroundImage?: string | null = ''
   publishedAt: Date | null | undefined | string = new Date(Date.now())
   updatedAt: Date | null | undefined | string = new Date(Date.now())
-  categories: Array<string> | undefined | null | Prisma.PublishedPostCreatecategoriesInput
-  tags: string[] | null | undefined | Prisma.PublishedPostCreatetagsInput
+  categories: string | undefined | null
+  tags: string | null | undefined
   postUrl: string = ''
   postedBy: string = ''
   content: string = ''

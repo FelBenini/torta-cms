@@ -13,25 +13,27 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   if (!post) {
     return NextResponse.json({}, { status: 404 })
   }
-  if (post.categories.includes(body.category)) {
+  if (post.categories?.includes(body.category)) {
+    const arrayCategories = post.categories.split(', ')
+    const updatedCategories = arrayCategories.filter((category) => category !== body.category)
+    const categories = updatedCategories.join(', ')
     const newPost = await prisma.post.update({
       where: {
         id: params.id
       },
       data: {
-        categories: { set: post.categories.filter((category) => category !== body.category) }
+        categories: `${categories}, `
       }
     })
     return NextResponse.json({ 'removed': newPost.categories })
   } else {
+
     const newPost = await prisma.post.update({
       where: {
         id: params.id
       },
       data: {
-        categories: {
-          push: body.category
-        }
+        categories: `${post.categories}${body.category}, `
       }
     })
     return NextResponse.json({ 'included': newPost.categories })
