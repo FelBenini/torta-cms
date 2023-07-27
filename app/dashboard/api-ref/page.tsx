@@ -6,9 +6,7 @@ import ApiRefCard from '@/components/API/RefCard';
 
 const ApiRefPage = () => {
   const headersList = headers();
-  const referer = headersList.get("referer");
-  const headerHost = headersList.get("host")
-  const host = referer?.replace('/dashboard/api-ref', '').replace('/dashboard/posts', '')
+  const host = `https://${headersList.get("host")}`
   return (
     <section className={styles.apiRefSection}>
       <h1><AiOutlineCluster size='2.8rem' style={{marginBottom: '-0.5rem'}}/> API References</h1>
