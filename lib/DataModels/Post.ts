@@ -1,7 +1,15 @@
 import { Prisma } from "@prisma/client";
 
+interface PostType extends Prisma.PostCreateInput {
+  id: number
+}
+
+interface PublishedPostType extends Prisma.PublishedPostCreateInput {
+  id: number
+}
+
 export class Post {
-  id?: string | undefined;
+  id: number;
   title: string;
   content: string;
   tags?: Array<string> | undefined;
@@ -9,13 +17,13 @@ export class Post {
   type?: string | null | undefined;
   published: boolean;
   publishedAt?: string | Date | null | undefined;
-  publishedPost?: string | null | undefined;
+  publishedPost?: number | null | undefined;
   updatedAt?: string | Date | null | undefined;
   postedBy: string;
   summary?: string | null | undefined;
   createdAt?: string | Date | null | undefined;
   backgroundImage?: string | null | undefined;
-  constructor(post: Prisma.PostCreateInput) {
+  constructor(post: PostType) {
     this.id = post.id;
     this.title = post.title
     this.postedBy = post.postedBy
@@ -33,7 +41,7 @@ export class Post {
 }
 
 export class PublishedPost {
-  id?: string | undefined;
+  id?: number | undefined;
   title: string;
   searchTitle: string;
   content: string;
@@ -42,13 +50,13 @@ export class PublishedPost {
   type?: string | null | undefined;
   published: boolean;
   publishedAt?: string | Date | null | undefined;
-  draftPost: string;
+  draftPost: number | null | undefined;
   updatedAt?: string | Date | null | undefined;
   postedBy: string;
   summary?: string | null | undefined;
   createdAt?: string | Date | null | undefined;
   backgroundImage?: string | null | undefined;
-  constructor(post: Prisma.PublishedPostCreateInput) {
+  constructor(post: PublishedPostType) {
     this.id = post.id;
     this.title = post.title
     this.postedBy = post.postedBy

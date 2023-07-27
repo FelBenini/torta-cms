@@ -1,12 +1,16 @@
 import { Prisma } from "@prisma/client";
 
+interface CategoryType extends Prisma.CategoryCreateInput {
+  id: number
+}
+
 export class Category {
   id?: string | number
   name: string
-  mainCategory?: string | null
+  mainCategory?: number | null
   childCategories?: Array<string> | null
   type?: string | null
-  constructor(category: Prisma.CategoryCreateInput) {
+  constructor(category: CategoryType) {
     this.id = category.id
     this.name = category.name
     this.mainCategory = category.mainCategory

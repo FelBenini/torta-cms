@@ -119,7 +119,7 @@ export default class PostController {
     }
     const post = await prisma.post.update({
       where: {
-        id: id
+        id: parseInt(id)
       },
       data: {
         tags: tagsToUpdate

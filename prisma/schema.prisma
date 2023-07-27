@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgres"
-  url      = env("CONNECTION_STRING")
+  url      = env("SUPABASE_CONNECTION")
 }
 
 model Post {
@@ -29,7 +29,7 @@ model Category {
   name            String   @unique
   type            String
   childCategories String?  @default(" ")
-  mainCategory    String?
+  mainCategory    Int?
 }
 
 model PublishedPost {

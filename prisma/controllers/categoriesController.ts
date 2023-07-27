@@ -10,7 +10,7 @@ export default class CategoriesController {
     return categories
   }
 
-  public static addCategory = async (name: string, type: string = 'father', fatherCategory?: number) => {
+  public static addCategory = async (name: string, type: string = 'father', fatherCategory?: string) => {
     if (fatherCategory) {
       const father = await prisma.category.findFirst({
         where: {
@@ -31,13 +31,13 @@ export default class CategoriesController {
       data: {
         name: name,
         type: type,
-        mainCategory: fatherCategory
+        mainCategory: parseInt(fatherCategory as string)
       }
     })
-    const categoryToUpdate = await prisma.category.findFirst({ where: { id: fatherCategory } })
+    const categoryToUpdate = await prisma.category.findFirst({ where: { id: parseInt(fatherCategory as string) } })
     const updatedCategory = await prisma.category.update({
       where: {
-        id: fatherCategory
+        id: parseInt(fatherCategory as string)
       },
       data: {
         childCategories: `${categoryToUpdate?.childCategories}, ${newCategory}`

@@ -9,6 +9,6 @@ export async function PUT(req: NextRequest, {params}: {params: {id: string}}) {
   }
   const body = await req.json()
   const {id} = params;
-  const tags = await PostController.updateTags(parseInt(id), body.tags)
+  const tags = await PostController.updateTags(id, body.tags)
   return NextResponse.json(tags);
 }
