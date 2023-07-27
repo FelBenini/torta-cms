@@ -14,8 +14,9 @@ import Checkbox from '@mui/material/Checkbox';
 import ImageUpload from './ImageUpload';
 import NewCategoryModal from '../Categories/NewCategoryModal';
 import { Prisma } from '@prisma/client';
+import { Category } from '@/lib/DataModels/Category';
 
-const SideMenu = ({ summaryProp, postId, tags, categories, postCategories, imageUrl }: { summaryProp: string | null | undefined, postId: string, tags: Array<string> | null | undefined, postCategories: Array<string> | null | undefined, categories: Array<Prisma.CategoryCreateInput> | undefined | undefined, imageUrl: string | null | undefined }) => {
+const SideMenu = ({ summaryProp, postId, tags, categories, postCategories, imageUrl }: { summaryProp: string | null | undefined, postId: string, tags: Array<string> | null | undefined, postCategories: Array<string> | null | undefined, categories: Array<Category> | undefined | undefined, imageUrl: string | null | undefined }) => {
   const router = useRouter()
   const [summary, setSummary] = useState(summaryProp)
   const [open, setOpen] = useState(false)

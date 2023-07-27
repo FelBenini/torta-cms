@@ -4,6 +4,7 @@ import { useState } from 'react'
 import NewCategoryModal from "@/components/Categories/NewCategoryModal";
 import styles from './style.module.scss'
 import { Prisma } from "@prisma/client";
+import { Category } from "@/lib/DataModels/Category";
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -17,7 +18,7 @@ const style = {
   p: 4,
 };
 
-const Topbar = ({ length, categories }: { length: number, categories: Array<Prisma.CategoryCreateInput> }) => {
+const Topbar = ({ length, categories }: { length: number, categories: Array<Category> }) => {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true);
   return (
