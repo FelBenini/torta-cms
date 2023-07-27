@@ -9,11 +9,14 @@ const Categories = async () => {
   const categories = res.map((category) => {
     return new Category(category)
   })
+  const string = JSON.stringify(categories)
+  const json = JSON.parse(string)
 
   return (
     <>
       <section className={styles.categoriesSection}>
-        <ListOfCategories categories={categories} />
+        {string}
+        <ListOfCategories categories={json} />
       </section>
     </>
   )
