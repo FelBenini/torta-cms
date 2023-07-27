@@ -15,8 +15,8 @@ model Post {
   published       Boolean
   publishedAt     DateTime?
   backgroundImage String?
-  categories     String     @default(" ")
-  tags            String    @default(" ")
+  categories     String?
+  tags            String?    
   summary         String?
   postedBy        String
   updatedAt       DateTime?
@@ -42,8 +42,8 @@ model PublishedPost {
   published       Boolean
   publishedAt     DateTime?
   backgroundImage String?
-  categories      String   @default(" ")
-  tags            String   @default(" ")
+  categories      String?
+  tags            String?
   summary         String?
   postedBy        String
   updatedAt       DateTime?

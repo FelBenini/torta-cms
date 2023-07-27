@@ -112,13 +112,17 @@ export default class PostController {
     if (initialTags.length <= 0) {
       return null
     }
-    const tags = initialTags.join(', ')
+    const tags: string = initialTags.filter(tag => tag !== null).filter(tag => tag !== '').join(', ')
+    let tagsToUpdate: string | null = tags
+    if (tags === '' || tags === ', ') {
+      tagsToUpdate = null
+    }
     const post = await prisma.post.update({
       where: {
         id: id
       },
       data: {
-        tags: `${tags}`
+        tags: tagsToUpdate
       }
     })
     return post.tags
