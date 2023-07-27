@@ -8,8 +8,8 @@ class RemoveDataFromPost {
   backgroundImage?: string | null = ''
   publishedAt: Date | null | undefined | string = new Date(Date.now())
   updatedAt: Date | null | undefined | string = new Date(Date.now())
-  categories: Array<string> | undefined | null | Prisma.PublishedPostCreatecategoriesInput
-  tags: string[] | null | undefined | Prisma.PublishedPostCreatetagsInput
+  categories: Array<string> | undefined | null
+  tags: string[] | null | undefined
   postUrl: string = ''
   postedBy: string = ''
   summary: string | null | undefined
@@ -18,8 +18,16 @@ class RemoveDataFromPost {
     this.backgroundImage = post.backgroundImage
     this.publishedAt = post.publishedAt
     this.updatedAt = post.updatedAt
-    this.categories = post.categories
-    this.tags = post.tags
+    if (post.categories !== '' && post.categories !== '' && post.categories !== ', ') {
+      this.categories = post.categories?.split(', ')
+    } else {
+      this.categories = []
+    }
+    if (post.tags && post.tags !== '' && post.tags !== ', ') {
+      this.categories = post.tags?.split(', ')
+    } else {
+      this.categories = []
+    }
     this.summary = post.summary
     this.postUrl = postUrl
     this.postedBy = post.postedBy

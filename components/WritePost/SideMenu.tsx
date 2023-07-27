@@ -14,12 +14,10 @@ import Checkbox from '@mui/material/Checkbox';
 import ImageUpload from './ImageUpload';
 import NewCategoryModal from '../Categories/NewCategoryModal';
 import { Prisma } from '@prisma/client';
+import { Category } from '@/lib/DataModels/Category';
 
-interface Category extends Prisma.CategoryCreateInput {
-  id: number
-}
 
-const SideMenu = ({ summaryProp, postId, tags, categories, postCategories, imageUrl }: { summaryProp: string | null | undefined, postId: number, tags: Array<string> | null | undefined, postCategories: Array<string> | null | undefined, categories: Array<Category> | undefined | undefined, imageUrl: string | null | undefined }) => {
+const SideMenu = ({ summaryProp, postId, tags, categories, postCategories, imageUrl }: { summaryProp: string | null | undefined, postId: string, tags: Array<string> | null | undefined, postCategories: Array<string> | null | undefined, categories: Array<Category> | undefined | undefined, imageUrl: string | null | undefined }) => {
   const router = useRouter()
   const [summary, setSummary] = useState(summaryProp)
   const [open, setOpen] = useState(false)
@@ -46,7 +44,7 @@ const SideMenu = ({ summaryProp, postId, tags, categories, postCategories, image
       <h3 className={styles.titleMargin}>Summary</h3>
       <textarea style={{ width: '95%', height: 200 }} value={summary || ''} onChange={(e) => setSummary(e.target.value)} onBlur={handleSummaryBlur} />
       <h3 className={styles.titleMargin}>Main Image</h3>
-      <ImageUpload postId={postId} initialValue={imageUrl || ''} />
+      <ImageUpload postId={parseInt(postId)} initialValue={imageUrl || ''} />
       <Accordion sx={{ boxShadow: 'none', borderRadius: 0 }}>
         <AccordionSummary
           expandIcon={<MdOutlineExpandMore size={30} />}
@@ -91,7 +89,7 @@ const SideMenu = ({ summaryProp, postId, tags, categories, postCategories, image
       </Accordion>
       <div className={styles.line}></div>
       <h3 className={styles.titleMargin}>Tags</h3>
-      <InputTags tagsData={tags || []} id={postId} />
+      <InputTags tagsData={tags || []} id={parseInt(postId)} />
       <h5><AiOutlineInfoCircle size={18} /> Separate tags by pressing enter</h5>
     </div>
   )

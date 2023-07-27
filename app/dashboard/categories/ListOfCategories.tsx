@@ -10,6 +10,7 @@ import { FaTrash } from 'react-icons/fa'
 import axios from 'axios'
 import { usePathname, useRouter } from 'next/navigation'
 import { Prisma } from '@prisma/client'
+import { Category } from '@/lib/DataModels/Category'
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -73,7 +74,7 @@ const ListOfCategories = ({ categories }: { categories: Array<Category> }) => {
       </Modal>
       <h1><FiLayers style={{ marginBottom: '-4px', marginRight: '8px' }} />All Categories</h1>
       <Topbar length={categories.length + countSubCategories(categories)} categories={categories} />
-      {categories.map((category: Prisma.CategoryCreateInput, index: number) => (
+      {categories.map((category: Category, index: number) => (
         <CategoryCard setData={setData} openModalState={setOpen} id={category.name} key={index} />
       ))}
     </>

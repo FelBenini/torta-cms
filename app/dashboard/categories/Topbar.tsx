@@ -4,6 +4,7 @@ import { useState } from 'react'
 import NewCategoryModal from "@/components/Categories/NewCategoryModal";
 import styles from './style.module.scss'
 import { Prisma } from "@prisma/client";
+import { Category } from "@/lib/DataModels/Category";
 
 export interface Category extends Prisma.CategoryCreateInput {
   id: number

@@ -7,10 +7,7 @@ import styles from './newcategory.module.scss'
 import axios from 'axios'
 import { usePathname, useRouter } from 'next/navigation';
 import { Prisma } from '@prisma/client';
-
-interface Category extends Prisma.CategoryCreateInput {
-  id: number
-}
+import { Category } from '@/lib/DataModels/Category';
 
 const style = {
   position: 'absolute' as 'absolute',
