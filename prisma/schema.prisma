@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgres"
-  url      = env("SUPABASE_CONNECTION")
+  url      = env("CONNECTION_STRING")
 }
 
 model Post {
