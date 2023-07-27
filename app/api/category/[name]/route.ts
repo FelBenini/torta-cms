@@ -16,7 +16,7 @@ export async function GET(req: NextRequest, { params }: { params: { name: string
   if (!category) {
     return NextResponse.json({}, { status: 404 })
   }
-  const num = await prisma.post.count({ where: { categories: {hasEvery: [params.name]}} })
+  const num = await prisma.post.count({ where: { categories: { contains: `${params.name}, `}} })
 
   return NextResponse.json({
     id: category.id,

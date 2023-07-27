@@ -5,6 +5,7 @@ import CategoriesController from '@/prisma/controllers/categoriesController';
 import PostController from '@/prisma/controllers/postController';
 import { redirect } from 'next/navigation';
 import { Post } from '@/lib/DataModels/Post';
+import { Category } from '@/lib/DataModels/Category';
 
 type Props = {
   params?: {
@@ -28,7 +29,10 @@ const fetchPost = async (id: string) => {
 
 const fetchCategories = async () => {
   const res = await CategoriesController.getCategories()
-  const string = JSON.stringify(res)
+  const category = res.map((category) => {
+    return new Category(category)
+  })
+  const string = JSON.stringify(category)
   const json = JSON.parse(string)
   return json
 }
