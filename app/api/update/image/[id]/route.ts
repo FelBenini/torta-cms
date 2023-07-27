@@ -11,7 +11,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   const body = await req.json()
   const post = await prisma.post.findFirst({
     where: {
-      id: params.id
+      id: parseInt(params.id)
     }
   })
   if (!post) {
