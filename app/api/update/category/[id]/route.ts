@@ -27,6 +27,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     })
     return NextResponse.json({ 'removed': newPost.categories })
   } else {
+
     const newPost = await prisma.post.update({
       where: {
         id: params.id

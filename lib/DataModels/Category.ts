@@ -10,7 +10,11 @@ export class Category {
     this.id = category.id
     this.name = category.name
     this.mainCategory = category.mainCategory
-    this.childCategories = category.childCategories?.split(', ')
+    if (category.childCategories !== '') {
+      this.childCategories = category.childCategories?.split(', ')
+    } else {
+      this.childCategories = []
+    }
     this.type = category.type
   }
 }
