@@ -47,9 +47,10 @@ export default function RootLayout({
     NProgress.configure({ showSpinner: false });
 
     const handleAnchorClick = (event: MouseEvent) => {
-      const targetUrl = (event.currentTarget as HTMLAnchorElement).href;
+      const currentTarget = event.currentTarget as HTMLAnchorElement
+      const targetUrl = currentTarget.href;
       const currentUrl = location.href;
-      if (targetUrl !== currentUrl && targetUrl !== `${currentUrl}#`) {
+      if (targetUrl !== currentUrl && targetUrl !== `${currentUrl}#` && currentTarget.target !== 'blank') {
         NProgress.start();
       }
     };

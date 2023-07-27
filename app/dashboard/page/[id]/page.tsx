@@ -4,6 +4,8 @@ import WritePost from '@/components/WritePost';
 import CategoriesController from '@/prisma/controllers/categoriesController';
 import PageController from '@/prisma/controllers/pageController';
 import { redirect } from 'next/navigation';
+import { Category } from '@/lib/DataModels/Category';
+import { Post } from '@/lib/DataModels/Post';
 
 type Props = {
   params?: {
@@ -19,14 +21,18 @@ const fetchPost = async (id: string) => {
   if (!res) {
     redirect('/dashboard/posts?message=This post does not exist')
   }
-  const string = JSON.stringify(res)
+  const post = new Post(res)
+  const string = JSON.stringify(post)
   const json = JSON.parse(string)
   return json
 }
 
 const fetchCategories = async () => {
   const res = await CategoriesController.getCategories()
-  const string = JSON.stringify(res)
+  const categories = res.map((category) => {
+    return new Category(category)
+  })
+  const string = JSON.stringify(categories)
   const json = JSON.parse(string)
   return json
 }

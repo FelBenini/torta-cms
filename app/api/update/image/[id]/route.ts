@@ -9,7 +9,11 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     return NextResponse.json({ 'message': 'Not authorized' }, { status: 401 })
   }
   const body = await req.json()
-  const post = await PostController.getOnePostById(parseInt(params.id))
+  const post = await prisma.post.findFirst({
+    where: {
+      id: params.id
+    }
+  })
   if (!post) {
     return NextResponse.json({'message': 'Post does not exist'}, {status: 404})
   }
