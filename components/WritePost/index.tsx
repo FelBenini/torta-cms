@@ -16,17 +16,6 @@ import { useRouter } from 'next/navigation'
 import { Category } from '@/lib/DataModels/Category'
 import { Post } from '@/lib/DataModels/Post'
 
-<<<<<<< HEAD
-interface Post extends Prisma.PostCreateInput {
-  id: number
-}
-
-interface Category extends Prisma.CategoryCreateInput {
-  id: number
-}
-
-=======
->>>>>>> development
 const WritePost = ({ post, categories }: { post: Post, categories: Array<Category> | undefined}) => {
   const [content, setContent] = useState(post.content)
   const [title, setTitle] = useState(post.title)
@@ -83,7 +72,7 @@ const WritePost = ({ post, categories }: { post: Post, categories: Array<Categor
         anchor='right'
         open={showing}
         onClose={toggleDrawer(false)}
-      ><SideMenu summaryProp={post?.summary || ''} tags={post?.tags as string[]} postId={post.id as number} postCategories={post?.categories as string[]} categories={categories} imageUrl={post.backgroundImage}/></Drawer>
+      ><SideMenu summaryProp={post?.summary || ''} tags={post?.tags as string[]} postId={String(post.id)} postCategories={post?.categories as string[]} categories={categories} imageUrl={post.backgroundImage}/></Drawer>
       <Stack direction='row' spacing={4} justifyContent='flex-end'>
         {saving ?
           <p>Saving changes...</p> :

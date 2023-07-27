@@ -6,10 +6,6 @@ import styles from './style.module.scss'
 import { Prisma } from "@prisma/client";
 import { Category } from "@/lib/DataModels/Category";
 
-export interface Category extends Prisma.CategoryCreateInput {
-  id: number
-}
-
 const style = {
   position: 'absolute' as 'absolute',
   top: '50%',

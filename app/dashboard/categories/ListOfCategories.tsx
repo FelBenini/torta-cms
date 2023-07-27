@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import Topbar, { Category } from './Topbar'
+import Topbar from './Topbar'
 import { FiLayers } from 'react-icons/fi'
 import CategoryCard from './CategoryCard'
 import { Box, Button, ButtonGroup, Modal } from '@mui/material'
