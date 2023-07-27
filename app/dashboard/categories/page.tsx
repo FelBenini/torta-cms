@@ -15,7 +15,6 @@ const Categories = async () => {
   return (
     <>
       <section className={styles.categoriesSection}>
-        {string}
         <ListOfCategories categories={json} />
       </section>
     </>
