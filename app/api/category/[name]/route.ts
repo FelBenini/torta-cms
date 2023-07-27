@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 import CategoriesController from "@/prisma/controllers/categoriesController";
 import { prisma } from "@/prisma/prismaClient";
+import { Category } from "@/lib/DataModels/Category";
 
 export async function GET(req: NextRequest, { params }: { params: { name: string } }) {
   const token = await getToken({ req })
@@ -18,13 +19,7 @@ export async function GET(req: NextRequest, { params }: { params: { name: string
   }
   const num = await prisma.post.count({ where: { categories: { contains: `${params.name}, `}} })
 
-  return NextResponse.json({
-    id: category.id,
-    name: category.name,
-    type: category.type,
-    num_of_posts: num,
-    childCategories: category.childCategories
-  })
+  return NextResponse.json(new Category(category))
 }
 
 export async function DELETE(req: NextRequest, { params }: { params: { name: string } }) {

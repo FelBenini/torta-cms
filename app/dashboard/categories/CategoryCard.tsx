@@ -9,7 +9,6 @@ import { BiDotsVerticalRounded } from 'react-icons/bi'
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { FaRegTrashAlt } from 'react-icons/fa'
-import { Prisma } from '@prisma/client'
 
 const CategoryCard = ({ id, openModalState, setData }: { id: string, openModalState: (value: React.SetStateAction<boolean>) => void, setData: (value: React.SetStateAction<{name: string, id: string}>) => void}) => {
   const pathname = useSearchParams()
@@ -20,7 +19,7 @@ const CategoryCard = ({ id, openModalState, setData }: { id: string, openModalSt
     console.log(pathname)
     const fetchCategory = async (id: string) => {
       const { data } = await axios.get(`/api/category/${encodeURIComponent( id ).replace(/[!'()]/g, escape).replace(/\*/g, "%2A")}`)
-      setInfo(data)
+      setInfo({...data, childCategories: data.childCategories.filter((category) => category !== '')})
       setLoading(false)
     }
     fetchCategory(id)
@@ -38,7 +37,8 @@ const CategoryCard = ({ id, openModalState, setData }: { id: string, openModalSt
         <h4>Posts on this category: <b>{info?.num_of_posts}</b></h4>
         <OptionsMenu id={info?.id as string} setData={setData} name={info?.name as string} openModalState={openModalState}/>
       </span>
-      {info?.childCategories.length ? <h5>Child categories:</h5> : <></>}
+      {info?.childCategories.length ? <h5>Child categories:</h5> :       
+      <></>}
       {info?.childCategories.map((category, index) => (
         <CategoryCard id={category} openModalState={openModalState} setData={setData} key={index} />
       ))}

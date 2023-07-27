@@ -1,4 +1,5 @@
 import { Prisma } from "@prisma/client";
+import { splitString } from "./splitString";
 
 interface PostType extends Prisma.PostCreateInput {
   id: number
@@ -64,8 +65,8 @@ export class PublishedPost {
     this.createdAt = post.createdAt
     this.backgroundImage = post.backgroundImage
     this.content = post.content
-    this.tags = post.tags?.split(', ')
-    this.categories = post.categories?.split(', ')
+    this.tags = splitString(post.tags as string)
+    this.categories = splitString(post.categories as string)
     this.type = post.type
     this.published = post.published
     this.publishedAt = post.publishedAt

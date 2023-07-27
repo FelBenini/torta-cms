@@ -1,4 +1,5 @@
 import { Prisma } from "@prisma/client";
+import { splitString } from "./splitString";
 
 interface CategoryType extends Prisma.CategoryCreateInput {
   id: number
@@ -14,11 +15,7 @@ export class Category {
     this.id = category.id
     this.name = category.name
     this.mainCategory = category.mainCategory
-    if (category.childCategories !== '') {
-      this.childCategories = category.childCategories?.split(', ')
-    } else {
-      this.childCategories = []
-    }
+    this.childCategories = splitString(category.childCategories as string)
     this.type = category.type
   }
 }

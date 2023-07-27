@@ -11,13 +11,6 @@ export default class CategoriesController {
   }
 
   public static addCategory = async (name: string, type: string = 'father', fatherCategory?: string) => {
-    if (fatherCategory) {
-      const father = await prisma.category.findFirst({
-        where: {
-          name: name
-        }
-      })
-    }
     if (type === 'father') {
       const newCategory = await prisma.category.create({
         data: {
@@ -40,7 +33,7 @@ export default class CategoriesController {
         id: parseInt(fatherCategory as string)
       },
       data: {
-        childCategories: `${categoryToUpdate?.childCategories}, ${newCategory}`
+        childCategories: `${categoryToUpdate?.childCategories}, ${newCategory.name}`
       }
     })
     return newCategory
