@@ -9,12 +9,14 @@ import { AiOutlineFileSearch } from 'react-icons/ai'
 import Link from 'next/link'
 import { Prisma } from '@prisma/client'
 
-type Post = Prisma.PostCreateInput
+interface Post extends Prisma.PostCreateInput {
+  id: number
+}
 
 type PropsType = {
   initialData: {
     numOfPosts: number,
-    posts: Array<Prisma.PostCreateInput> | [],
+    posts: Array<Post> | [],
 
   },
   type: 'post' | 'page',

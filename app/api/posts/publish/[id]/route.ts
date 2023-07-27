@@ -8,6 +8,6 @@ export async function POST(req: NextRequest, {params}: {params: {id: string}}) {
     return NextResponse.json({'message': 'Unauthorized'}, {status: 401})
   }
   const {id} = params;
-  const post = await PostController.publishAPost(id);
+  const post = await PostController.publishAPost(parseInt(id));
   return NextResponse.json(post);
 }

@@ -33,7 +33,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { name: str
     return NextResponse.json({}, { status: 401 })
   }
 
-  const deletion = await CategoriesController.deleteCategory(params.name);
+  const deletion = await CategoriesController.deleteCategory(parseInt(params.name));
 
   if (!deletion) {
     return NextResponse.json({ 'message': 'Category not found' }, { status: 404 })

@@ -23,7 +23,7 @@ const loadingStyle = {
   alignItems: 'center'
 }
 
-const ImageUpload = ({ postId, initialValue }: { postId: string, initialValue: string | undefined }) => {
+const ImageUpload = ({ postId, initialValue }: { postId: number, initialValue: string | undefined }) => {
   const [loading, setLoading] = useState(false)
   const [imgLink, setImgLink] = useState(initialValue || '')
   const router = useRouter()

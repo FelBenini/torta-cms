@@ -8,6 +8,10 @@ import axios from 'axios'
 import { usePathname, useRouter } from 'next/navigation';
 import { Prisma } from '@prisma/client';
 
+interface Category extends Prisma.CategoryCreateInput {
+  id: number
+}
+
 const style = {
   position: 'absolute' as 'absolute',
   top: '50%',
@@ -22,7 +26,7 @@ const style = {
 
 const NewCategoryModal = ({ openState, setOpenState, categories }: { openState: boolean,
   setOpenState: (value: SetStateAction<boolean>) => void,
-  categories: Array<Prisma.CategoryCreateInput>}) => {
+  categories: Array<Category>}) => {
   const router = useRouter()
   const pathname = usePathname()
   const [mainCategory, setMainCategory] = useState(0)
@@ -73,7 +77,7 @@ const NewCategoryModal = ({ openState, setOpenState, categories }: { openState: 
           <p>Main Category:</p>
           <Select sx={{ width: '100%', marginTop: '12px' }} onChange={handleSelectChange} value={mainCategory}>
             <MenuItem value={0}>None</MenuItem>
-            {categories.map((category: Prisma.CategoryCreateInput, index: number) => (
+            {categories.map((category: Category, index: number) => (
               <MenuItem value={category.id} key={index}>
                 {category.name}
               </MenuItem>

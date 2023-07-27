@@ -15,7 +15,15 @@ import SideMenu from './SideMenu'
 import { useRouter } from 'next/navigation'
 import { Prisma } from '@prisma/client'
 
-const WritePost = ({ post, categories }: { post: Prisma.PostCreateInput, categories: Array<Prisma.CategoryCreateInput> | undefined}) => {
+interface Post extends Prisma.PostCreateInput {
+  id: number
+}
+
+interface Category extends Prisma.CategoryCreateInput {
+  id: number
+}
+
+const WritePost = ({ post, categories }: { post: Post, categories: Array<Category> | undefined}) => {
   const [content, setContent] = useState(post.content)
   const [title, setTitle] = useState(post.title)
   const [showing, setShowing] = useState(false)
@@ -71,7 +79,7 @@ const WritePost = ({ post, categories }: { post: Prisma.PostCreateInput, categor
         anchor='right'
         open={showing}
         onClose={toggleDrawer(false)}
-      ><SideMenu summaryProp={post?.summary || ''} tags={post?.tags as string[]} postId={post.id as string} postCategories={post?.categories as string[]} categories={categories} imageUrl={post.backgroundImage}/></Drawer>
+      ><SideMenu summaryProp={post?.summary || ''} tags={post?.tags as string[]} postId={post.id as number} postCategories={post?.categories as string[]} categories={categories} imageUrl={post.backgroundImage}/></Drawer>
       <Stack direction='row' spacing={4} justifyContent='flex-end'>
         {saving ?
           <p>Saving changes...</p> :

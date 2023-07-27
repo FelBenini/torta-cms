@@ -8,7 +8,7 @@ export async function PUT(req: NextRequest, {params}: {params: {id: string}}) {
     return NextResponse.json({'message': 'Unauthorized'}, {status: 401})
   }
   const body = await req.json()
-  const {id} = params;
+  const id = parseInt(params.id);
   const summary = await PostController.updateSummary(id, body.summary)
   return NextResponse.json(summary);
 }

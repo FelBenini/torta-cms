@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ 'message': 'Unauthorized' }, { status: 401 })
   }
   const data: categoryType = await req.json()
-  const category = await CategoriesController.addCategory(data.name, data.type, data.mainCategory)
+  const category = await CategoriesController.addCategory(data.name, data.type, parseInt(data.mainCategory))
   if (!category) {
     return NextResponse.json({'message': 'Bad request'}, {status: 400})
   }

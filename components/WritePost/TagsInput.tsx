@@ -5,7 +5,7 @@ import { TiDelete } from 'react-icons/ti'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 
-const TagsInput = ({tagsData, id}: {tagsData: Array<string>, id: string}) => {
+const TagsInput = ({tagsData, id}: {tagsData: Array<string>, id: number}) => {
   const [tags, setTags] = useState(tagsData)
   const [inputValue, setInputValue] = useState('')
   const router = useRouter()

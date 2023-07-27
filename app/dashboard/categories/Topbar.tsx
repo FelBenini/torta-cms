@@ -5,6 +5,10 @@ import NewCategoryModal from "@/components/Categories/NewCategoryModal";
 import styles from './style.module.scss'
 import { Prisma } from "@prisma/client";
 
+export interface Category extends Prisma.CategoryCreateInput {
+  id: number
+}
+
 const style = {
   position: 'absolute' as 'absolute',
   top: '50%',
@@ -17,7 +21,7 @@ const style = {
   p: 4,
 };
 
-const Topbar = ({ length, categories }: { length: number, categories: Array<Prisma.CategoryCreateInput> }) => {
+const Topbar = ({ length, categories }: { length: number, categories: Array<Category> }) => {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true);
   return (

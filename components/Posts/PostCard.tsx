@@ -14,7 +14,11 @@ function getFormattedDate(date: Date) {
   return `${month}/${day}/${year} - ${hours}:${minutes}`;
 }
 
-const PostCard = ({ post, type = 'post' }: { post: Prisma.PostCreateInput, type: 'post' | 'page' }) => {
+interface Post extends Prisma.PostCreateInput {
+  id: number
+}
+
+const PostCard = ({ post, type = 'post' }: { post: Post, type: 'post' | 'page' }) => {
   return (
     <div className={styles.postCard}>
       <div>

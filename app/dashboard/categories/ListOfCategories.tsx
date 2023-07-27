@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import Topbar from './Topbar'
+import Topbar, { Category } from './Topbar'
 import { FiLayers } from 'react-icons/fi'
 import CategoryCard from './CategoryCard'
 import { Box, Button, ButtonGroup, Modal } from '@mui/material'
@@ -23,8 +23,8 @@ const style = {
   p: 4,
 };
 
-const ListOfCategories = ({ categories }: { categories: Array<Prisma.CategoryCreateInput> }) => {
-  const countSubCategories = (categories: Array<Prisma.CategoryCreateInput>) => {
+const ListOfCategories = ({ categories }: { categories: Array<Category> }) => {
+  const countSubCategories = (categories: Array<Category>) => {
     let count = 0;
     categories.map((category) => {
       (category.childCategories as string[]).map((category: string) => {
