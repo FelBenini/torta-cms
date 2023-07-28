@@ -27,5 +27,5 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
       categories: `${categories}, `
     }
   })
-  return NextResponse.json({})
+  return NextResponse.json({categories: newPost.categories})
 }
