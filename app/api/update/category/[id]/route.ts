@@ -17,36 +17,18 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     }
   })
   if (!post) {
-    return NextResponse.json({}, { status: 404 })
+    return NextResponse.json({'message': 'Post does not exist'}, {status: 404})
   }
-  if (post.categories?.includes(body.category)) {
-    const arrayCategories = post.categories.split(', ')
-    const updatedCategories = arrayCategories.filter((category) => category !== body.category)
-    const categories = updatedCategories.join(', ')
-    const newPost = await prisma.post.update({
-      where: {
-        id: id
-      },
-      data: {
-        categories: `${categories}, `
-      }
-    })
-    return NextResponse.json({ 'removed': newPost.categories })
-  } else {
-    let newCategories: string
-    if (post.categories === '' || post.categories === ' ' || post.categories === ', ' || !post.categories) {
-      newCategories = `${body.category}, `
-    } else {
-      newCategories = `${post.categories}${body.category}, `
+
+  const arrayCategories = body.categories as string[]
+  const categories = arrayCategories.filter((cat) => cat !== '').join(', ')
+  const newPost = await prisma.post.update({
+    where: {
+      id: parseInt(params.id)
+    },
+    data: {
+      categories: `${categories}, `
     }
-    const newPost = await prisma.post.update({
-      where: {
-        id: id
-      },
-      data: {
-        categories: newCategories
-      }
-    })
-    return NextResponse.json({ 'included': newPost.categories })
-  }
+  })
+  return NextResponse.json({categories: newPost.categories})
 }
