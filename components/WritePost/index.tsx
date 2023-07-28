@@ -70,15 +70,16 @@ const WritePost = ({ post, categories }: { post: Post, categories: Array<Categor
   }
 
   const updateCategories = async () => {
-    await axios.put(`/api/update/category/${post.id}`, {
-      categories: activeCategories
-    })
-    router.refresh()
+    if (JSON.stringify(activeCategories) !== JSON.stringify(post.categories)) {
+      await axios.put(`/api/update/category/${post.id}`, {
+        categories: activeCategories
+      })
+      router.refresh()
+      return
+    }
+    return
   }
 
-  const handleClose = (open: boolean) => {
-    toggleDrawer(open)
-  }
   return (
     <div className={styles.writePost}>
       <Drawer
