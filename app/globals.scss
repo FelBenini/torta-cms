@@ -75,3 +75,19 @@ body {
   --outline-color: #00000062;
   --outline-stronger: #000000b6;
 }
+
+@media (prefers-color-scheme: light) {
+  .wmde-markdown,
+  .wmde-markdown-var {
+    --color-neutral-muted: #48314b4f;
+    --color-accent-fg: #c026d3 !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .wmde-markdown,
+  .wmde-markdown-var {
+    --color-neutral-muted: #48314b4f;
+    --color-accent-fg: #c026d3 !important;
+  }
+}
