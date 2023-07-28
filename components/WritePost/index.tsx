@@ -24,13 +24,14 @@ const WritePost = ({ post, categories }: { post: Post, categories: Array<Categor
   const [saving, setSaving] = useState(false)
   const [publishedText, setPublishedText] = useState(post.published ? 'Publish Changes' : 'Publish')
   const [timer, setTimer] = useState<any>(null)
+  const [activeCategories, setActiveCategories] = useState(post?.categories || [])
   async function handleSave() {
     setSaving(true)
     const { status } = await axios.put(`/api/content/save-content-changes/${post.id}`, {
       title: title,
       content: content
     })
-    setSaving(false)
+    setSaving(false);
   }
 
   const publishPost = async () => {
@@ -51,6 +52,7 @@ const WritePost = ({ post, categories }: { post: Post, categories: Array<Categor
         ) {
           return;
         }
+        updateCategories();
         setShowing(open);
       };
 
@@ -66,13 +68,24 @@ const WritePost = ({ post, categories }: { post: Post, categories: Array<Categor
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     setTitle(e.currentTarget.innerHTML)
   }
+
+  const updateCategories = async () => {
+    await axios.put(`/api/update/category/${post.id}`, {
+      categories: activeCategories
+    })
+    router.refresh()
+  }
+
+  const handleClose = (open: boolean) => {
+    toggleDrawer(open)
+  }
   return (
     <div className={styles.writePost}>
       <Drawer
         anchor='right'
         open={showing}
         onClose={toggleDrawer(false)}
-      ><SideMenu summaryProp={post?.summary || ''} tags={post?.tags as string[]} postId={post.id as string} postCategories={post?.categories as string[]} categories={categories} imageUrl={post.backgroundImage}/></Drawer>
+      ><SideMenu summaryProp={post?.summary || ''} tags={post?.tags as string[]} postId={post.id as string} activeCategories={activeCategories} setActiveCategories={setActiveCategories} categories={categories} imageUrl={post.backgroundImage}/></Drawer>
       <Stack direction='row' spacing={4} justifyContent='flex-end'>
         {saving ?
           <p>Saving changes...</p> :

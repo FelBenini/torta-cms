@@ -14,7 +14,7 @@ import Checkbox from '@mui/material/Checkbox';
 import ImageUpload from './ImageUpload';
 import { Category } from '@/lib/DataModels/Category';
 
-const SideMenu = ({ summaryProp, postId, tags, categories, postCategories, imageUrl }: { summaryProp: string | null | undefined, postId: string, tags: Array<string> | null | undefined, postCategories: Array<string> | null | undefined, categories: Array<Category> | undefined | undefined, imageUrl: string | null | undefined }) => {
+const SideMenu = ({ summaryProp, postId, tags, categories, activeCategories, imageUrl, setActiveCategories }: { summaryProp: string | null | undefined, postId: string, tags: Array<string> | null | undefined, activeCategories: Array<string> | null | undefined, categories: Array<Category> | undefined | undefined, imageUrl: string | null | undefined, setActiveCategories: React.Dispatch<React.SetStateAction<string[]>> }) => {
   const router = useRouter()
   const [summary, setSummary] = useState(summaryProp)
 
@@ -27,12 +27,6 @@ const SideMenu = ({ summaryProp, postId, tags, categories, postCategories, image
     })
     router.refresh()
     return
-  }
-  const updateCategories = async (id: string) => {
-    await axios.put(`/api/update/category/${postId}`, {
-      category: id
-    })
-    router.refresh()
   }
   return (
     <div className={styles.sideMenu}>
@@ -53,27 +47,27 @@ const SideMenu = ({ summaryProp, postId, tags, categories, postCategories, image
         <AccordionDetails sx={{ width: '85%' }}>
           {categories?.map((category, index) => {
             const childCategories = (category.childCategories as string[]).map((category, index) => {
-              if (postCategories?.includes(category)) {
+              if (activeCategories?.includes(category)) {
                 return (
-                  <p className={styles.paragraphCategory} key={index}><Checkbox defaultChecked onClick={() => updateCategories(category)} />{category}</p>
+                  <p className={styles.paragraphCategory} key={index}><Checkbox defaultChecked onClick={() => setActiveCategories(activeCategories.filter((cat) => cat !== category))} />{category}</p>
                 )
               } else {
                 return (
-                  <p key={index} className={styles.paragraphCategory}><Checkbox onClick={() => updateCategories(category)} />{category}</p>
+                  <p key={index} className={styles.paragraphCategory}><Checkbox onClick={() => setActiveCategories([...activeCategories as string[], category])} />{category}</p>
                 )
               }
             })
-            if (postCategories?.includes(category?.name as string)) {
+            if (activeCategories?.includes(category?.name as string)) {
               return (
                 <div className={styles.paragraphCategory} key={index}>
-                  <p><Checkbox defaultChecked onClick={() => updateCategories(category?.name as string)} />{category.name}</p>
+                  <p><Checkbox defaultChecked onClick={() => setActiveCategories(activeCategories.filter((cat) => cat !== category.name))} />{category.name}</p>
                   {childCategories}
                 </div>
               )
             } else {
               return (
                 <div className={styles.paragraphCategory} key={index}>
-                  <p><Checkbox onClick={() => updateCategories(category?.name as string)} />{category.name}</p>
+                  <p><Checkbox onClick={() => setActiveCategories([...activeCategories as string[], category.name])} />{category.name}</p>
                   {childCategories}
                 </div>
               )
