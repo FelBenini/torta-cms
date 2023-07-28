@@ -21,7 +21,7 @@ export default class PostController {
     const post = await prisma.post.create({
       data: {
         title: 'Your title here',
-        content: '<p>Write your content here</p>',
+        content: '# Write your content here',
         postedBy: userPosting?.username,
         published: false,
         type: type
