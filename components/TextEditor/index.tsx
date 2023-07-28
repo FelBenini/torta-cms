@@ -1,15 +1,20 @@
 "use client";
-import { useState, useRef } from "react";
+import dynamic from 'next/dynamic';
+import { useState, useCallback } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
+import type { ContextStore } from '@uiw/react-md-editor';
+
+const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false });
+type OnChange = (value?: string, event?: React.ChangeEvent<HTMLTextAreaElement>, state?: ContextStore) => void;
 
 export default function TextEditor({ value, setValue, onChange }: { value: string, setValue: React.Dispatch<React.SetStateAction<string>>, onChange: () => void }) {
-  const editorRef = useRef<any>();
 
-  const handleEditorChange = (content: string) => {
-    setValue(content);
+  const handleEditorChange = useCallback<OnChange>((content) => {
+    setValue(content || '');
     onChange()
-  };
+    console.log('callback')
+  }, [setValue, onChange]);
 
   const handleUpload = async (
     blobInfo: any,
@@ -44,35 +49,6 @@ export default function TextEditor({ value, setValue, onChange }: { value: strin
     }
   };
   return (
-    <>
-      <Editor
-        onInit={(evt, editor) => (editorRef.current = editor)}
-        value={value}
-        onEditorChange={handleEditorChange}
-        init={{
-          height: 'calc(96.5svh - 126px)',
-          width: '100%',
-          resize: false,
-          menubar: true,
-          skin_url: "/skin/light",
-          //skin_url: '/skin/dark',
-          content_css: "light",
-          plugins: [
-            "image",
-            "advlist autolink lists link image charmap print preview anchor",
-            "searchreplace visualblocks code fullscreen",
-            "insertdatetime media table paste code help wordcount",
-          ],
-          toolbar:
-            "undo redo | formatselect blocks insertfile | " +
-            "bold italic backcolor | alignleft aligncenter " +
-            "alignright alignjustify | image | bullist numlist outdent indent | " +
-            "removeformat emoticons | help",
-          images_upload_url: "/api/upload", // @ts-ignore
-          images_upload_handler: handleUpload,
-          content_style: "body { font-family: 'Inter', sans-serif; }"
-        }}
-      />
-    </>
+    <MDEditor data-color-mode='light' style={{ width: '99%', margin: '0 auto', height: '60dvh' }} height='78dvh' value={value} onChange={handleEditorChange} />
   );
 }
