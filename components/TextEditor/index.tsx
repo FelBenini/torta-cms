@@ -1,7 +1,6 @@
 "use client";
 import dynamic from 'next/dynamic';
 import { useState, useCallback } from "react";
-import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
 import type { ContextStore } from '@uiw/react-md-editor';
 
