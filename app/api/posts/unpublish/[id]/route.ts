@@ -7,7 +7,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
     if (!token) {
         return NextResponse.json({ status: 401 })
     }
-    const { id } = params
+    const id = parseInt(params.id)
     const draftPost = await prisma.post.findFirst({
         where: {
             id: id
@@ -24,5 +24,5 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
             publishedAt: null
         }
     })
-    await prisma.publishedPost.delete({ where: { id: publishedId as string } })
+    await prisma.publishedPost.delete({ where: { id: publishedId as number } })
 }
