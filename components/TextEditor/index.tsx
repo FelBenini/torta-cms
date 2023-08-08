@@ -48,6 +48,6 @@ export default function TextEditor({ value, setValue, onChange }: { value: strin
     }
   };
   return (
-    <MDEditor data-color-mode='light' style={{ width: '99%', margin: '0 auto', height: '60dvh' }} height='78dvh' value={value} onChange={handleEditorChange} />
+    <MDEditor data-color-mode='light' style={{ width: '99%', margin: '0 auto', height: '60dvh' }} height='calc(95dvh - 120px)' value={value} onChange={handleEditorChange} />
   );
 }
