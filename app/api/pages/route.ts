@@ -2,7 +2,7 @@ import CategoriesController from "@/prisma/controllers/categoriesController";
 import PostController from "@/prisma/controllers/postController";
 import { Prisma } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-import { RemoveDataFromPost } from "../page/[slug]/route";
+import { RemoveDataFromPost } from "../post/[day]/[month]/[year]/[slug]/route";
 
 class CreateResponse {
   posts?: RemoveDataFromPost[]

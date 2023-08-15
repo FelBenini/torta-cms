@@ -4,7 +4,7 @@ import { Prisma } from "@prisma/client";
 import { Post } from "@/lib/DataModels/Post";
 import { splitString } from "@/lib/DataModels/splitString";
 
-class RemoveDataFromPost {
+export class RemoveDataFromPost {
   title: string = ''
   backgroundImage?: string | null = ''
   publishedAt: Date | null | undefined | string = new Date(Date.now())
