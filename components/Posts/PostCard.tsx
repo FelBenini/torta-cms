@@ -18,7 +18,7 @@ interface Post extends Prisma.PostCreateInput {
   id: number
 }
 
-const PostCard = ({ post, type = 'post' }: { post: Post, type: 'post' | 'page' }) => {
+const PostCard = ({ post, type = 'post', setOpenUnpublish, setId }: { post: Post, type: 'post' | 'page', setOpenUnpublish: any, setId: any }) => {
   return (
     <div className={styles.postCard}>
       <div>
@@ -35,7 +35,7 @@ const PostCard = ({ post, type = 'post' }: { post: Post, type: 'post' | 'page' }
           <p>{post.content.replace(/(<([^>]+)>)/ig, '')}</p>
         }
       </div>
-      <OptionsPost id={post.id} type={type}/>
+      <OptionsPost setId={setId} setOpenUnpublish={setOpenUnpublish} id={post.id} type={type} published={post.published}/>
     </div>
   )
 }

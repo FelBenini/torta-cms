@@ -25,4 +25,5 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
         }
     })
     await prisma.publishedPost.delete({ where: { id: publishedId as number } })
+    return NextResponse.json({'message': 'Succesfully unpublished'})
 }
