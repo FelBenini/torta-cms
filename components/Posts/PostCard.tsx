@@ -14,7 +14,7 @@ function getFormattedDate(date: Date) {
   return `${month}/${day}/${year} - ${hours}:${minutes}`;
 }
 
-const PostCard = ({ post, type = 'post' }: { post: Prisma.PostCreateInput, type: 'post' | 'page' }) => {
+const PostCard = ({ post, type = 'post', setOpenUnpublish, setId }: { post: Prisma.PostCreateInput, type: 'post' | 'page', setOpenUnpublish: any, setId: any }) => {
   return (
     <div className={styles.postCard}>
       <div>
@@ -31,7 +31,7 @@ const PostCard = ({ post, type = 'post' }: { post: Prisma.PostCreateInput, type:
           <p>{post.content.replace(/(<([^>]+)>)/ig, '')}</p>
         }
       </div>
-      <OptionsPost id={post.id} type={type}/>
+      <OptionsPost setId={setId} setOpenUnpublish={setOpenUnpublish} id={post.id} type={type} published={post.published}/>
     </div>
   )
 }
