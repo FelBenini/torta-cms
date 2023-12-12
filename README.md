@@ -10,7 +10,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-You will need Node.js installed on your system and a MongoDB database.
+You will need Node.js installed on your system and a MongoDB/PostgreSQL/MySQL database.
 
 ### Installing
 
@@ -37,7 +37,7 @@ npm install
 - 3 Rename '.env.local.example' to '.env.local' and change its values, it should look something like this:
 
 ```makefile
-CONNECTION_STRING='mongodb://localhost:27017/tortaCMS' #mongoDB connection string
+CONNECTION_STRING='mongodb://localhost:27017/tortaCMS' #database connection string
 NEXTAUTH_SECRET='asdfasdfdasfa0j324asdioahdAAsdfasfsaddfasofjadspo243432zafaASdgsfHDShgSGSFHgs' #this is the hash that will encrypt your jwt tokens
 NEXTAUTH_URL='http://localhost:3000'
 ```
